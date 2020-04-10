@@ -1,0 +1,220 @@
+@import 'atomic/mixins';
+
+$margin_list: 0 4 8 10 16 20 24 32 40 48 56 82;
+$padding_list: 0 4 8 16 20 24 32 40 48 56;
+$min_width: 0 8 16 24 32 40 48 56 80 100 150 200;
+$max_width: 0 8 16 24 32 40 48 56 80 100 150 200;
+$fzs: 0, 12, 16, 20, 24, 28, 32, 36, 40;
+$bdrs_primary: 4px;
+$bdrs_round: 20px;
+$bdrs_circle: 50%;
+$z_header: 100;   // fix 状态的 header
+$z_sidebar: 110;  // 侧边栏
+$z_toast: 300;   // toast提示
+$z_dialog: 200;  // 弹窗
+$z_overlay: 100;  // 浮层
+$color_primary: #845bea;
+
+// padding padding-*
+@include Paddings($padding_list);
+
+// margin margin-*
+@include Margins($margin_list);
+
+// min-width
+@include MinWidth($min_width);
+
+// max-width
+@include MaxWidth($max_width);
+
+// font-size
+@include FontSize($fzs);
+
+// position
+.Posr { position: relative; }
+.Posa { position: absolute; }
+.Posf { position: fixed; }
+.Poss { position: static; }
+.Posst { position: sticky; }
+
+// top
+.T0 { top: 0; }
+
+// right
+.End0 { right: 0; }
+
+// bottom
+.B0 { bottom: 0; }
+
+// left
+.Start0 { left: 0; }
+.Start224 { left: 224px; }
+
+// display
+.Db { display: block; }
+.Di { display: inline-block; }
+.Df { display: flex; }
+.Dif { display: inline-flex; }
+
+// Flex
+.Fxfxd { flex: 0 0 auto; }
+.Fxful { flex: 1 1 100%; }
+.Fxog { flex: 1 0 auto; }
+.Fxos { flex: 0 1 auto; }
+.Flwnw { flex-wrap: nowrap; }
+.Flww { flex-wrap: wrap; }
+.Fldr { flex-direction: row; }
+.Fldc { flex-direction: column; }
+
+// justify-content
+.Jcc { justify-content: center; }
+.Jcsb { justify-content: space-between; }
+.Jcfs { justify-content: flex-start; }
+.Jcfe { justify-content: flex-end; }
+
+// align-items
+.Aic { align-items: center; }
+.Aist { align-items: stretch; }
+.Aifs { align-items: flex-start; }
+.Aife { align-items: flex-end; }
+
+// align-self
+.Asfe { align-self: flex-end; }
+.Asc { align-self: center; }
+
+// font-weight
+.Fwlr { font-weight: 100; }
+.Fwl { font-weight: 400; }
+.Fwp { font-weight: 500; }
+.Fwb { font-weight: 600; }
+.Fwbr { font-weight: 900; }
+
+// white-space
+.Whsnw { white-space: nowrap; }
+
+// color
+.Cn { color: none; }
+.Ct { color: transparent; }
+.Ccc { color: currentColor; }
+.Cm { color: $color_primary; }
+
+.Cd1 { color: #1e1f23; } // $dark_title_background
+.Cd2 { color: #2a2b31; } // $dark_line
+.Cd3 { color: #686c78; } // $dark_primary_text
+.Cd4 { color: #999ea8; } // $dark_second_text
+.Cl1 { color: #cbd1da; } // $light_free
+.Cl2 { color: #e7eaef; } // $light_line
+.Cl3 { color: #f7f9fc; } // $light_background
+.Cl4 { color: #fff; } // $light_white
+
+.Cw { color: #fff; }
+.Cg { color: #11ab4e; }
+.Cr { color: #f04038; }
+.Cy { color: #faaf2b; }
+.Cs { color: #666666; }
+
+// background-color
+.Bgp { background-color: $color_primary; }
+.Bgct { background-color: transparent; }
+.Bgcd1 { background-color: #1e1f23; }
+.Bgcl1 { background-color: #cbd1da; }
+.Bgcl4 { background-color: #fff; }
+
+// box-shadow
+.Bxshpw { box-shadow: 0 2px 8px rgba(236,236,236,0.49); } // primary-white
+.Bxshpd { box-shadow: 0 2px 8px rgba(51,51,51,0.49); } // primary-dark
+
+// z-index
+.Za { z-index: auto; }
+.Zn { z-index: -1; }
+.Zh { z-index: 100; } // fix 状态的 header
+.Zs { z-index: 110; } // 侧边栏
+.Zt { z-index: 300; } // toast 提示
+.Zd { z-index: 200; } // 弹窗
+.Zo { z-index: 100; } // 浮层
+
+// width
+.Wa { width: auto; }
+.Wst { width: 100%; }
+.Wcnt { width: 1200px; }
+
+// height
+.Ha { height: auto; }
+.Hst { height: 100%; }
+
+// box-sizing
+.Bxzcb { box-sizing: content-box; }
+.Bxzbb { box-sizing: border-box; }
+
+// overflow
+.Ova { overflow: auto; }
+.Ovh { overflow: hidden; }
+.Ovs { overflow: scroll; }
+
+// text-align
+.Tac { text-align: center; }
+.TaStart { text-align: left; }
+.TaEnd { text-align: right; }
+
+// text-decoration
+.Tdn { text-decoration: none; }
+.Tdu { text-decoration: underline; }
+.Tdlt { text-decoration: line-through; }
+.Tdo { text-decoration: overline; }
+
+// -*-:hover
+.hover_Tdu:hover { text-decoration: underline; }
+.hover_Bxshpd:hover { box-shadow: 0 2px 8px rgba(51,51,51,0.49); }
+
+// line-height
+.Lhcr { line-height: 1; }
+
+// vertical-align
+.Vat { vertical-align: top; }
+.Vam { vertical-align: middle; }
+.Vab { vertical-align: bottom; }
+.Vabl { vertical-align: baseline; }
+.Vasub { vertical-align: sub; }
+.Vasup { vertical-align: super; }
+
+// border
+.Bdt1 { border-top: 1px; }
+.Bdb1 { border-bottom: 1px; }
+.Bdb2 { border-bottom: 2px; }
+
+// border-color
+.Bdct { border-color: transparent; }
+.Bdccc { border-color: currentColor; }
+.Bdcn { border-color: none; }
+
+// border-style
+.Bdsn { border-style: none; }
+.Bdss { border-style: solid; }
+.Bdsd { border-style: dashed; }
+
+// border-radius
+.Bdr0 { border-radius: 0; }
+.Bdrsp { border-radius: $bdrs_primary; }
+.Bdrs_round { border-radius: $bdrs_round; }
+.Bdrs_circle { border-radius: $bdrs_circle; }
+
+// cursor
+.Curp { cursor: pointer; }
+
+// object-fit
+.Objfct { object-fit: contain; }
+.Objfcv { object-fit: cover; }
+.Objff {object-fit: fill; }
+.Objfn {object-fit: none; }
+.Objfsd {object-fit: scale-down; }
+
+
+// float
+.Fln { float: none; }
+.FlStart { float: left; }
+.FlEnd { float: right; }
+
+// opacity
+.Op1 { opacity: 1; }
+.Op0 { opacity: 0; }
+.Op06 { opacity: 0.6; }

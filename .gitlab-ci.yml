@@ -1,0 +1,28 @@
+image: hub.qixincha.com/gitlab-runner-fe-env-node10.16.x
+
+before_script:
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+stages:
+  - deploy_test
+  - deploy_prod
+
+# 测试环境发布
+deploy_test:
+  stage: deploy_test
+  script:
+    - sh deploy/bin/deploy_test.sh
+  only:
+    - dev@weixin/coconut_ui
+
+# 正式环境发布
+deploy_prod:
+  stage: deploy_prod
+  when: manual
+  script:
+    - sh deploy/bin/deploy_prod.sh
+  only:
+    - master@weixin/coconut_ui

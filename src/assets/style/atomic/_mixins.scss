@@ -1,0 +1,52 @@
+@mixin Paddings($paddings) {
+  @each $p in $paddings {
+    .P#{$p} { padding: #{$p}px; }
+    .Pt#{$p} { padding-top: #{$p}px; }
+    .Pr#{$p} { padding-right: #{$p}px;}
+    .Pb#{$p} { padding-bottom: #{$p}px;}
+    .Pl#{$p} { padding-left: #{$p}px;}
+    .Px#{$p} { padding-left: #{$p}px; padding-right: #{$p}px; }
+    .Py#{$p} { padding-top: #{$p}px; padding-bottom: #{$p}px; }
+  }
+}
+
+@mixin Margins($margins) {
+  @each $m in $margins {
+    .M#{$m} { margin: #{$m}px; }
+    .Mt#{$m} { margin-top: #{$m}px; }
+    .Mr#{$m} { margin-right: #{$m}px;}
+    .Mb#{$m} { margin-bottom: #{$m}px;}
+    .Ml#{$m} { margin-left: #{$m}px;}
+    .Mx#{$m} { margin-left: #{$m}px; margin-right: #{$m}px; }
+    .My#{$m} { margin-top: #{$m}px; margin-bottom: #{$m}px; }
+  }
+
+  .Ma { margin: auto; }
+  .Mla { margin-left: auto; }
+  .Mra { margin-right: auto; }
+  .Mxa { margin-left: auto; margin-right: auto; }
+}
+
+@mixin MinWidth($minWidth) {
+  @each $minw in $minWidth {
+  .Minw#{$minw} { min-width: #{$minw}px; }
+  }
+}
+
+@mixin MaxWidth($maxWidth) {
+  @each $maxw in $maxWidth {
+    .Maxw#{$maxw} { max-width: #{$maxw}px; }
+  }
+}
+
+@mixin FontSize($fzs) {
+  @each $fz in $fzs {
+    .Fz#{$fz} { font-size: #{$fz}px; }
+  }
+}
+
+@mixin FontWeight($fws) {
+}
+
+
+// font-weight

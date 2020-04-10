@@ -1,0 +1,89 @@
+html,
+body {
+  height: 100%;
+}
+
+html {
+  background-color: #f7f9fc;
+}
+
+body {
+  font-size: 14px;
+  line-height: 1.444;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Helvetica',
+    'Segoe UI', 'Arial', sans-serif;
+  color: #686c78;
+  overflow: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  height: 100%;
+}
+
+.g_search {
+  width: 40%;
+}
+
+.Txcel {
+  width: 100%;
+
+  td {
+    padding: 8px 0;
+  }
+
+  .el-table .cell {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .el-table__header {
+    .cell {
+      padding: 0 4px;
+      font-weight: 600;
+    }
+  }
+
+  .el-table-column--selection .cell {
+    text-overflow: unset;
+  }
+
+  .el-pagination {
+    margin-top: 16px;
+    text-align: right;
+  }
+}
+
+.BoxShadow {
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.popover_set {
+  width: 450px;
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.keyword_mark {
+  background: yellow;
+  color: red;
+}
+
+.el-image-viewer__wrapper {
+  z-index: 4000 !important;
+}
+
+.AuditPopverImage {
+  max-width: 650px;
+  max-height: 650px;
+  object-fit: contain;
+}
+
+.cell_tools_third_tags {
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
