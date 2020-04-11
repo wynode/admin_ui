@@ -1,5 +1,5 @@
 <template>
-  <div :id="chartId" style="width: 100%; height:320px;"></div>
+  <div :id="chartId" style="width: 100%; height:300px;"></div>
 </template>
 
 <script>
@@ -16,7 +16,7 @@ export default {
       type: String,
       default: 'histogram',
     },
-    histogramData: {
+    chartData: {
       type: Object,
       default: () => {},
     },
@@ -33,7 +33,7 @@ export default {
   },
 
   watch: {
-    histogramData: {
+    chartData: {
       deep: true,
       immediate: true,
       handler(newVal) {
@@ -55,14 +55,12 @@ export default {
       let legendData = []
       let seriesData = []
       let xAxisData = []
-      const histogramDataArray = Object.keys(this.histogramData)
-      xAxisData = this.histogramData[histogramDataArray[0]].map((val) => {
+      const chartDataArray = Object.keys(this.chartData)
+      xAxisData = this.chartData[chartDataArray[0]].map((val) => {
         return val.stat_day.slice(5)
       })
-      histogramDataArray.forEach((key) => {
-        const noEmptyValArray = this.histogramData[key].filter(
-          (item) => item !== 0
-        )
+      chartDataArray.forEach((key) => {
+        const noEmptyValArray = this.chartData[key].filter((item) => item !== 0)
         if (noEmptyValArray.length) {
           legendData.push(key)
           seriesData.push({
@@ -70,10 +68,10 @@ export default {
             type: 'bar',
             stack: '总量',
             label: {
-              show: histogramDataArray.length <= 1,
+              show: chartDataArray.length <= 1,
               position: 'top',
             },
-            data: this.histogramData[key].map((val) => {
+            data: this.chartData[key].map((val) => {
               return {
                 label: val.stat_day.slice(5),
                 value:

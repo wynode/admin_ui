@@ -8,7 +8,8 @@
     "build": "vue-cli-service build",
     "build:test": "vue-cli-service build --mode testbuild",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "publish:dev": "sh deploy/bin/deploy_test.sh"
   },
   "dependencies": {
     "@chenfengyuan/vue-countdown": "^1.1.4",
@@ -58,6 +59,6 @@
     "vue-template-compiler": "^2.6.10"
   },
   "gitHooks": {
-    "pre-commit": "yarn lint && yarn build:ts"
+    "pre-commit": "yarn lint"
   }
 }

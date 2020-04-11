@@ -1,5 +1,5 @@
 import Mutation from '@what-a-faka/obj-mutation'
-import { fetchOptions } from '@/apis/options'
+// import { fetchOptions } from '@/apis/options'
 import { allErrors } from '@/utils/errorFormat'
 import requests from '@/apis/requests'
 import exportCsv from '@/utils/exportCSV'
@@ -54,7 +54,8 @@ export default ({
         this.mixTableLoading = true
         try {
           this.filtersCache = {
-            ...this.pager,
+            page: this.pager.page,
+            pageSize: this.pager.page_size,
             ...this.filters,
             ordering: this.ordering,
             ...params,
@@ -62,8 +63,8 @@ export default ({
           const res = await this.fetchTableListMethod(
             this.filtersMutate.parse(this.filtersCache)
           )
-          this.tableList = res.results || []
-          this.tableTotal = res.count
+          this.tableList = res.result.list || []
+          this.tableTotal = res.result.total
         } catch (error) {
           allErrors(error.data || error)
         } finally {
@@ -123,13 +124,13 @@ export default ({
         this.fetchTableList(form)
       },
 
-      fetchOptions(option) {
-        // TODO 删除对 formItemList 依赖
-        return fetchOptions(option).then((res) => {
-          this.formItemList = res
-          return res
-        })
-      },
+      // fetchOptions(option) {
+      //   // TODO 删除对 formItemList 依赖
+      //   return fetchOptions(option).then((res) => {
+      //     this.formItemList = res
+      //     return res
+      //   })
+      // },
 
       async handleExportCSV(url, name) {
         this.$confirm('是否确认导出以下内容？', '提示', {

@@ -1,5 +1,5 @@
 yarn install &&
 # yarn test:unit &&
 yarn run build:test &&
-rsync -r deploy/nginx/nginx.test.conf root@hongkong:/root/project/admin_ui &&
-rsync -r dist root@hongkong:/root/project/admin_ui
+# scp -r deploy/nginx/nginx.test.conf wyme@hongkong:/home/wyme/project/admin_ui &&
+scp -r dist wyme@hongkong:/home/wyme/project/admin_ui

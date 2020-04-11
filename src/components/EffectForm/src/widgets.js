@@ -3,7 +3,7 @@ import WrapRadioGroup from './component/WrapRadioGroup'
 import WrapCheckboxGroup from './component/WrapCheckboxGroup'
 import Upload from './component/Upload'
 import InputNumberRange from './component/InputNumberRange'
-import UEditor from './component/UEditor'
+// import UEditor from './component/UEditor'
 import DynamicLabels from './component/DynamicLabels'
 import MultipleInput from './component/MultipleInput'
 
@@ -24,9 +24,9 @@ export default {
     component: WrapSelect,
   },
 
-  UEditor: {
-    component: UEditor,
-  },
+  // UEditor: {
+  //   component: UEditor,
+  // },
 
   datetimepicker: {
     component: 'el-date-picker',

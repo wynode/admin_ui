@@ -1,5 +1,5 @@
 <template>
-  <div :id="chartId" style="width: 100%; height:340px;"></div>
+  <div :id="chartId" style="width: 100%; height:300px;"></div>
 </template>
 
 <script>
@@ -10,14 +10,21 @@ require('echarts/lib/component/title')
 // const echarts = require('echarts/lib/echarts')
 import echarts from 'echarts'
 
-// const pieColorArray = [
-//   '#13003e',
-//   '#2d0094',
-//   '#4c0bc2',
-//   '#6736e1',
-//   '#845bea',
-//   '#937aff',
-// ]
+const pieColorArray = [
+  '#009688',
+  '#1E9FFF',
+  '#83C897',
+  '#FFB980',
+  '#D87A80',
+  '#647994',
+  '#011e3c',
+  '#b1709b',
+  '#ae94de',
+  '#798dd4',
+  '#a6d1d0',
+  '#79adb6',
+  '#f1e0c8',
+]
 
 export default {
   props: {
@@ -29,7 +36,7 @@ export default {
       type: String,
       default: '',
     },
-    pieChartData: {
+    chartData: {
       type: Object,
       default: () => {},
     },
@@ -41,7 +48,7 @@ export default {
   },
 
   watch: {
-    pieChartData: {
+    chartData: {
       immediate: true,
       deep: true,
       handler(newVal) {
@@ -61,14 +68,12 @@ export default {
     commonData() {
       let legendData = []
       let seriesData = []
-      Object.keys(this.pieChartData).forEach((item) => {
-        if (this.pieChartData[item]) {
-          legendData.push(item)
-          seriesData.push({
-            value: this.pieChartData[item],
-            name: item,
-          })
-        }
+      Object.keys(this.chartData).forEach((item) => {
+        legendData.push(item)
+        seriesData.push({
+          value: this.chartData[item],
+          name: item,
+        })
       })
       return {
         legendData,
@@ -77,14 +82,14 @@ export default {
     },
     option() {
       return {
-        title: {
-          text: this.titleName,
-          left: 80,
-          top: 10,
-          textStyle: {
-            fontSize: 14,
-          },
-        },
+        // title: {
+        //   text: this.titleName,
+        //   // left: 100,
+        //   top: 10,
+        //   textStyle: {
+        //     fontSize: 14,
+        //   },
+        // },
         tooltip: {
           trigger: 'item',
           formatter: (params) => {
@@ -97,15 +102,16 @@ export default {
         legend: {
           type: 'scroll',
           orient: 'vertical',
-          left: '75%',
-          y: 'center',
+          left: '0',
+          y: '0',
           data: this.commonData.legendData,
         },
         series: [
           {
             type: 'pie',
-            radius: '50%',
-            center: ['45%', '50%'],
+            // radius: ['45%', '65%'],
+            radius: '60%',
+            center: ['50%', '50%'],
             label: {
               formatter: (params) => {
                 return `${params.name} ${params.percent.toFixed(0)}%`
@@ -120,9 +126,9 @@ export default {
               },
             },
             itemStyle: {
-              // color: (params) => {
-              //   return pieColorArray[params.dataIndex]
-              // },
+              color: (params) => {
+                return pieColorArray[params.dataIndex] || '#ae94de'
+              },
               emphasis: {
                 shadowBlur: 10,
                 shadowOffsetX: 0,

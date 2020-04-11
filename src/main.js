@@ -10,8 +10,6 @@ import { sync } from 'vuex-router-sync'
 import ElementUI from 'element-ui'
 import EffectForm from '@/components/EffectForm'
 import Dialog from '@/components/dialog'
-import DecodeImage from '@/components/DecodeImage'
-import DecodeImageList from '@/components/DecodeImageList'
 import { USER_INFO } from './config'
 import App from './App.vue'
 import routers from './routers'
@@ -23,10 +21,6 @@ Vue.use(ElementUI)
 Vue.use(Txcel)
 Vue.use(plugins)
 Vue.use(EffectForm)
-Vue.use(DecodeImage)
-Vue.use(DecodeImageList)
-Vue.component(DecodeImage.name, DecodeImage)
-Vue.component(DecodeImageList.name, DecodeImageList)
 sync(stores, routers)
 
 function getAuthCode() {

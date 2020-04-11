@@ -3,7 +3,7 @@
     <slot></slot>
 
     <slot name="btnGroup">
-      <div v-if="needToolBtnGroup">
+      <div v-if="needToolBtnGroup" class="effect_btn_group">
         <el-button type="primary" size="small" @click="onSubmit">
           {{ submitText }}
         </el-button>

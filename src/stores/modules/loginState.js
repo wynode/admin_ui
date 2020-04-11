@@ -22,7 +22,7 @@ const getters = {
   username() {
     const userInfo = store.get(USER_INFO)
     return userInfo
-      ? userInfo.name || userInfo.username || userInfo.email
+      ? userInfo.adminName || userInfo.adminAccount
       : '用户资料错误'
   },
 }
