@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="history">
     <el-card>
       <EffectForm
         ref="effectForm"
@@ -18,8 +18,16 @@
       </EffectForm>
     </el-card>
 
-    <el-card class="Mt15 Pt40 Pb40">
-      <LineData :chartData="chartData" v-loading="loading"></LineData>
+    <el-card class="Mt15 Pb15">
+      <el-tabs v-model="activeName">
+        <el-tab-pane label="趋势图" name="LineData"></el-tab-pane>
+        <el-tab-pane label="占比图" name="PieData"></el-tab-pane>
+      </el-tabs>
+      <component
+        :is="activeName"
+        :chartData="chartData"
+        v-loading="loading"
+      ></component>
     </el-card>
   </div>
 </template>
@@ -35,10 +43,12 @@ export default {
 
   components: {
     LineData: () => import('./LineData'),
+    PieData: () => import('./PieData'),
   },
 
   data() {
     return {
+      activeName: 'LineData',
       chartData: [],
       loading: false,
     }
@@ -50,7 +60,7 @@ export default {
     },
 
     liveTimeOptions() {
-      return getMapOptions('historyTime')
+      return getMapOptions('liveTime')
     },
   },
 
@@ -83,7 +93,12 @@ export default {
     getDateDataFn(date) {
       this.loading = true
       getDateData({ date }).then((data) => {
-        const result = data.result || []
+        let result = data.result || []
+        if (result.length == 0) {
+          for (let i = 0; i < 1000; i++) {
+            result[i] = {}
+          }
+        }
         const totalLength = result.length || 0
         const sliceLength = parseInt(totalLength / 25)
         const pieLength = totalLength / sliceLength
@@ -108,4 +123,10 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss">
+.history {
+  .date_data_switch_ul {
+    float: left;
+  }
+}
+</style>

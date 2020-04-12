@@ -26,3 +26,33 @@ export const ChangeFields = () => {
     },
   ]
 }
+
+export const accessFields = () => {
+  return [
+    {
+      type: 'datetime',
+      title: '时间范围',
+      name: 'date',
+      widget: 'datetimepicker',
+      xProps: {
+        type: 'date',
+        'value-format': 'yyMMdd',
+      },
+    },
+  ]
+}
+
+export const attackFields = () => {
+  return [
+    {
+      type: 'datetime',
+      title: '时间范围',
+      name: 'notify_date',
+      widget: 'datetimepicker',
+      xProps: {
+        type: 'daterange',
+        'value-format': 'yyyyMMdd',
+      },
+    },
+  ]
+}

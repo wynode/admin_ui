@@ -16,8 +16,8 @@ const colorBoard = {
   qps: '#011E3C',
   incomeTransfer: '#28ACB8',
   requestTimes: '#5142B3',
-  status10x: '#5142B3',
-  status20x: '#929CB5',
+  status10x: '#a6d1d0',
+  status20x: '#f1e0c8',
   status30x: '#70a6ff',
   status40x: '#b3b2e1',
   status50x: '#8a7bd4',
@@ -88,14 +88,16 @@ export default {
         return dateFormat(val.time * 1000).slice(11, 16)
       })
 
-      this.liveTimeOptions.forEach((item) => {
-        legendData.push(item.label)
+      this.liveTimeOptions.forEach((item, index) => {
+        legendData.push(
+          `${dateFormat(this.chartData[index]['time'] * 1000)}${item.label}`
+        )
         seriesData.push({
           name: item.label,
           type: 'line',
           smooth: true,
           itemStyle: {
-            color: colorBoard[item.value] || '#fff',
+            color: colorBoard[item.value] || '',
           },
           lineStyle: {
             width: 2,
@@ -104,11 +106,11 @@ export default {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
                 offset: 0,
-                color: colorBoard[item.value] || '#fff',
+                color: colorBoard[item.value] || '',
               },
               {
                 offset: 0.5,
-                color: colorBoard[item.value] || '#fff',
+                color: colorBoard[item.value] || '',
               },
               {
                 offset: 1.0,
@@ -116,7 +118,12 @@ export default {
               },
             ]),
           },
-          data: this.chartData.map((val) => val[item.value]),
+          data: this.chartData.map((val) => {
+            return {
+              label: `${dateFormat(val.time * 1000)}${item.label}`,
+              value: val[item.value],
+            }
+          }),
         })
       })
       return {

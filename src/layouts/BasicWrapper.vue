@@ -28,7 +28,7 @@
       </el-dropdown>
     </el-header>
 
-    <el-container class="Ovh">
+    <el-container class="Ovh" style="margin-top: -1px">
       <el-aside :width="menuCollapse ? '65px' : '216px'" class="Posr Pb56">
         <el-menu
           router
@@ -57,7 +57,7 @@
         </div>
       </el-aside>
 
-      <el-main class="bg" id="main_anchor">
+      <el-main class="bg" id="main_anchor" style="margin-top: 1px">
         <HeaderBoard
           v-if="breadMeta"
           class="SubHeader"
@@ -129,6 +129,7 @@ export default {
 
 #main_anchor {
   min-width: 1200px;
+  overflow-x: hidden;
 
   .el-card {
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -149,8 +150,8 @@ export default {
 
 .Header {
   height: 54px !important;
-  // border-bottom: 1px solid #e6e6e6;
-  border-bottom: none;
+  border-bottom: 1px solid #e6e6e6;
+  // border-bottom: none;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   .logo {
     width: 136px;
@@ -160,7 +161,7 @@ export default {
 }
 
 .SubHeader {
-  margin: -24px -20px 24px;
+  margin: -24px -20px 16px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -196,7 +197,7 @@ export default {
     .el-submenu {
       .el-submenu__title {
         span {
-          margin-left: 24px;
+          margin-left: 20px;
         }
       }
       .el-menu-item {

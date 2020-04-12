@@ -18,7 +18,7 @@
       </EffectForm>
     </el-card>
 
-    <el-card class="Mt24">
+    <el-card class="Mt16">
       <Txcel
         v-loading="mixTableLoading"
         element-loading-text="数据加载中"

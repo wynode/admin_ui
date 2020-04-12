@@ -5,7 +5,7 @@
       titleName="审核量趋势"
       chartId="liveTimeLine"
       :chartData="chartData"
-      mapOption="historyTime"
+      mapOption="liveTime"
     />
   </div>
 </template>

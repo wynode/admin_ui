@@ -46,7 +46,7 @@ export default (/* vm */) => {
       icon: 'el-icon-lock',
       children: [
         {
-          title: 'ip黑白名单',
+          title: 'IP黑白名单',
           router: { name: 'ipList' },
         },
         {

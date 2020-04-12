@@ -3,30 +3,47 @@ import { FormatTime, TextCutOff } from '@/components/CellTools.jsx'
 export function accessLogListCols() {
   return [
     {
-      label: '监控Id',
-      prop: 'watchId',
+      label: '请求ID',
+      prop: 'accessId',
       width: 120,
     },
     {
-      label: '链接地址',
-      prop: 'url',
+      label: 'ip',
+      prop: 'ip',
     },
     {
-      label: 'dnsIP',
-      prop: 'dnsIp',
+      label: '账户',
+      prop: 'account',
     },
     {
-      label: 'http状态',
-      prop: 'httpStatus',
+      label: 'query',
+      prop: 'query',
     },
     {
-      label: '响应时间',
-      prop: 'microTime',
+      label: 'post',
+      prop: 'post',
     },
     {
-      label: '最后监控时间',
-      prop: 'lastWatch',
+      label: 'cookie',
+      prop: 'cookie',
+      component: TextCutOff,
+    },
+    {
+      label: 'hour',
+      prop: 'hour',
+    },
+    {
+      label: 'time',
+      prop: 'time',
       component: FormatTime,
+    },
+    {
+      label: 'uuid',
+      prop: 'uuid',
+    },
+    {
+      label: 'logUuid',
+      prop: 'logUuid',
     },
   ]
 }

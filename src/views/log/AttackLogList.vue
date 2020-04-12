@@ -1,6 +1,23 @@
 <template>
   <div>
     <el-card>
+      <EffectForm
+        ref="effectForm"
+        inline
+        size="small"
+        label-position="top"
+        cancelText="重置"
+        @submit="handleFilterFn"
+        @cancel="handleFilterReset"
+      >
+        <EffectFormField
+          v-for="field in attackFields"
+          v-bind="field"
+          :key="field.name"
+        />
+      </EffectForm>
+    </el-card>
+    <el-card class="Mt16">
       <Txcel
         v-loading="mixTableLoading"
         element-loading-text="数据加载中"
@@ -22,6 +39,7 @@
 <script>
 import tableMixins from '@/mixins/table'
 import { fetchAttackLogList } from '@/apis/all'
+import { attackFields } from './formConfig'
 import { attackLogListCols } from './tableConfig'
 
 const table = tableMixins({
@@ -42,8 +60,22 @@ export default {
       return fetchAttackLogList
     },
 
+    attackFields() {
+      return attackFields(this)
+    },
+
     attackLogListCols() {
       return attackLogListCols(this)
+    },
+  },
+
+  methods: {
+    handleFilterFn(form) {
+      const payload = {
+        startDate: form.notify_date[0],
+        endDate: form.notify_date[1],
+      }
+      this.handleFilter(payload)
     },
   },
 
