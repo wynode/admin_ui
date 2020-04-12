@@ -1,35 +1,33 @@
 import { FormatTime } from '@/components/CellTools.jsx'
 
-export function userListCols(vm) {
+export function urlListCols(vm) {
   return [
     {
-      label: '管理ID',
-      prop: 'adminId',
+      label: '监控Id',
+      prop: 'watchId',
       width: 120,
     },
     {
-      label: '管理名称',
-      prop: 'adminName',
+      label: '链接地址',
+      prop: 'url',
     },
     {
-      label: '管理帐号',
-      prop: 'adminAccount',
+      label: 'dnsIP',
+      prop: 'dnsIp',
     },
     {
-      label: '最后登录IP',
-      prop: 'lastLoginIp',
+      label: 'http状态',
+      prop: 'httpStatus',
     },
     {
-      label: '最后登录时间',
-      prop: 'lastLoginTime',
+      label: '响应时间',
+      prop: 'microTime',
+    },
+    {
+      label: '最后监控时间',
+      prop: 'lastWatch',
       component: FormatTime,
     },
-    {
-      label: '创建时间',
-      prop: 'addTime',
-      component: FormatTime,
-    },
-
     {
       label: '操作',
       width: 150,
@@ -41,7 +39,7 @@ export function userListCols(vm) {
               <el-button
                 type="text"
                 size="small"
-                onClick={() => vm.modifyUser(this.row)}>
+                onClick={() => vm.modifyUrl(this.row)}>
                 编辑
               </el-button>
 
@@ -50,7 +48,7 @@ export function userListCols(vm) {
                 class="Ml8"
                 size="small"
                 style="color:#f56c6c;"
-                onClick={() => vm.delUser(this.row)}>
+                onClick={() => vm.delUrl(this.row)}>
                 删除
               </el-button>
             </span>

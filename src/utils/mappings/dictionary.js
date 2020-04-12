@@ -10,3 +10,20 @@ export const liveTime = new Map([
   ['status50x', '今日50x百分比'],
   ['attackTimes', '今日攻击次数'],
 ])
+
+export const historyTime = new Map([
+  ['incomeTransfer', '今日入网流量'],
+  ['incomeAverageTransfer', '今日平均入网流量'],
+  ['outcomeTransfer', '今日出网流量曲线'],
+  ['outcomeAverageTransfer', '今日平均出网流量曲线'],
+  ['qps', '今日QPS'],
+  // ['qps', '今日当前QPS'],
+  ['attackTimes', '今日攻击曲线'],
+])
+
+export const logSetting = new Map([
+  ['IS_WRITE_COOKIE_DATA', 'isWriteCookieData'],
+  ['IS_WRITE_HEADER_DATA', 'isWriteHeaderData'],
+  ['IS_WRITE_POST_DATA', 'isWritePostData'],
+  ['MAX_STORAGE_DATE', 'maxStorageDate'],
+])

@@ -112,11 +112,11 @@ export default {
             // radius: ['45%', '65%'],
             radius: '60%',
             center: ['50%', '50%'],
-            label: {
-              formatter: (params) => {
-                return `${params.name} ${params.percent.toFixed(0)}%`
-              },
-            },
+            // label: {
+            //   formatter: (params) => {
+            //     return `${params.name} ${params.percent.toFixed(0)}%`
+            //   },
+            // },
             data: this.commonData.seriesData,
             emphasis: {
               itemStyle: {

@@ -38,7 +38,7 @@
           background-color="#20222A"
           text-color="#fff"
           active-text-color="#fff"
-          class="Hst Ova BasicWrapperMenu"
+          class="Hst BasicWrapperMenu"
         >
           <AsideMenu
             v-for="(item, index) in menuItems"
@@ -171,6 +171,12 @@ export default {
 }
 
 .BasicWrapperMenu {
+  overflow: auto;
+  overflow-x: hidden;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   .el-submenu .svgIcon {
     vertical-align: middle;
     margin-right: 5px;
@@ -183,7 +189,22 @@ export default {
   .el-submenu .el-menu-item {
     padding: 0;
     min-width: 150px;
-    padding-left: 64px !important;
+    padding-left: 60px !important;
+  }
+
+  .el-submenu {
+    .el-submenu {
+      .el-submenu__title {
+        span {
+          margin-left: 24px;
+        }
+      }
+      .el-menu-item {
+        span {
+          margin-left: 14px;
+        }
+      }
+    }
   }
 
   .el-menu-item {

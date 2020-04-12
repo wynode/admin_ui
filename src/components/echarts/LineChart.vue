@@ -38,6 +38,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    mapOption: {
+      type: String,
+      default: 'liveTime',
+    },
   },
 
   data() {
@@ -66,7 +70,7 @@ export default {
 
   computed: {
     liveTimeOptions() {
-      return getMapOptions('liveTime')
+      return getMapOptions(this.mapOption)
     },
 
     commonData() {

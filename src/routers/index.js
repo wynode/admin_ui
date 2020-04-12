@@ -4,8 +4,9 @@ import BasicWrapper from '@/layouts/BasicWrapper.vue'
 
 import system from './system'
 import user from './user'
-import home from './home'
+import all from './all'
 import login from './login'
+import monitor from './monitor'
 
 Vue.use(Router)
 /* eslint-disable */
@@ -17,9 +18,9 @@ const router = new Router({
     ...login,
     {
       path: '/',
-      redirect: '/home',
+      redirect: '/monitor',
       component: BasicWrapper,
-      children: [...user, ...home, ...system],
+      children: [...user, ...all, ...system, ...monitor],
     },
   ],
 })
