@@ -6,52 +6,72 @@
           <div slot="header" class="clearfix">
             <span>实时状态</span>
           </div>
-          <CurrentData />
+          <CurrentData :currentData="currentData" />
         </el-card>
       </el-col>
       <el-col :span="14">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
-            <span>实时监控</span>
-            <ul class="date_data_switch_ul">
-              <li
-                :class="{ isChoice: currentComponent == 'LineData' }"
-                @mouseover="currentComponent = 'LineData'"
-              ></li>
-              <li
-                :class="{ isChoice: currentComponent == 'PieData' }"
-                @mouseover="currentComponent = 'PieData'"
-              ></li>
-            </ul>
+            <span>http响应统计</span>
           </div>
-          <component
-            :is="currentComponent"
-            :chartData="chartData"
-            v-loading="loading"
-          ></component>
+          <HistogramData :chartData="histogramChartData" v-loading="loading1" />
         </el-card>
       </el-col>
+    </el-row>
+    <el-row class="Mt15">
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span>近一小时统计 - 请求次数和http状态码</span>
+        </div>
+        <LineChart
+          ref="liveTimeLine"
+          chartId="liveTimeLine"
+          :chartData="lineChartData"
+          mapOption="liveLine"
+          v-loading="loading2"
+        />
+      </el-card>
+    </el-row>
+
+    <el-row class="Mt15">
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span>近一小时统计 - 流量</span>
+        </div>
+        <LineChart
+          ref="liveTimeLineFlow"
+          chartId="liveTimeLineFlow"
+          :chartData="lineChartData"
+          mapOption="liveLineFlow"
+          v-loading="loading2"
+        />
+        <!-- <LineData :chartData="lineChartData" mapOption="liveLineFlow" /> -->
+      </el-card>
     </el-row>
   </div>
 </template>
 
 <script>
 import { dateFormat } from '@/utils/dateFormat'
-import { getDateData } from '@/apis/home'
+import { getDateData, getCurrentData } from '@/apis/home'
 import { getMapOptions } from '@/utils/mappings'
+import { subHours } from 'date-fns'
 
 export default {
   data() {
     return {
-      currentComponent: 'LineData',
-      chartData: [],
-      loading: false,
+      lineChartData: [],
+      histogramChartData: [],
+      loading1: true,
+      loading2: true,
+      currentData: {},
     }
   },
   components: {
     CurrentData: () => import('./CurrentData'),
-    LineData: () => import('./LineData'),
-    PieData: () => import('./PieData'),
+    // LineData: () => import('./LineData'),
+    HistogramData: () => import('./HistogramData'),
+    LineChart: () => import('@/components/echarts/LineChart'),
   },
 
   computed: {
@@ -61,41 +81,47 @@ export default {
   },
 
   methods: {
-    ListObjectItemAdd(arrayList, start, sliceLength = 1) {
-      let obj = {}
-      this.liveTimeOptions.forEach((item) => {
-        const key = item.value
-        for (let index = 0; index < sliceLength; index++) {
-          const objItem = arrayList[start + index] || {}
-          const objItemValue = objItem[key] || 0
-          obj[key] = obj[key] || 0 + objItemValue
-        }
-        obj[key] = parseInt(obj[key] / sliceLength)
+    getDateDataFn() {
+      const date = dateFormat(new Date(), 'yyMMdd')
+      getDateData({ date }).then((data) => {
+        this.histogramChartData = data.result || []
+        this.loading1 = false
       })
-      const middleArrayList = arrayList[start + Math.floor(sliceLength / 2)]
-      obj.time = middleArrayList ? middleArrayList.time : arrayList[start].time
-      return obj
+    },
+
+    getTimeDataFn() {
+      const date = dateFormat(new Date(), 'yyMMdd')
+      const time = new Date()
+      const startTime = dateFormat(subHours(time, 1), 'yyyy-MM-dd HH:mm:ss')
+      const endTime = dateFormat(time, 'yyyy-MM-dd HH:mm:ss')
+      getDateData({ date, startTime, endTime }).then((data) => {
+        this.lineChartData = data.result || []
+        this.loading2 = false
+      })
+    },
+
+    getCurrentDataFn() {
+      getCurrentData().then((data) => {
+        this.currentData = data.result
+      })
     },
   },
 
   mounted() {
-    const date = dateFormat(new Date(), 'yyMMdd')
-    this.loading = true
-    getDateData({ date }).then((data) => {
-      const result = data.result || []
-      const totalLength = result.length || 0
-      const sliceLength = parseInt(totalLength / 25)
-      const pieLength = totalLength / sliceLength
-      let deputyDateData = []
-      for (let index = 0; index < pieLength; index++) {
-        deputyDateData[index] = this.ListObjectItemAdd(
-          result,
-          index * sliceLength,
-          sliceLength
-        )
+    this.getCurrentDataFn()
+    this.getDateDataFn()
+    this.getTimeDataFn()
+    const that = this
+    setInterval(function() {
+      that.getCurrentDataFn()
+    }, 3000)
+    this.$nextTick(() => {
+      window.onresize = () => {
+        if (this.$refs.liveTimeLine) {
+          this.$refs.liveTimeLine.myChart.resize()
+          this.$refs.liveTimeLineFlow.myChart.resize()
+        }
       }
-      this.loading = false
-      this.chartData = deputyDateData
     })
   },
 }

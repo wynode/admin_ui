@@ -14,7 +14,7 @@ export default (/* vm */) => {
           router: { name: 'monitorUrl' },
         },
         {
-          title: '动态网关',
+          title: '当前访问IP',
           router: { name: 'monitorUpstream' },
         },
         {

@@ -5,6 +5,7 @@
       titleName="审核量趋势"
       chartId="liveTimeLine"
       :chartData="chartData"
+      :mapOption="mapOption"
     />
   </div>
 </template>
@@ -17,6 +18,10 @@ export default {
     chartData: {
       type: Array,
       default: () => [],
+    },
+    mapOption: {
+      type: String,
+      default: 'liveLine',
     },
   },
 

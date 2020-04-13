@@ -30,22 +30,26 @@
 
     <el-container class="Ovh" style="margin-top: -1px">
       <el-aside :width="menuCollapse ? '65px' : '216px'" class="Posr Pb56">
-        <el-menu
-          router
-          :default-active="getActiveRouter()"
-          :collapse="menuCollapse"
-          :collapse-transition="false"
-          background-color="#20222A"
-          text-color="#fff"
-          active-text-color="#fff"
-          class="Hst BasicWrapperMenu"
-        >
-          <AsideMenu
-            v-for="(item, index) in menuItems"
-            :key="index"
-            :item="item"
-          />
-        </el-menu>
+        <div class="menu_container">
+          <div class="menu_scroll">
+            <el-menu
+              router
+              :default-active="getActiveRouter()"
+              :collapse="menuCollapse"
+              :collapse-transition="false"
+              background-color="#20222A"
+              text-color="#fff"
+              active-text-color="#fff"
+              class="Hst BasicWrapperMenu"
+            >
+              <AsideMenu
+                v-for="(item, index) in menuItems"
+                :key="index"
+                :item="item"
+              />
+            </el-menu>
+          </div>
+        </div>
 
         <div class="Df Aic Posa B0 Start0 End0 CollapseContainer">
           <i
@@ -134,6 +138,7 @@ export default {
   .el-card {
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     color: #666;
+    overflow: visible;
   }
 
   .el-card__header {
@@ -142,6 +147,20 @@ export default {
 
   .el-card__body {
     padding: 10px 15px;
+  }
+}
+
+.menu_container {
+  height: 100%;
+  width: 216px;
+  overflow-x: hidden;
+  .menu_scroll {
+    width: 236px;
+    height: 100%;
+    overflow-x: hidden;
+    .el-menu {
+      width: 215px;
+    }
   }
 }
 .bg {
@@ -172,8 +191,6 @@ export default {
 }
 
 .BasicWrapperMenu {
-  overflow: auto;
-  overflow-x: hidden;
   ::-webkit-scrollbar {
     display: none;
   }

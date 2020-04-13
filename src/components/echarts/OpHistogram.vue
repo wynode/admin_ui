@@ -36,52 +36,60 @@ export default {
     chartData: {
       deep: true,
       immediate: true,
-      handler(newVal) {
+      handler() {
         this.$nextTick(() => {
           if (!this.myChart) {
             this.myChart = echarts.init(document.getElementById(this.chartId))
           }
+          // this.myChart.setOption(this.option)
           this.myChart.clear()
-          if (Object.keys(newVal).length) {
-            this.myChart.setOption(this.option)
-          }
+          // if (Object.keys(newVal).length) {
+          this.myChart.setOption(this.option)
+          // }
         })
       },
     },
   },
 
   computed: {
+    dataTotal() {
+      return (
+        Object.values(this.chartData).reduce((acc, cur) => acc + cur, 0) || 1
+      )
+    },
     commonData() {
       let legendData = []
       let seriesData = []
       let xAxisData = []
       const chartDataArray = Object.keys(this.chartData)
-      xAxisData = this.chartData[chartDataArray[0]].map((val) => {
-        return val.stat_day.slice(5)
-      })
-      chartDataArray.forEach((key) => {
-        const noEmptyValArray = this.chartData[key].filter((item) => item !== 0)
-        if (noEmptyValArray.length) {
-          legendData.push(key)
-          seriesData.push({
-            name: key === 'by_day' ? '所有' : key,
-            type: 'bar',
-            stack: '总量',
-            label: {
-              show: chartDataArray.length <= 1,
-              position: 'top',
-            },
-            data: this.chartData[key].map((val) => {
-              return {
-                label: val.stat_day.slice(5),
-                value:
-                  this.chartId === 'orderTimeHistogram'
-                    ? Number(val.val / 60).toFixed(2)
-                    : val.val,
-              }
-            }),
-          })
-        }
+      xAxisData = chartDataArray
+      legendData = chartDataArray
+      seriesData.push({
+        // name: key,
+        type: 'bar',
+        // stack: '总量',
+        label: {
+          show: true,
+          position: 'top',
+        },
+        barWidth: '50%',
+        itemStyle: {
+          normal: {
+            barBorderRadius: 4,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: 'rgb(0,150,136)' },
+              { offset: 1, color: 'rgb(0,150,136, 0.9)' },
+            ]),
+          },
+          emphasis: {
+            barBorderRadius: 4,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: 'rgb(0,150,136) ' },
+              { offset: 1, color: 'rgb(0,150,136, 0.9)' },
+            ]),
+          },
+        },
+        data: Object.values(this.chartData),
       })
       return {
         legendData,
@@ -91,17 +99,28 @@ export default {
     },
     option() {
       return {
-        title: {
-          text: this.titleName,
-          top: 10,
-          textStyle: {
-            fontSize: 14,
-          },
-        },
+        // title: {
+        //   text: this.titleName,
+        //   top: 10,
+        //   textStyle: {
+        //     fontSize: 14,
+        //   },
+        // },
         tooltip: {
           trigger: 'axis',
           axisPointer: {
             type: 'shadow',
+          },
+          // formatter: (params) => {
+          //   console.log(params.value)
+          //   const divisor = (params.value / this.dataTotal) * 100 || 0
+          //   return `${params.value} ${divisor.toFixed(2)}%`
+          // },
+          formatter: (params) => {
+            const divisor = (params[0].value / this.dataTotal) * 100 || 0
+            return `${params[0].name}<br />数值：${
+              params[0].value
+            }<br />占比：${divisor.toFixed(2)}%`
           },
         },
         legend: {
@@ -113,7 +132,8 @@ export default {
         grid: {
           left: '3%',
           right: '4%',
-          bottom: '3%',
+          bottom: '2%',
+          top: '8%',
           containLabel: true,
         },
         xAxis: {

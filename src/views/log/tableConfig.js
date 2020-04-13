@@ -2,11 +2,11 @@ import { FormatTime, TextCutOff } from '@/components/CellTools.jsx'
 
 export function accessLogListCols() {
   return [
-    {
-      label: '请求ID',
-      prop: 'accessId',
-      width: 120,
-    },
+    // {
+    //   label: '请求ID',
+    //   prop: 'accessId',
+    //   width: 120,
+    // },
     {
       label: 'ip',
       prop: 'ip',
@@ -50,11 +50,11 @@ export function accessLogListCols() {
 
 export function attackLogListCols() {
   return [
-    {
-      label: '请求ID',
-      prop: 'accessId',
-      width: 120,
-    },
+    // {
+    //   label: '请求ID',
+    //   prop: 'accessId',
+    //   width: 120,
+    // },
     {
       label: 'ip',
       prop: 'ip',

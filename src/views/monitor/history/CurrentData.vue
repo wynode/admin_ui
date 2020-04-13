@@ -1,10 +1,10 @@
 <template>
   <div class="current_data">
     <el-row :gutter="20">
-      <el-col :span="8" v-for="item in liveTimeOptions" :key="item.value">
+      <el-col :span="8" v-for="(value, key) in currentData" :key="key">
         <div class="current_col">
-          <p>{{ item.label }}</p>
-          <span>{{ currentData[item.value] }}</span>
+          <p>{{ key }}</p>
+          <span>{{ value }}</span>
         </div>
       </el-col>
     </el-row>
@@ -26,7 +26,7 @@ export default {
 
   computed: {
     liveTimeOptions() {
-      return getMapOptions('liveStatus')
+      return getMapOptions('liveStatusDay')
     },
   },
 
@@ -73,10 +73,10 @@ export default {
   padding: 12px 15px 8px;
   box-sizing: border-box;
   display: flex;
-  word-break: keep-all;
-  overflow: hidden;
   flex-direction: column;
   justify-content: space-between;
+  word-break: keep-all;
+  overflow: hidden;
   span {
     font-size: 30px;
     font-weight: 400;

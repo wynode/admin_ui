@@ -12,8 +12,8 @@ export default [
     path: '/monitor/upstream',
     name: 'monitorUpstream',
     meta: {
-      title: '动态网关',
-      breadcrumb: ['服务监控', '动态网关'],
+      title: '当前访问IP',
+      breadcrumb: ['服务监控', '当前访问IP'],
     },
     component: () => import('@/views/monitor/upstream/UpstreamList.vue'),
   },

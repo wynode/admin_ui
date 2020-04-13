@@ -1,10 +1,10 @@
 <template>
   <div>
-    <OpPieChart
+    <OpHistogram
       ref="liveTimePie"
       titleName="审核量趋势"
       chartId="liveTimePie"
-      :chartData="pieChartData"
+      :chartData="histogramChartData"
     />
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
   },
 
   computed: {
-    pieChartData() {
+    histogramChartData() {
       let chartData = {}
       const statusArray = [
         'status10x',
@@ -42,14 +42,14 @@ export default {
         return acc
       }, initObj)
       statusArray.forEach((key) => {
-        chartData[translate(key, 'liveTime')] = totalChartData[key]
+        chartData[translate(key, 'liveHistogram')] = totalChartData[key]
       })
       return chartData
     },
   },
 
   components: {
-    OpPieChart: () => import('@/components/echarts/OpPieChart'),
+    OpHistogram: () => import('@/components/echarts/OpHistogram'),
   },
 
   mounted() {

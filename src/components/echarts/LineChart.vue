@@ -13,15 +13,33 @@ import { dateFormat } from '@/utils/dateFormat'
 import { getMapOptions } from '@/utils/mappings'
 
 const colorBoard = {
-  qps: '#011E3C',
-  incomeTransfer: '#28ACB8',
-  requestTimes: '#5142B3',
-  status10x: '#a6d1d0',
-  status20x: '#f1e0c8',
-  status30x: '#70a6ff',
-  status40x: '#b3b2e1',
-  status50x: '#8a7bd4',
-  attackTimes: '#01AAED',
+  requestTimes: 'rgb(0,150,136,0.6)',
+  qps: 'rgb(48,70,85,0.6)',
+  status10x: '#5142B3',
+  status20x: 'rgb(15,154,195, 0.6)',
+  status30x: '#f1e0c8',
+  status40x: '#70a6ff',
+  status50x: 'rgb(224,99,93)',
+  incomeTransfer: 'rgb(0,150,136,0.6)',
+  incomeAverageTransfer: 'rgb(97,160,168, 0.6)',
+  outcomeTransfer: 'rgb(15,154,195, 0.6)',
+  outcomeAverageTransfer: 'rgb(48,70,85,0.6)',
+  attackTimes: 'rgb(97,160,168, 0.6)',
+}
+
+const colorBoardNoGraph = {
+  requestTimes: 'rgb(0,150,136,1)',
+  qps: 'rgb(48,70,85)',
+  status10x: '#5142B3',
+  status20x: 'rgb(15,154,195, 1)',
+  status30x: '#f1e0c8',
+  status40x: '#70a6ff',
+  status50x: 'rgb(224,99,93)',
+  incomeTransfer: 'rgb(0,150,136,1)',
+  incomeAverageTransfer: 'rgb(97,160,168)',
+  outcomeTransfer: 'rgb(15,154,195, 1)',
+  outcomeAverageTransfer: 'rgb(48,70,85)',
+  attackTimes: 'rgb(97,160,168)',
 }
 
 export default {
@@ -40,7 +58,7 @@ export default {
     },
     mapOption: {
       type: String,
-      default: 'liveTime',
+      default: 'liveLine',
     },
   },
 
@@ -97,26 +115,29 @@ export default {
           type: 'line',
           smooth: true,
           itemStyle: {
-            color: colorBoard[item.value] || '',
+            color: colorBoardNoGraph[item.value] || '',
           },
           lineStyle: {
             width: 2,
           },
+          showSymbol: false,
+          hoverAnimation: false,
           areaStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-              {
-                offset: 0,
-                color: colorBoard[item.value] || '',
-              },
-              {
-                offset: 0.5,
-                color: colorBoard[item.value] || '',
-              },
-              {
-                offset: 1.0,
-                color: '#fff',
-              },
-            ]),
+            color: colorBoard[item.value] || '',
+            // color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            //   {
+            //     offset: 0,
+            //     color: colorBoardNoGraph[item.value] || '',
+            //   },
+            //   {
+            //     offset: 0.5,
+            //     color: colorBoard[item.value] || '',
+            //   },
+            //   {
+            //     offset: 1.0,
+            //     color: '#fff',
+            //   },
+            // ]),
           },
           data: this.chartData.map((val) => {
             return {
@@ -148,8 +169,8 @@ export default {
           trigger: 'axis',
         },
         grid: {
-          left: '3%',
-          right: '3%',
+          left: '2%',
+          right: '2%',
           bottom: '1%',
           top: '5%',
           containLabel: true,

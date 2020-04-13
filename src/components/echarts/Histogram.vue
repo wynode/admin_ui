@@ -66,9 +66,9 @@ export default {
           },
         },
         grid: {
-          top: '10%',
-          left: '6%',
-          right: '6%',
+          top: '3%',
+          left: '3%',
+          right: '3%',
           bottom: '4%',
           containLabel: true,
           show: false,

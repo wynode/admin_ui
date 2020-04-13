@@ -51,15 +51,15 @@ export default {
     chartData: {
       immediate: true,
       deep: true,
-      handler(newVal) {
+      handler() {
         this.$nextTick(() => {
           if (!this.myChart) {
             this.myChart = echarts.init(document.getElementById(this.chartId))
           }
-          this.myChart.clear()
-          if (Object.keys(newVal).length) {
-            this.myChart.setOption(this.option)
-          }
+          // this.myChart.clear()
+          // if (Object.keys(newVal).length) {
+          this.myChart.setOption(this.option)
+          // }
         })
       },
     },

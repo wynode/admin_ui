@@ -1,4 +1,60 @@
+export const liveStatus = new Map([
+  ['qps', '当前qps'],
+  ['requestTimes', ' 当前总请求次数'],
+  ['outcomeTransfer', '当前出网总流量'],
+  ['outcomeAverageTransfer', '当前出网平均流量'],
+  ['incomeTransfer', '当前入网总流量'],
+  ['incomeAverageTransfer', '当前入网平均流量'],
+  ['attackTimes', '今日攻击次数'],
+])
+
+export const liveStatusDay = new Map([
+  ['qps', '今日qps'],
+  ['requestTimes', '总请求次数'],
+  ['outcomeTransfer', '今日出网总流量'],
+  ['outcomeAverageTransfer', '今日出网平均流量'],
+  ['incomeTransfer', '今日入网总流量'],
+  ['incomeAverageTransfer', '今日入网平均流量'],
+  ['attackTimes', '今日攻击次数'],
+])
+
+export const liveStatusDayHistory = new Map([
+  ['qps', 'qps'],
+  ['requestTimes', '总请求次数'],
+  ['outcomeTransfer', '出网总流量'],
+  ['outcomeAverageTransfer', '出网平均流量'],
+  ['incomeTransfer', '入网总流量'],
+  ['incomeAverageTransfer', '入网平均流量'],
+  ['attackTimes', '攻击次数'],
+])
+
+export const liveLine = new Map([
+  ['requestTimes', '当前总请求次数'],
+  ['qps', '当前qps'],
+  ['status10x', '当前10x响应次数'],
+  ['status20x', '当前20x响应次数'],
+  ['status30x', '当前30x响应次数'],
+  ['status40x', '当前40x响应次数'],
+  ['status50x', '当前50x响应次数'],
+  ['attackTimes', '当前攻击拦截次数'],
+])
+
+export const liveLineFlow = new Map([
+  ['incomeTransfer', '当前入网总流量'],
+  ['incomeAverageTransfer', '当前平均入网流量'],
+  ['outcomeTransfer', '当前出网总流量'],
+  ['outcomeAverageTransfer', '当前平均出网流量'],
+])
 // 实时监控
+
+export const liveHistogram = new Map([
+  ['status10x', ' 10x'],
+  ['status20x', '20x'],
+  ['status30x', '30x'],
+  ['status40x', '40x'],
+  ['status50x', '50x'],
+])
+
 export const liveTime = new Map([
   ['qps', 'QPS'],
   ['incomeTransfer', '流量'],
