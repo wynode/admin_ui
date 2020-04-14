@@ -118,7 +118,7 @@ export default {
           // },
           formatter: (params) => {
             const divisor = (params[0].value / this.dataTotal) * 100 || 0
-            return `${params[0].name}<br />数值：${
+            return `${params[0].name}<br />次数：${
               params[0].value
             }<br />占比：${divisor.toFixed(2)}%`
           },

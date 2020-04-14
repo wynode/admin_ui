@@ -51,6 +51,8 @@ export default {
       url: 'https://sso.yunaq.com/captcha/',
       verifyCode: '',
       verifyCodeUrl: '',
+      verifyCodeTime: '',
+      verifyCodeHash: '',
     }
   },
 
@@ -65,6 +67,8 @@ export default {
       postLogin({
         ...form,
         verifyCode: this.verifyCode,
+        verifyCodeTime: this.verifyCodeTime,
+        verifyCodeHash: this.verifyCodeHash,
       }).then((data) => {
         const { adminSession, adminId, adminName, adminAccount } = data.result
         store.set(AUTH_TOKEN, adminSession)
@@ -80,8 +84,8 @@ export default {
     fetchVerifyCodeFn() {
       fetchVerifyCode().then((data) => {
         this.verifyCodeUrl = data.result.verifyCode || ''
-        store.set('verifyCodeHash', data.result.verifyCodeHash)
-        store.set('verifyCodeTime', data.result.verifyCodeTime)
+        this.verifyCodeTime = data.result.verifyCodeTime
+        this.verifyCodeHash = data.result.verifyCodeHash
       })
     },
   },

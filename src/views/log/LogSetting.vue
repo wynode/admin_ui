@@ -16,6 +16,7 @@
           label-position="left"
           label-width="auto"
           :needToolBtnGroup="false"
+          :effects="handleFormEffects"
         >
           <EffectFormField
             v-for="field in ChangeFields"
@@ -30,12 +31,18 @@
         size="small"
         @click="handleGoEdit"
         v-if="showEdit"
+        style="margin-left: 80px"
       >
         编辑
       </el-button>
-      <el-button type="primary" size="small" @click="handleGoSubmit" v-else>
-        确定
-      </el-button>
+      <div v-else class="Df" style="width: 300px; margin-left: 40px">
+        <el-button type="primary" size="small" @click="handleGoSubmit">
+          确定
+        </el-button>
+        <el-button size="small" @click="handleGoSubmitNoModify">
+          返回
+        </el-button>
+      </div>
     </el-card>
   </div>
 </template>
@@ -69,6 +76,10 @@ export default {
       this.showEdit = false
     },
 
+    handleGoSubmitNoModify() {
+      this.showEdit = true
+    },
+
     handleGoSubmit() {
       const { form } = this.$refs.effectForm
       patchLogConfig(form).then(() => {
@@ -86,6 +97,15 @@ export default {
         })
       })
     },
+
+    handleFormEffects(subscribe) {
+      subscribe('onFieldInit', (fields) => {
+        Object.keys(fields).forEach((item) => {
+          const { setForm } = this.$refs.effectForm
+          setForm(item, this.logConfig[item])
+        })
+      })
+    },
   },
 
   mounted() {
@@ -98,8 +118,8 @@ export default {
 .log_setting {
   li {
     display: flex;
-    margin-bottom: 22px;
-    margin-top: 10px;
+    margin-bottom: 30px;
+    margin-top: 16px;
   }
 }
 .log_card {
@@ -107,6 +127,9 @@ export default {
     max-width: 500px;
     margin: 0 auto;
     // padding: 40px !important;
+  }
+  .el-form-item {
+    margin-bottom: 16px;
   }
   .el-button {
     margin: 0 auto;

@@ -4,7 +4,7 @@
       <el-col :span="8" v-for="item in liveTimeOptions" :key="item.value">
         <div class="current_col">
           <p>{{ item.label }}</p>
-          <span>{{ currentData[item.value] }}</span>
+          <span>{{ formatValue(item.value, currentData[item.value]) }}</span>
         </div>
       </el-col>
     </el-row>
@@ -15,6 +15,7 @@
 // import { getCurrentData } from '@/apis/home'
 // import { toPercent } from '@/utils/common'
 import { getMapOptions } from '@/utils/mappings'
+import { byteToMGb } from '@/utils/common'
 
 export default {
   props: {
@@ -27,6 +28,21 @@ export default {
   computed: {
     liveTimeOptions() {
       return getMapOptions('liveStatus')
+    },
+  },
+
+  methods: {
+    formatValue(label, value) {
+      const flow = [
+        'incomeTransfer',
+        'incomeAverageTransfer',
+        'outcomeTransfer',
+        'outcomeAverageTransfer',
+      ]
+      if (flow.includes(label)) {
+        return byteToMGb(value)
+      }
+      return value
     },
   },
 

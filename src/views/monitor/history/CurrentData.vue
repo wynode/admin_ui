@@ -4,7 +4,7 @@
       <el-col :span="8" v-for="(value, key) in currentData" :key="key">
         <div class="current_col">
           <p>{{ key }}</p>
-          <span>{{ value }}</span>
+          <span>{{ formatValue(key, value) }}</span>
         </div>
       </el-col>
     </el-row>
@@ -15,6 +15,7 @@
 // import { getCurrentData } from '@/apis/home'
 // import { toPercent } from '@/utils/common'
 import { getMapOptions } from '@/utils/mappings'
+import { byteToMGb } from '@/utils/common'
 
 export default {
   props: {
@@ -30,6 +31,14 @@ export default {
     },
   },
 
+  methods: {
+    formatValue(label, value) {
+      if (label.includes('流量')) {
+        return byteToMGb(value)
+      }
+      return value
+    },
+  },
   // methods: {
   //   getCurrentDataFn() {
   //     getCurrentData().then((data) => {

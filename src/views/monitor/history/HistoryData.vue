@@ -28,21 +28,21 @@
           <div slot="header" class="clearfix">
             <span>{{ dateName }} - http响应统计</span>
           </div>
-          <HistogramData :chartData="histogramChartData" v-loading="loading1" />
+          <HistogramData :chartData="chartData" v-loading="loading" />
         </el-card>
       </el-col>
     </el-row>
     <el-row class="Mt15">
       <el-card class="box-card" style="height: 378px">
         <div slot="header" class="clearfix">
-          <span>{{ dateName }} - 请求次数和http状态码</span>
+          <span>{{ dateName }}统计 - 请求次数和http响应次数</span>
         </div>
         <LineChart
           ref="liveTimeLine"
           chartId="liveTimeLine"
-          :chartData="lineChartData"
+          :chartData="chartData"
           mapOption="liveLine"
-          v-loading="loading2"
+          v-loading="loading"
         />
       </el-card>
     </el-row>
@@ -50,16 +50,30 @@
     <el-row class="Mt15">
       <el-card class="box-card" style="height: 378px">
         <div slot="header" class="clearfix">
-          <span>{{ dateName }} - 流量</span>
+          <span>{{ dateName }}统计 - 攻击请求拦截次数</span>
+        </div>
+        <LineChart
+          ref="liveTimeLineAttack"
+          chartId="liveTimeLineAttack"
+          :chartData="chartData"
+          mapOption="liveLineAttack"
+          v-loading="loading"
+        />
+      </el-card>
+    </el-row>
+
+    <el-row class="Mt15">
+      <el-card class="box-card" style="height: 378px">
+        <div slot="header" class="clearfix">
+          <span>{{ dateName }}统计 - 流量</span>
         </div>
         <LineChart
           ref="liveTimeLineFlow"
           chartId="liveTimeLineFlow"
-          :chartData="lineChartData"
+          :chartData="chartData"
           mapOption="liveLineFlow"
-          v-loading="loading2"
+          v-loading="loading"
         />
-        <!-- <LineData :chartData="lineChartData" mapOption="liveLineFlow" /> -->
       </el-card>
     </el-row>
   </div>
@@ -67,27 +81,22 @@
 
 <script>
 import { dateFormat } from '@/utils/dateFormat'
-import { getDateData, getCurrentData } from '@/apis/home'
+import { getDateData } from '@/apis/home'
 import { getMapOptions, translate } from '@/utils/mappings'
-// import { subHours } from 'date-fns'
 import { filterFields } from './formConfig'
 
 export default {
   data() {
     return {
-      lineChartData: [],
-      histogramChartData: [],
-      loading1: true,
-      loading2: true,
+      chartData: [],
+      loading: true,
       form: {
         date: new Date(),
       },
-      // currentData: {},
     }
   },
   components: {
     CurrentData: () => import('./CurrentData'),
-    // LineData: () => import('./LineData'),
     HistogramData: () => import('./HistogramData'),
     LineChart: () => import('@/components/echarts/LineChart'),
   },
@@ -126,7 +135,7 @@ export default {
       statusArray.forEach((item) => {
         initObj[item] = 0
       })
-      const totalChartData = this.lineChartData.reduce((acc, cur) => {
+      const totalChartData = this.chartData.reduce((acc, cur) => {
         statusArray.forEach((key) => {
           acc[key] += cur[key]
         })
@@ -143,58 +152,27 @@ export default {
 
   methods: {
     handleDateChange() {
-      // const now = dateFormat(new Date(), 'yyMMdd')
       const date = dateFormat(this.form.date || new Date(), 'yyMMdd')
       this.getDateDataFn(date)
-      this.getTimeDataFn(date)
     },
-
-    // handleFilter(form) {
-    //   this.getDateDataFn(form.date)
-    //   this.getTimeDataFn(form.date)
-    // },
-
-    // handleFilterReset() {
-    //   const date = dateFormat(new Date(), 'yyMMdd')
-    //   this.getDateDataFn(date)
-    //   this.getTimeDataFn(date)
-    // },
 
     getDateDataFn(date) {
       getDateData({ date }).then((data) => {
-        this.histogramChartData = data.result || []
-        this.loading1 = false
-      })
-    },
-
-    getTimeDataFn(date) {
-      getDateData({ date }).then((data) => {
-        this.lineChartData = data.result || []
-        this.loading2 = false
-      })
-    },
-
-    getCurrentDataFn() {
-      getCurrentData().then((data) => {
-        this.currentData = data.result
+        this.chartData = data.result || []
+        this.loading = false
       })
     },
   },
 
   mounted() {
     const date = dateFormat(new Date(), 'yyMMdd')
-    // this.getCurrentDataFn()
     this.getDateDataFn(date)
-    this.getTimeDataFn(date)
-    // const that = this
-    // setInterval(function() {
-    //   that.getCurrentDataFn()
-    // }, 3000)
     this.$nextTick(() => {
       window.onresize = () => {
         if (this.$refs.liveTimeLine) {
           this.$refs.liveTimeLine.myChart.resize()
           this.$refs.liveTimeLineFlow.myChart.resize()
+          this.$refs.liveTimeLineAttack.myChart.resize()
         }
       }
     })

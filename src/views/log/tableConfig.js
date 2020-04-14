@@ -10,18 +10,22 @@ export function accessLogListCols() {
     {
       label: 'ip',
       prop: 'ip',
+      component: TextCutOff,
     },
     {
       label: '账户',
       prop: 'account',
+      component: TextCutOff,
     },
     {
       label: 'query',
       prop: 'query',
+      component: TextCutOff,
     },
     {
       label: 'post',
       prop: 'post',
+      component: TextCutOff,
     },
     {
       label: 'cookie',
@@ -31,6 +35,7 @@ export function accessLogListCols() {
     {
       label: 'hour',
       prop: 'hour',
+      component: TextCutOff,
     },
     {
       label: 'time',
@@ -40,10 +45,12 @@ export function accessLogListCols() {
     {
       label: 'uuid',
       prop: 'uuid',
+      component: TextCutOff,
     },
     {
       label: 'logUuid',
       prop: 'logUuid',
+      component: TextCutOff,
     },
   ]
 }
@@ -58,18 +65,22 @@ export function attackLogListCols() {
     {
       label: 'ip',
       prop: 'ip',
+      component: TextCutOff,
     },
     {
       label: '账户',
       prop: 'account',
+      component: TextCutOff,
     },
     {
       label: 'query',
       prop: 'query',
+      component: TextCutOff,
     },
     {
       label: 'post',
       prop: 'post',
+      component: TextCutOff,
     },
     {
       label: 'cookie',
@@ -79,6 +90,7 @@ export function attackLogListCols() {
     {
       label: 'hour',
       prop: 'hour',
+      component: TextCutOff,
     },
     {
       label: 'time',
@@ -88,10 +100,12 @@ export function attackLogListCols() {
     {
       label: 'uuid',
       prop: 'uuid',
+      component: TextCutOff,
     },
     {
       label: 'logUuid',
       prop: 'logUuid',
+      component: TextCutOff,
     },
     // {
     //   label: '最后监控时间',

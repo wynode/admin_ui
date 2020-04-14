@@ -11,6 +11,7 @@ require('echarts/lib/component/legend')
 import echarts from 'echarts'
 import { dateFormat } from '@/utils/dateFormat'
 import { getMapOptions } from '@/utils/mappings'
+import { byteToMGb } from '@/utils/common'
 
 const colorBoard = {
   requestTimes: 'rgb(0,150,136,0.6)',
@@ -21,10 +22,10 @@ const colorBoard = {
   status40x: '#70a6ff',
   status50x: 'rgb(224,99,93)',
   incomeTransfer: 'rgb(0,150,136,0.6)',
-  incomeAverageTransfer: 'rgb(97,160,168, 0.6)',
+  incomeAverageTransfer: 'rgb(212,130,101, 0.6)',
   outcomeTransfer: 'rgb(15,154,195, 0.6)',
-  outcomeAverageTransfer: 'rgb(48,70,85,0.6)',
-  attackTimes: 'rgb(97,160,168, 0.6)',
+  outcomeAverageTransfer: 'rgb(195,56,52, 0.6)',
+  attackTimes: 'rgb(0,150,136,0.6)',
 }
 
 const colorBoardNoGraph = {
@@ -36,10 +37,10 @@ const colorBoardNoGraph = {
   status40x: '#70a6ff',
   status50x: 'rgb(224,99,93)',
   incomeTransfer: 'rgb(0,150,136,1)',
-  incomeAverageTransfer: 'rgb(97,160,168)',
+  incomeAverageTransfer: 'rgb(212,130,101)',
   outcomeTransfer: 'rgb(15,154,195, 1)',
-  outcomeAverageTransfer: 'rgb(48,70,85)',
-  attackTimes: 'rgb(97,160,168)',
+  outcomeAverageTransfer: 'rgb(195,56,52)',
+  attackTimes: 'rgb(0,150,136,1)',
 }
 
 export default {
@@ -106,10 +107,10 @@ export default {
         return dateFormat(val.time * 1000).slice(11, 16)
       })
 
-      this.liveTimeOptions.forEach((item, index) => {
-        legendData.push(
-          `${dateFormat(this.chartData[index]['time'] * 1000)}${item.label}`
-        )
+      this.liveTimeOptions.forEach((item) => {
+        // legendData.push(
+        //   `${dateFormat(this.chartData[index]['time'] * 1000)}${item.label}`
+        // )
         seriesData.push({
           name: item.label,
           type: 'line',
@@ -139,12 +140,7 @@ export default {
             //   },
             // ]),
           },
-          data: this.chartData.map((val) => {
-            return {
-              label: `${dateFormat(val.time * 1000)}${item.label}`,
-              value: val[item.value],
-            }
-          }),
+          data: this.chartData.map((val) => val[item.value]),
         })
       })
       return {
@@ -167,6 +163,20 @@ export default {
         // ],
         tooltip: {
           trigger: 'axis',
+          formatter: (params) => {
+            var relVal = params[0].name
+            for (var i = 0; i < params.length; i++) {
+              relVal +=
+                '<div class="circle" ><span style="background:' +
+                params[i].color +
+                '"></span>' +
+                params[i].seriesName +
+                ' : ' +
+                this.formatValue(params[i].seriesName, params[i].value) +
+                '</div>'
+            }
+            return relVal
+          },
         },
         grid: {
           left: '2%',
@@ -218,5 +228,27 @@ export default {
       }
     },
   },
+
+  methods: {
+    formatValue(label, value) {
+      if (label.includes('流量')) {
+        return byteToMGb(value)
+      }
+      return value
+    },
+  },
 }
 </script>
+
+<style lang="scss">
+.circle {
+  font-size: 0.8rem;
+}
+.circle > span {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+</style>

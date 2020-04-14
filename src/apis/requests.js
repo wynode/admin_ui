@@ -26,16 +26,6 @@ function requestFactory(httpClient) {
         ...opts.headers,
         'Content-Type': 'multipart/form-data',
       }
-      const verifyCodeTime = store.get('verifyCodeTime')
-      const verifyCodeHash = store.get('verifyCodeHash')
-      const isLogin = opts.url == '/System/Auth/login'
-      if (verifyCodeTime && verifyCodeHash && isLogin) {
-        opts.headers = {
-          ...opts.headers,
-          'Content-Type': 'multipart/form-data',
-          Authorization: `verifyCodeTime=${verifyCodeTime};verifyCodeHash=${verifyCodeHash}`,
-        }
-      }
       return opts
     },
     (error) => Promise.reject(error)

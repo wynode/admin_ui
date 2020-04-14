@@ -21,13 +21,28 @@
     <el-row class="Mt15">
       <el-card class="box-card">
         <div slot="header" class="clearfix">
-          <span>近一小时统计 - 请求次数和http状态码</span>
+          <span>近一小时统计 - 请求次数和http响应次数</span>
         </div>
         <LineChart
           ref="liveTimeLine"
           chartId="liveTimeLine"
           :chartData="lineChartData"
           mapOption="liveLine"
+          v-loading="loading2"
+        />
+      </el-card>
+    </el-row>
+
+    <el-row class="Mt15">
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span>近一小时统计 - 攻击请求拦截次数</span>
+        </div>
+        <LineChart
+          ref="liveTimeLineAttack"
+          chartId="liveTimeLineAttack"
+          :chartData="lineChartData"
+          mapOption="liveLineAttack"
           v-loading="loading2"
         />
       </el-card>
@@ -65,6 +80,7 @@ export default {
       loading1: true,
       loading2: true,
       currentData: {},
+      interval: '',
     }
   },
   components: {
@@ -112,7 +128,7 @@ export default {
     this.getDateDataFn()
     this.getTimeDataFn()
     const that = this
-    setInterval(function() {
+    this.interval = setInterval(function() {
       that.getCurrentDataFn()
     }, 3000)
     this.$nextTick(() => {
@@ -120,9 +136,14 @@ export default {
         if (this.$refs.liveTimeLine) {
           this.$refs.liveTimeLine.myChart.resize()
           this.$refs.liveTimeLineFlow.myChart.resize()
+          this.$refs.liveTimeLineAttack.myChart.resize()
         }
       }
     })
+  },
+
+  destroyed() {
+    clearInterval(this.interval)
   },
 }
 </script>

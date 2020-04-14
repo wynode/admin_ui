@@ -66,3 +66,16 @@ export const textCutOff = (text, retain) => {
       : text.slice(0, retain) + '...'
     : text
 }
+
+export const byteToMGb = (byte) => {
+  if (!byte) {
+    return 0
+  }
+  const mb = byte / 1024 / 1024
+  if (mb > 1024) {
+    const gb = Math.round((mb / 1024) * 100) / 100
+    return `${gb}GB`
+  } else {
+    return `${Math.round(mb * 100) / 100}MB`
+  }
+}

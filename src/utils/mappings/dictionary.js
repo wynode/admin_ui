@@ -36,7 +36,6 @@ export const liveLine = new Map([
   ['status30x', '当前30x响应次数'],
   ['status40x', '当前40x响应次数'],
   ['status50x', '当前50x响应次数'],
-  ['attackTimes', '当前攻击拦截次数'],
 ])
 
 export const liveLineFlow = new Map([
@@ -45,6 +44,9 @@ export const liveLineFlow = new Map([
   ['outcomeTransfer', '当前出网总流量'],
   ['outcomeAverageTransfer', '当前平均出网流量'],
 ])
+
+export const liveLineAttack = new Map([['attackTimes', '当前攻击拦截次数']])
+
 // 实时监控
 
 export const liveHistogram = new Map([
