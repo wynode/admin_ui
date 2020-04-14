@@ -51,3 +51,7 @@ export const fetchBaseSetting = (params = {}) => {
 export const patchBaseSetting = (payload) => {
   return requests.post('/System/BaseSetting/updateSetting', payload)
 }
+
+export const fetchVerifyCode = (params = {}) => {
+  return requests.get('/Common/VerifyCode/verifyCode', { params })
+}

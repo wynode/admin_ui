@@ -17,6 +17,21 @@
           v-bind="field"
           :key="field.name"
         />
+        <el-form-item
+          label="验证码"
+          prop="verifyCode"
+          :rules="[{ required: true, message: '验证码错误', trigger: 'blur' }]"
+        >
+          <div class="verify_code">
+            <el-input v-model="verifyCode"></el-input>
+            <img
+              :src="verifyCodeUrl"
+              alt=""
+              class="verify_code_img"
+              @click="fetchVerifyCodeFn"
+            />
+          </div>
+        </el-form-item>
       </EffectForm>
     </el-card>
   </div>
@@ -27,11 +42,15 @@ import store from 'store2'
 import { AUTH_TOKEN, USER_INFO } from '@/config'
 import { LoginFields } from './formConfig'
 import { postLogin } from '@/apis/system'
+import { fetchVerifyCode } from '@/apis/all'
 
 export default {
   data() {
     return {
       // key: value,
+      url: 'https://sso.yunaq.com/captcha/',
+      verifyCode: '',
+      verifyCodeUrl: '',
     }
   },
 
@@ -43,7 +62,10 @@ export default {
 
   methods: {
     handleLogin(form) {
-      postLogin(form).then((data) => {
+      postLogin({
+        ...form,
+        verifyCode: this.verifyCode,
+      }).then((data) => {
         const { adminSession, adminId, adminName, adminAccount } = data.result
         store.set(AUTH_TOKEN, adminSession)
         store.set(USER_INFO, {
@@ -54,6 +76,18 @@ export default {
         this.$router.push('/')
       })
     },
+
+    fetchVerifyCodeFn() {
+      fetchVerifyCode().then((data) => {
+        this.verifyCodeUrl = data.result.verifyCode || ''
+        store.set('verifyCodeHash', data.result.verifyCodeHash)
+        store.set('verifyCodeTime', data.result.verifyCodeTime)
+      })
+    },
+  },
+
+  mounted() {
+    this.fetchVerifyCodeFn()
   },
 }
 </script>
@@ -66,6 +100,15 @@ export default {
   .effect_btn_group {
     display: flex;
     justify-content: center;
+  }
+  .verify_code {
+    display: flex;
+    .verify_code_img {
+      max-width: 160px;
+      height: 36px;
+      margin-left: 20px;
+      margin-right: 38px;
+    }
   }
 }
 </style>

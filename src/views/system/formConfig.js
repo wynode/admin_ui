@@ -21,6 +21,15 @@ export const LoginFields = () => {
         'show-password': true,
       },
     },
+    // {
+    //   title: '验证码',
+    //   name: 'adminPassword',
+    //   widget: 'text',
+    //   rules: [{ required: true, message: '请填写用户密码', trigger: 'blur' }],
+    //   xProps: {
+    //     'show-password': true,
+    //   },
+    // },
   ]
 }
 
