@@ -24,12 +24,16 @@
           <span>近一小时统计 - 请求次数和http响应次数</span>
         </div>
         <LineChart
+          v-if="lineChartData.length"
           ref="liveTimeLine"
           chartId="liveTimeLine"
           :chartData="lineChartData"
           mapOption="liveLine"
           v-loading="loading2"
         />
+        <div v-else class="no_data">
+          暂无数据
+        </div>
       </el-card>
     </el-row>
 
@@ -39,12 +43,16 @@
           <span>近一小时统计 - 攻击请求拦截次数</span>
         </div>
         <LineChart
+          v-if="lineChartData.length"
           ref="liveTimeLineAttack"
           chartId="liveTimeLineAttack"
           :chartData="lineChartData"
           mapOption="liveLineAttack"
           v-loading="loading2"
         />
+        <div v-else class="no_data">
+          暂无数据
+        </div>
       </el-card>
     </el-row>
 
@@ -54,12 +62,16 @@
           <span>近一小时统计 - 流量</span>
         </div>
         <LineChart
+          v-if="lineChartData.length"
           ref="liveTimeLineFlow"
           chartId="liveTimeLineFlow"
           :chartData="lineChartData"
           mapOption="liveLineFlow"
           v-loading="loading2"
         />
+        <div v-else class="no_data">
+          暂无数据
+        </div>
         <!-- <LineData :chartData="lineChartData" mapOption="liveLineFlow" /> -->
       </el-card>
     </el-row>
@@ -173,5 +185,11 @@ export default {
   .isChoice {
     background-color: #999;
   }
+}
+.no_data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 120px;
 }
 </style>

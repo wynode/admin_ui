@@ -38,12 +38,16 @@
           <span>{{ dateName }}统计 - 请求次数和http响应次数</span>
         </div>
         <LineChart
+          v-if="chartData.length"
           ref="liveTimeLine"
           chartId="liveTimeLine"
           :chartData="chartData"
           mapOption="liveLine"
           v-loading="loading"
         />
+        <div v-else class="no_data">
+          暂无数据
+        </div>
       </el-card>
     </el-row>
 
@@ -53,12 +57,16 @@
           <span>{{ dateName }}统计 - 攻击请求拦截次数</span>
         </div>
         <LineChart
+          v-if="chartData.length"
           ref="liveTimeLineAttack"
           chartId="liveTimeLineAttack"
           :chartData="chartData"
           mapOption="liveLineAttack"
           v-loading="loading"
         />
+        <div v-else class="no_data">
+          暂无数据
+        </div>
       </el-card>
     </el-row>
 
@@ -68,12 +76,16 @@
           <span>{{ dateName }}统计 - 流量</span>
         </div>
         <LineChart
+          v-if="chartData.length"
           ref="liveTimeLineFlow"
           chartId="liveTimeLineFlow"
           :chartData="chartData"
           mapOption="liveLineFlow"
           v-loading="loading"
         />
+        <div v-else class="no_data">
+          暂无数据
+        </div>
       </el-card>
     </el-row>
   </div>
