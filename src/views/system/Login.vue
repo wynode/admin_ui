@@ -17,11 +17,7 @@
           v-bind="field"
           :key="field.name"
         />
-        <el-form-item
-          label="验证码"
-          prop="verifyCode"
-          :rules="[{ required: true, message: '验证码错误', trigger: 'blur' }]"
-        >
+        <el-form-item label="验证码" prop="verifyCode" class="verify_code_item">
           <div class="verify_code">
             <el-input v-model="verifyCode"></el-input>
             <img
@@ -104,6 +100,17 @@ export default {
   .effect_btn_group {
     display: flex;
     justify-content: center;
+  }
+  .verify_code_item {
+    position: relative;
+    &::before {
+      content: '*';
+      color: #f04038;
+      margin-right: 4px;
+      position: absolute;
+      top: 10px;
+      left: 13px;
+    }
   }
   .verify_code {
     display: flex;

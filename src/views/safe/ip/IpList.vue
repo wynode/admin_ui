@@ -14,15 +14,15 @@
         v-loading="mixTableLoading"
         element-loading-text="数据加载中"
         class="Txcel"
-        :data="tableList"
+        :data="tableListx"
         :columns="IpListCols"
         :pager="{
           page: pager.page,
           page_size: pager.page_size,
           layout: 'total,prev,pager,next,jumper',
-          total: tableTotal,
+          total: tableTotalx,
         }"
-        @change="handleTableChange"
+        @change="handleTableChangex"
       />
     </el-card>
   </div>
@@ -44,7 +44,11 @@ export default {
   mixins: [table],
 
   data() {
-    return {}
+    return {
+      tableListx: [],
+      tableTotalx: 0,
+      tableListall: [],
+    }
   },
 
   computed: {
@@ -58,6 +62,26 @@ export default {
   },
 
   methods: {
+    async fetchTableList() {
+      this.mixTableLoading = true
+      const res = await this.fetchTableListMethod(
+        this.filtersMutate.parse(this.filtersCache)
+      )
+      const size = (this.pager.page - 1) * 10
+      this.tableListall = res.result.list
+      this.tableListx = res.result.list.slice(size, size + 10) || []
+      this.tableTotalx = res.result.list.length
+      this.mixTableLoading = false
+    },
+
+    handleTableChangex(pager) {
+      const size = (pager.page - 1) * 10
+      this.pager = {
+        ...pager,
+      }
+      this.tableListx = this.tableListall.slice(size, size + 10)
+    },
+
     handleNewIp() {
       this.$createDialog(
         {
@@ -69,7 +93,7 @@ export default {
               if (await effectForm.useValidator()) {
                 const form = slotRef.$refs.effectForm.getForm()
                 await postIP(form)
-                this.fetchTableList(this.filtersCache)
+                this.fetchTableList()
                 this.$notify.success('新增成功')
                 instance.close()
               }
@@ -92,7 +116,7 @@ export default {
               ip: row.ip,
               ...form,
             })
-            this.fetchTableList(this.filtersCache)
+            this.fetchTableList()
             this.$notify.success('修改成功')
             instance.close()
           },
@@ -112,7 +136,7 @@ export default {
       if (ifDel) {
         await delIP({ ip: row.ip })
         this.$notify.success('删除成功')
-        this.fetchTableList(this.filtersCache)
+        this.fetchTableList()
       }
     },
   },
