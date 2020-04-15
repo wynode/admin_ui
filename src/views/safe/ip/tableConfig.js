@@ -15,9 +15,11 @@ export function IpListCols(vm) {
           const { type } = this.row
           let showText = ''
           if (type == 1) {
-            showText = '黑名单'
-          } else if (type == 2) {
             showText = '白名单'
+          } else if (type == 2) {
+            showText = '黑名单'
+          } else if (type == 3) {
+            showText = '临时黑名单'
           }
           return <div>{showText}</div>
         },
