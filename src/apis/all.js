@@ -24,6 +24,10 @@ export const postIP = (payload) => {
   return requests.post('/System/IpList/addIp', payload)
 }
 
+export const patchIP = (payload) => {
+  return requests.post('/System/IpList/updateIp', payload)
+}
+
 export const delIP = (payload) => {
   return requests.post('/System/IpList/delIp', payload)
 }

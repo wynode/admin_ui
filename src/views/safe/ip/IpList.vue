@@ -30,7 +30,7 @@
 
 <script>
 import tableMixins from '@/mixins/table'
-import { fetchIPList, postIP, delIP } from '@/apis/all'
+import { fetchIPList, postIP, patchIP, delIP } from '@/apis/all'
 import { IpListCols } from './tableConfig'
 import EditIp from './EditIp'
 
@@ -77,6 +77,27 @@ export default {
           },
         },
         () => <EditIp />
+      ).show()
+    },
+
+    modifyUpstream(row) {
+      this.$createDialog(
+        {
+          title: '更新IP',
+          width: '600px',
+          validate: false,
+          onSubmit: async (instance, slotRef) => {
+            const form = slotRef.$refs.effectForm.getForm()
+            await patchIP({
+              ip: row.ip,
+              ...form,
+            })
+            this.fetchTableList(this.filtersCache)
+            this.$notify.success('修改成功')
+            instance.close()
+          },
+        },
+        () => <EditIp meta={row} />
       ).show()
     },
 

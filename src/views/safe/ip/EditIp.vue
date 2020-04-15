@@ -17,12 +17,34 @@
 </template>
 
 <script>
-import { ChangeFields } from './formConfig'
+import { ChangeFields, IpUpdateFields } from './formConfig'
 
 export default {
+  props: {
+    meta: {
+      type: Object,
+      default: null,
+    },
+  },
   computed: {
     ChangeFields() {
-      return ChangeFields(this)
+      return this.meta ? IpUpdateFields(this) : ChangeFields(this)
+    },
+  },
+
+  watch: {
+    meta: {
+      immediate: true,
+      handler() {
+        this.$nextTick(() => {
+          const { fields, setForm } = this.$refs.effectForm
+          if (this.meta) {
+            Object.keys(fields).forEach((fieldName) => {
+              setForm(fieldName, this.meta[fieldName])
+            })
+          }
+        })
+      },
     },
   },
 }

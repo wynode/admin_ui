@@ -12,14 +12,20 @@ export function IpListCols(vm) {
       component: {
         props: { row: Object },
         render() {
-          const { type } = this.row
+          const { type, expire } = this.row
           let showText = ''
-          if (type == 1) {
-            showText = '白名单'
-          } else if (type == 2) {
-            showText = '黑名单'
-          } else if (type == 3) {
-            showText = '临时黑名单'
+          if (expire) {
+            if (type == 1) {
+              showText = '临时白名单'
+            } else if (type == 2) {
+              showText = '临时黑名单'
+            }
+          } else {
+            if (type == 1) {
+              showText = '白名单'
+            } else if (type == 2) {
+              showText = '黑名单'
+            }
           }
           return <div>{showText}</div>
         },
@@ -37,6 +43,13 @@ export function IpListCols(vm) {
         render() {
           return (
             <span>
+              <el-button
+                type="text"
+                size="small"
+                onClick={() => vm.modifyUpstream(this.row)}>
+                编辑
+              </el-button>
+
               <el-button
                 type="text"
                 class="Ml8"
