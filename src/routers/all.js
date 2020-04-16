@@ -17,15 +17,15 @@ export default [
     },
     component: () => import('@/views/log/AttackLogList.vue'),
   },
-  {
-    path: '/log/setting',
-    name: 'logSetting',
-    meta: {
-      title: '日志设置',
-      breadcrumb: ['日志管理', '日志设置'],
-    },
-    component: () => import('@/views/log/LogSetting.vue'),
-  },
+  // {
+  //   path: '/log/setting',
+  //   name: 'logSetting',
+  //   meta: {
+  //     title: '日志设置',
+  //     breadcrumb: ['日志管理', '日志设置'],
+  //   },
+  //   component: () => import('@/views/log/LogSetting.vue'),
+  // },
   {
     path: '/safe/ip',
     name: 'ipList',

@@ -35,10 +35,10 @@ export default (/* vm */) => {
           title: '攻击日志',
           router: { name: 'logAttack' },
         },
-        {
-          title: '日志设置',
-          router: { name: 'logSetting' },
-        },
+        // {
+        //   title: '日志设置',
+        //   router: { name: 'logSetting' },
+        // },
       ],
     },
     {

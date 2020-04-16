@@ -170,9 +170,12 @@ export default {
 
 <style lang="scss">
 .ip_list {
-  .el-pagination__total {
-    display: none;
+  .el-pagination {
+    .el-pagination__total {
+      display: none;
+    }
   }
+
   .el-pager {
     display: none;
   }
