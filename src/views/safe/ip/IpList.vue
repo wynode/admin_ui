@@ -134,7 +134,7 @@ export default {
           onSubmit: async (instance, slotRef) => {
             const form = slotRef.$refs.effectForm.getForm()
             await patchIP({
-              ip: row.ip,
+              ip: this.langtoip(row.ip),
               ...form,
             })
             this.fetchTableList()

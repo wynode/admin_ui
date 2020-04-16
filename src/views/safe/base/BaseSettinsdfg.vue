@@ -109,7 +109,8 @@ export default {
 }
 </script>
 
-// <style lang="scss">
+//
+<style lang="scss">
 // .base_setting {
 //   .base_title {
 //     font-size: 20px;
@@ -138,4 +139,5 @@ export default {
 //     margin-left: 40px;
 //   }
 // }
-// </style>
+//
+</style>
