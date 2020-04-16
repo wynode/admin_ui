@@ -6,7 +6,6 @@
       label-position="left"
       label-width="auto"
       :needToolBtnGroup="false"
-      :effects="handleFormEffects"
     >
       <EffectFormField
         v-for="field in ChangeFields"
@@ -34,12 +33,6 @@ export default {
     },
   },
 
-  data() {
-    return {
-      kw_categoryOpt: [],
-    }
-  },
-
   watch: {
     meta: {
       immediate: true,
@@ -48,22 +41,11 @@ export default {
           const { fields, setForm } = this.$refs.effectForm
           if (this.meta) {
             Object.keys(fields).forEach((fieldName) => {
-              const isPass = fieldName === 'adminPassword'
-              setForm(fieldName, isPass ? '' : this.meta[fieldName])
+              setForm(fieldName, this.meta[fieldName])
             })
           }
         })
       },
-    },
-  },
-
-  methods: {
-    handleFormEffects(subscribe) {
-      subscribe('onFieldInit', (fields) => {
-        if (this.meta) {
-          fields.adminAccount.ifRender = false
-        }
-      })
     },
   },
 }

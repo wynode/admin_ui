@@ -9,13 +9,13 @@ export default [
     component: () => import('@/views/monitor/url/UrlList.vue'),
   },
   {
-    path: '/monitor/upstream',
-    name: 'monitorUpstream',
+    path: '/monitor/current-ip',
+    name: 'monitorCurrentIP',
     meta: {
       title: '当前访问IP',
       breadcrumb: ['服务监控', '当前访问IP'],
     },
-    component: () => import('@/views/monitor/upstream/UpstreamList.vue'),
+    component: () => import('@/views/monitor/current_ip/CurrentIPList.vue'),
   },
   {
     path: '/monitor/history',

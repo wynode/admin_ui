@@ -1,6 +1,23 @@
 <template>
-  <div>
+  <div class="ip_list">
     <el-card>
+      <EffectForm
+        ref="effectForm"
+        inline
+        size="small"
+        label-position="top"
+        cancelText="重置"
+        @submit="handleFilter"
+        @cancel="handleFilterReset"
+      >
+        <EffectFormField
+          v-for="field in notifyFields"
+          v-bind="field"
+          :key="field.name"
+        />
+      </EffectForm>
+    </el-card>
+    <el-card class="Mt15">
       <el-button
         size="small"
         type="primary"
@@ -14,15 +31,15 @@
         v-loading="mixTableLoading"
         element-loading-text="数据加载中"
         class="Txcel"
-        :data="tableListx"
+        :data="tableList"
         :columns="IpListCols"
         :pager="{
           page: pager.page,
           page_size: pager.page_size,
           layout: 'total,prev,pager,next,jumper',
-          total: tableTotalx,
+          total: tableTotal,
         }"
-        @change="handleTableChangex"
+        @change="handleTableChange"
       />
     </el-card>
   </div>
@@ -33,6 +50,8 @@ import tableMixins from '@/mixins/table'
 import { fetchIPList, postIP, patchIP, delIP } from '@/apis/all'
 import { IpListCols } from './tableConfig'
 import EditIp from './EditIp'
+import { notifyFields } from './formConfig'
+import ip from 'ip'
 
 const table = tableMixins({
   pagerInit: { page: 1, page_size: 10 },
@@ -44,14 +63,13 @@ export default {
   mixins: [table],
 
   data() {
-    return {
-      tableListx: [],
-      tableTotalx: 0,
-      tableListall: [],
-    }
+    return {}
   },
 
   computed: {
+    notifyFields() {
+      return notifyFields(this)
+    },
     fetchTableListMethod() {
       return fetchIPList
     },
@@ -62,24 +80,27 @@ export default {
   },
 
   methods: {
-    async fetchTableList() {
-      this.mixTableLoading = true
-      const res = await this.fetchTableListMethod(
-        this.filtersMutate.parse(this.filtersCache)
-      )
-      const size = (this.pager.page - 1) * 10
-      this.tableListall = res.result.list
-      this.tableListx = res.result.list.slice(size, size + 10) || []
-      this.tableTotalx = res.result.list.length
-      this.mixTableLoading = false
-    },
+    // async fetchTableList() {
+    //   this.mixTableLoading = true
+    //   const res = await this.fetchTableListMethod(
+    //     this.filtersMutate.parse(this.filtersCache)
+    //   )
+    //   const size = (this.pager.page - 1) * 10
+    //   this.tableListall = res.result.list
+    //   this.tableListx = res.result.list.slice(size, size + 10) || []
+    //   this.tableTotalx = res.result.list.length
+    //   this.mixTableLoading = false
+    // },
 
-    handleTableChangex(pager) {
-      const size = (pager.page - 1) * 10
-      this.pager = {
-        ...pager,
-      }
-      this.tableListx = this.tableListall.slice(size, size + 10)
+    // handleTableChangex(pager) {
+    //   const size = (pager.page - 1) * 10
+    //   this.pager = {
+    //     ...pager,
+    //   }
+    //   this.tableListx = this.tableListall.slice(size, size + 10)
+    // },
+    langtoip(lang) {
+      return ip.fromLong(lang)
     },
 
     handleNewIp() {
@@ -147,4 +168,13 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss">
+.ip_list {
+  .el-pagination__total {
+    display: none;
+  }
+  .el-pager {
+    display: none;
+  }
+}
+</style>

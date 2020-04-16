@@ -8,6 +8,15 @@ export default [
     },
     component: () => import('@/views/system/NotifyList.vue'),
   },
+  {
+    path: '/upstream-list',
+    name: 'monitorUpstream',
+    meta: {
+      title: 'Upstream',
+      breadcrumb: ['系统管理', 'Upstream'],
+    },
+    component: () => import('@/views/system/upstream/UpstreamList.vue'),
+  },
 
   {
     path: '/phone-list',

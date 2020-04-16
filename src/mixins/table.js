@@ -64,7 +64,7 @@ export default ({
             this.filtersMutate.parse(this.filtersCache)
           )
           this.tableList = res.result.list || []
-          this.tableTotal = res.result.total
+          this.tableTotal = res.result.total || 100000
         } catch (error) {
           allErrors(error.data || error)
         } finally {

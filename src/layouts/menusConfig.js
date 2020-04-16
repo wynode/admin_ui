@@ -15,7 +15,7 @@ export default (/* vm */) => {
         },
         {
           title: '当前访问IP',
-          router: { name: 'monitorUpstream' },
+          router: { name: 'monitorCurrentIP' },
         },
         {
           title: '历史数据',
@@ -66,6 +66,10 @@ export default (/* vm */) => {
         {
           title: '账户设置',
           router: { name: 'userList' },
+        },
+        {
+          title: 'upstream',
+          router: { name: 'monitorUpstream' },
         },
         {
           title: '短信预警',

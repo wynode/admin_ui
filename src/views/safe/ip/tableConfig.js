@@ -5,6 +5,12 @@ export function IpListCols(vm) {
     {
       label: 'ip',
       prop: 'ip',
+      component: {
+        props: { row: Object },
+        render() {
+          return <span>{vm.langtoip(this.row.ip)}</span>
+        },
+      },
     },
     {
       label: '类型',
@@ -12,21 +18,16 @@ export function IpListCols(vm) {
       component: {
         props: { row: Object },
         render() {
-          const { type, expire } = this.row
+          const { type } = this.row
           let showText = ''
-          if (expire) {
-            if (type == 1) {
-              showText = '临时白名单'
-            } else if (type == 2) {
-              showText = '临时黑名单'
-            }
-          } else {
-            if (type == 1) {
-              showText = '白名单'
-            } else if (type == 2) {
-              showText = '黑名单'
-            }
+          if (type == 1) {
+            showText = '白名单'
+          } else if (type == 2) {
+            showText = '黑名单'
+          } else if (type == 3) {
+            showText = '临时黑名单'
           }
+
           return <div>{showText}</div>
         },
       },

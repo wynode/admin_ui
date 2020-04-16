@@ -41,3 +41,7 @@ export const patchUpstream = (payload) => {
 export const deleteUpstream = (payload) => {
   return requests.post('/System/ServiceMonitor/delUpStream', payload)
 }
+
+export const fetchIPAccessList = (params = {}) => {
+  return requests.get('/System/IpAccess/list', { params })
+}
