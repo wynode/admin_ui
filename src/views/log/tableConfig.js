@@ -1,5 +1,8 @@
 import { FormatTime, TextCutOff } from '@/components/CellTools.jsx'
-
+import ip from 'ip'
+function langtoip(lang) {
+  return ip.fromLong(lang)
+}
 export function accessLogListCols() {
   return [
     // {
@@ -10,7 +13,12 @@ export function accessLogListCols() {
     {
       label: 'ip',
       prop: 'ip',
-      component: TextCutOff,
+      component: {
+        props: { row: Object },
+        render() {
+          return <span>{langtoip(this.row.ip)}</span>
+        },
+      },
     },
     {
       label: '账户',
@@ -30,6 +38,11 @@ export function accessLogListCols() {
     {
       label: 'cookie',
       prop: 'cookie',
+      component: TextCutOff,
+    },
+    {
+      label: 'header',
+      prop: 'header',
       component: TextCutOff,
     },
     {
@@ -65,7 +78,12 @@ export function attackLogListCols() {
     {
       label: 'ip',
       prop: 'ip',
-      component: TextCutOff,
+      component: {
+        props: { row: Object },
+        render() {
+          return <span>{langtoip(this.row.ip)}</span>
+        },
+      },
     },
     {
       label: '账户',
@@ -85,6 +103,11 @@ export function attackLogListCols() {
     {
       label: 'cookie',
       prop: 'cookie',
+      component: TextCutOff,
+    },
+    {
+      label: 'header',
+      prop: 'header',
       component: TextCutOff,
     },
     {

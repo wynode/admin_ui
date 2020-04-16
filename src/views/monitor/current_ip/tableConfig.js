@@ -3,6 +3,16 @@ import { FormatTime } from '@/components/CellTools.jsx'
 export function urlListCols(vm) {
   return [
     {
+      label: 'ip地址',
+      prop: 'ip',
+      component: {
+        props: { row: Object },
+        render() {
+          return <span>{vm.langtoip(this.row.ip)}</span>
+        },
+      },
+    },
+    {
       label: '最后访问时间',
       prop: 'lastAccessTime',
       component: FormatTime,
@@ -23,16 +33,6 @@ export function urlListCols(vm) {
     {
       label: '访问频率',
       prop: 'accessInInterval',
-    },
-    {
-      label: 'ip地址',
-      prop: 'ip',
-      component: {
-        props: { row: Object },
-        render() {
-          return <span>{vm.langtoip(this.row.ip)}</span>
-        },
-      },
     },
     // {
     //   label: '操作',

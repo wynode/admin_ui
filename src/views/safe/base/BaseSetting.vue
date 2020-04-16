@@ -52,7 +52,8 @@ export default {
     modifyUpstream(row) {
       this.$createDialog(
         {
-          title: `更新${row.item}`,
+          title: `更新 ${row.item};(${row.note})`,
+          showTwo: true,
           width: '600px',
           validate: false,
           onSubmit: async (instance, slotRef) => {

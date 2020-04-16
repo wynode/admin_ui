@@ -218,4 +218,11 @@ export default {
     background-color: #999;
   }
 }
+
+.no_data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 120px;
+}
 </style>

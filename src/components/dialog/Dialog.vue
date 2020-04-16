@@ -2,14 +2,19 @@
   <el-dialog
     :visible.sync="visible"
     :width="width"
-    :title="title"
     :close-on-click-modal="closeOnClickModal"
     :close-on-press-escape="true"
     @open="handleOpen"
     @close="handleClose"
   >
     <slot></slot>
-
+    <div slot="title">
+      <div v-if="showTwo" class="title_dialog">
+        <p>{{ title.split(';')[0] }}</p>
+        <p class="sub_title">{{ title.split(';')[1] }}</p>
+      </div>
+      <p v-else class="title_dialog">{{ title }}</p>
+    </div>
     <el-row v-if="footer" type="flex" justify="end" class="Mt20">
       <el-button size="small" @click="handleCancel" v-if="showCancelBtn">
         {{ cancelBtnText }}
@@ -40,6 +45,11 @@ export default {
     footer: {
       type: [Boolean, String],
       default: true,
+    },
+
+    showTwo: {
+      type: Boolean,
+      default: false,
     },
 
     confirmBtnText: {
@@ -143,3 +153,17 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.title_dialog {
+  line-height: 24px;
+  font-size: 18px;
+  color: #686c78;
+  .sub_title {
+    font-size: 16px;
+    margin-left: 40px;
+    color: #888;
+    margin-bottom: -10px;
+  }
+}
+</style>
