@@ -52,7 +52,7 @@ export default {
     modifyUpstream(row) {
       this.$createDialog(
         {
-          title: '更新配置',
+          title: `更新${row.item}`,
           width: '600px',
           validate: false,
           onSubmit: async (instance, slotRef) => {

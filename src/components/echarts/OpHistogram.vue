@@ -78,14 +78,14 @@ export default {
             barBorderRadius: 4,
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               { offset: 0, color: 'rgb(0,150,136)' },
-              { offset: 1, color: 'rgb(0,150,136, 0.9)' },
+              { offset: 1, color: 'rgba(0,150,136, 0.9)' },
             ]),
           },
           emphasis: {
             barBorderRadius: 4,
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-              { offset: 0, color: 'rgb(0,150,136) ' },
-              { offset: 1, color: 'rgb(0,150,136, 0.9)' },
+              { offset: 0, color: 'rgb(0,150,136)' },
+              { offset: 1, color: 'rgba(0,150,136, 0.9)' },
             ]),
           },
         },

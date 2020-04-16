@@ -14,33 +14,33 @@ import { getMapOptions } from '@/utils/mappings'
 import { byteToMGb } from '@/utils/common'
 
 const colorBoard = {
-  requestTimes: 'rgb(0,150,136,0.6)',
-  qps: 'rgb(48,70,85,0.6)',
+  requestTimes: 'rgba(0,150,136,0.6)',
+  qps: 'rgba(48,70,85,0.6)',
   status10x: '#5142B3',
-  status20x: 'rgb(15,154,195, 0.6)',
+  status20x: 'rgba(15,154,195, 0.6)',
   status30x: '#f1e0c8',
   status40x: '#70a6ff',
   status50x: 'rgb(224,99,93)',
-  incomeTransfer: 'rgb(0,150,136,0.6)',
-  incomeAverageTransfer: 'rgb(212,130,101, 0.6)',
-  outcomeTransfer: 'rgb(15,154,195, 0.6)',
-  outcomeAverageTransfer: 'rgb(195,56,52, 0.6)',
-  attackTimes: 'rgb(0,150,136,0.6)',
+  incomeTransfer: 'rgba(0,150,136,0.6)',
+  incomeAverageTransfer: 'rgba(212,130,101, 0.6)',
+  outcomeTransfer: 'rgba(15,154,195, 0.6)',
+  outcomeAverageTransfer: 'rgba(195,56,52, 0.6)',
+  attackTimes: 'rgba(0,150,136,0.6)',
 }
 
 const colorBoardNoGraph = {
-  requestTimes: 'rgb(0,150,136,1)',
+  requestTimes: 'rgb(0,150,136)',
   qps: 'rgb(48,70,85)',
   status10x: '#5142B3',
-  status20x: 'rgb(15,154,195, 1)',
+  status20x: 'rgb(15,154,195)',
   status30x: '#f1e0c8',
   status40x: '#70a6ff',
   status50x: 'rgb(224,99,93)',
-  incomeTransfer: 'rgb(0,150,136,1)',
+  incomeTransfer: 'rgb(0,150,136)',
   incomeAverageTransfer: 'rgb(212,130,101)',
   outcomeTransfer: 'rgb(15,154,195, 1)',
   outcomeAverageTransfer: 'rgb(195,56,52)',
-  attackTimes: 'rgb(0,150,136,1)',
+  attackTimes: 'rgb(0,150,136)',
 }
 
 export default {
