@@ -31,13 +31,29 @@ export const accessFields = () => {
   return [
     {
       type: 'datetime',
-      title: '时间范围',
+      title: '日期筛选',
       name: 'date',
       widget: 'datetimepicker',
       xProps: {
         type: 'date',
         'value-format': 'yyMMdd',
       },
+    },
+    {
+      type: 'datetime',
+      title: '时间范围筛选',
+      name: 'time_date',
+      widget: 'datetimepicker',
+      xProps: {
+        type: 'datetimerange',
+        'value-format': 'yyyy-MM-dd HH:mm:ss',
+      },
+    },
+    {
+      type: 'string',
+      title: 'ip',
+      name: 'ip',
+      widget: 'text',
     },
   ]
 }
@@ -46,13 +62,19 @@ export const attackFields = () => {
   return [
     {
       type: 'datetime',
-      title: '时间范围',
-      name: 'notify_date',
+      title: '时间范围筛选',
+      name: 'time_date',
       widget: 'datetimepicker',
       xProps: {
-        type: 'daterange',
-        'value-format': 'yyyyMMdd',
+        type: 'datetimerange',
+        'value-format': 'yyyy-MM-dd HH:mm:ss',
       },
+    },
+    {
+      type: 'string',
+      title: 'ip筛选',
+      name: 'ip',
+      widget: 'text',
     },
   ]
 }

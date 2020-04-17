@@ -60,11 +60,27 @@ export default ({
             ordering: this.ordering,
             ...params,
           }
+
           const res = await this.fetchTableListMethod(
             this.filtersMutate.parse(this.filtersCache)
           )
-          this.tableList = res.result.list || []
-          this.tableTotal = res.result.total || 100000
+          if (this.$route.name === 'monitorDiskSplit') {
+            this.tableList = res.result
+          } else {
+            this.tableList = res.result.list || []
+          }
+          if (
+            this.$route.name === 'logAccess' ||
+            this.$route.name === 'ipList'
+          ) {
+            if (this.tableList.length > 9) {
+              this.tableTotal = 100000
+            } else {
+              this.tableTotal = 0
+            }
+          } else {
+            this.tableTotal = res.result.total
+          }
         } catch (error) {
           allErrors(error.data || error)
         } finally {
@@ -87,9 +103,20 @@ export default ({
               ? `${ordering[sort.order]}${sort.prop}`
               : ''
         }
-        this.fetchTableList(
-          this.$refs.effectForm ? this.$refs.effectForm.getForm() : this.filters
-        )
+        const form = this.$refs.effectForm
+          ? this.$refs.effectForm.getForm()
+          : this.filters
+        const payload = { ...form }
+        if (payload.time_date) {
+          const startTime = payload.time_date ? payload.time_date[0] : ''
+          const endTime = payload.time_date ? payload.time_date[1] : ''
+          if (startTime) {
+            payload.startTime = startTime
+            payload.endTime = endTime
+            delete payload.time_date
+          }
+        }
+        this.fetchTableList(payload)
       },
 
       handleSearch(isSaveTime) {

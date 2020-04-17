@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="access_list">
     <el-card>
       <EffectForm
         ref="effectForm"
@@ -7,7 +7,7 @@
         size="small"
         label-position="top"
         cancelText="重置"
-        @submit="handleFilter"
+        @submit="handleFilterFn"
         @cancel="handleFilterReset"
       >
         <EffectFormField
@@ -70,12 +70,21 @@ export default {
     },
   },
 
-  // methods: {
-  //   handleFilterFn(form) {
-
-  //     this.handleFilter(payload)
-  //   },
-  // },
+  methods: {
+    handleFilterFn(form) {
+      let payload = (payload = {
+        ip: form.ip,
+        date: form.date,
+      })
+      const startTime = form.time_date ? form.time_date[0] : ''
+      const endTime = form.time_date ? form.time_date[1] : ''
+      if (startTime) {
+        payload.startTime = startTime
+        payload.endTime = endTime
+      }
+      this.handleFilter(payload)
+    },
+  },
 
   mounted() {
     this.fetchTableList()
@@ -83,4 +92,16 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss">
+.access_list {
+  .el-pagination {
+    .el-pagination__total {
+      display: none;
+    }
+  }
+
+  .el-pager {
+    display: none;
+  }
+}
+</style>

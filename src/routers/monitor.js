@@ -27,6 +27,34 @@ export default [
     component: () => import('@/views/monitor/history/HistoryData.vue'),
   },
   {
+    path: '/monitor/disk-split',
+    name: 'monitorDiskSplit',
+    meta: {
+      title: '磁盘分区',
+      breadcrumb: ['服务监控', '磁盘分区'],
+    },
+    component: () => import('@/views/monitor/disk/DiskSplit.vue'),
+  },
+  {
+    path: '/monitor/disk-statis',
+    name: 'monitorDiskStatis',
+    meta: {
+      title: '磁盘I/O统计',
+      breadcrumb: ['服务监控', '磁盘I/O统计'],
+    },
+    component: () => import('@/views/monitor/disk/DiskStatis.vue'),
+  },
+  {
+    path: '/monitor/memory',
+    name: 'monitorMemory',
+    meta: {
+      title: '内存信息',
+      breadcrumb: ['服务监控', '内存信息'],
+    },
+    component: () => import('@/views/monitor/disk/Memory.vue'),
+  },
+
+  {
     path: '/monitor',
     name: 'monitor',
     meta: {

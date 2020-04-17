@@ -5,7 +5,7 @@ export function getDict(name) {
 }
 
 export function translate(field, dict) {
-  return getDict(dict).get(field)
+  return getDict(dict).get(field) || field
 }
 
 export function getArray(name) {

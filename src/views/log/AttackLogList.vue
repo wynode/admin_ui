@@ -71,9 +71,14 @@ export default {
 
   methods: {
     handleFilterFn(form) {
-      const payload = {
-        startDate: form.notify_date[0],
-        endDate: form.notify_date[1],
+      let payload = (payload = {
+        ip: form.ip,
+      })
+      const startTime = form.time_date ? form.time_date[0] : ''
+      const endTime = form.time_date ? form.time_date[1] : ''
+      if (startTime) {
+        payload.startTime = startTime
+        payload.endTime = endTime
       }
       this.handleFilter(payload)
     },

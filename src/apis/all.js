@@ -59,3 +59,12 @@ export const patchBaseSetting = (payload) => {
 export const fetchVerifyCode = (params = {}) => {
   return requests.get('/Common/VerifyCode/verifyCode', { params })
 }
+export const fetchDiskSplit = (params = {}) => {
+  return requests.get('/System/Status/disk', { params })
+}
+export const fetchMemory = (params = {}) => {
+  return requests.get('/System/Status/memory', { params })
+}
+export const fetchIOstatis = (params = {}) => {
+  return requests.get('/System/Status/ioStats', { params })
+}

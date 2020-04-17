@@ -93,3 +93,13 @@ export const baseSetting = new Map([
   ['UUID', 'UUID设置'],
   ['SYSTEM', '系统设置'],
 ])
+
+export const diskStatis = new Map([
+  ['device', '设备'],
+  ['reads', '读取'],
+  ['writes', '写入'],
+  ['inProg', 'inProg'],
+  ['time', 'time'],
+])
+
+export const memory = new Map([])
