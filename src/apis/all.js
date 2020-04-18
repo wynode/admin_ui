@@ -68,3 +68,15 @@ export const fetchMemory = (params = {}) => {
 export const fetchIOstatis = (params = {}) => {
   return requests.get('/System/Status/ioStats', { params })
 }
+
+export const fetchIPForbidden = (params = {}) => {
+  return requests.get('/System/IpLocationForbidden/list', { params })
+}
+
+export const fetchProvince = (params = {}) => {
+  return requests.get('/System/IpLocationForbidden/provinceList', { params })
+}
+
+export const patchIPForbidden = (payload) => {
+  return requests.post('/System/IpLocationForbidden/updateForbidden', payload)
+}

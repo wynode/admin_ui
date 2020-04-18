@@ -90,6 +90,13 @@ export function attackLogListCols() {
       prop: 'account',
       component: TextCutOff,
     },
+
+    {
+      label: '攻击类型',
+      prop: 'attackType',
+      component: TextCutOff,
+    },
+
     {
       label: 'query',
       prop: 'query',

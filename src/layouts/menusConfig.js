@@ -62,6 +62,10 @@ export default (/* vm */) => {
           router: { name: 'ipList' },
         },
         {
+          title: 'IP地区禁用列表',
+          router: { name: 'ipForbidden' },
+        },
+        {
           title: '基础设置',
           router: { name: 'baseSetting' },
         },
