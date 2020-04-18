@@ -75,6 +75,7 @@ export default {
         })
         this.$router.push('/')
       })
+      this.fetchVerifyCodeFn()
     },
 
     fetchVerifyCodeFn() {
@@ -117,6 +118,7 @@ export default {
     .verify_code_img {
       max-width: 160px;
       height: 36px;
+      cursor: pointer;
       margin-left: 20px;
       margin-right: 38px;
     }

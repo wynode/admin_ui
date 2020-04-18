@@ -1,6 +1,10 @@
 export function diskSplitCols() {
   return [
     {
+      label: '挂载路径',
+      prop: 'mounted',
+    },
+    {
       label: '文件系统',
       prop: 'fileSystem',
     },
@@ -19,10 +23,6 @@ export function diskSplitCols() {
     {
       label: '已使用占比',
       prop: 'usedPercentage',
-    },
-    {
-      label: '挂载路径',
-      prop: 'mounted',
     },
     // {
     //   label: '操作',

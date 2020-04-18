@@ -38,18 +38,25 @@ export function paramsListCols(vm) {
     },
     {
       label: '操作',
-      width: 150,
       component: {
         props: { row: Object },
         render() {
           return (
             <span>
-              <el-button
+              {/* <el-button
                 type="text"
                 size="small"
                 onClick={() => vm.modifyParams(this.row)}>
                 编辑
-              </el-button>
+              </el-button> */}
+
+              <el-switch
+                value={vm.forbidden || Boolean(this.row.isForbidden)}
+                onChange={(value) => vm.modifyParams(this.row, value)}
+                active-color="#F56C6C"
+                inactive-color="#009688"
+                active-text="禁用"
+                inactive-text="正常"></el-switch>
             </span>
           )
         },

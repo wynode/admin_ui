@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ip_forbidden">
     <el-card>
       <EffectForm
         ref="effectForm"
@@ -41,7 +41,7 @@ import tableMixins from '@/mixins/table'
 import { fetchIPForbidden, patchIPForbidden } from '@/apis/all'
 import { paramsListCols } from './tableConfig'
 import { IpForbiddenFields } from './formConfig'
-import EditIPForbidden from './EditIPForbidden'
+// import EditIPForbidden from './EditIPForbidden'
 import { fetchProvince } from '@/apis/all'
 
 const table = tableMixins({
@@ -56,6 +56,7 @@ export default {
   data() {
     return {
       proviceList: [],
+      forbidden: false,
     }
   },
 
@@ -73,25 +74,34 @@ export default {
   },
 
   methods: {
-    modifyParams(row) {
-      this.$createDialog(
-        {
-          title: '修改参数过滤规则',
-          width: '600px',
-          validate: false,
-          onSubmit: async (instance, slotRef) => {
-            const form = slotRef.$refs.effectForm.getForm()
-            await patchIPForbidden({
-              id: row.id,
-              ...form,
-            })
-            this.fetchTableList(this.filtersCache)
-            this.$notify.success('修改成功')
-            instance.close()
-          },
-        },
-        () => <EditIPForbidden meta={row} />
-      ).show()
+    async modifyParams(row, value) {
+      let isForbidden = 0
+      if (value) {
+        isForbidden = 1
+      }
+      await patchIPForbidden({
+        id: row.id,
+        isForbidden,
+      })
+      this.fetchTableList(this.filtersCache)
+      // this.$createDialog(
+      //   {
+      //     title: '修改参数过滤规则',
+      //     width: '600px',
+      //     validate: false,
+      //     onSubmit: async (instance, slotRef) => {
+      //       const form = slotRef.$refs.effectForm.getForm()
+      //       await patchIPForbidden({
+      //         id: row.id,
+      //         ...form,
+      //       })
+      //       this.fetchTableList(this.filtersCache)
+      //       this.$notify.success('修改成功')
+      //       instance.close()
+      //     },
+      //   },
+      //   () => <EditIPForbidden meta={row} />
+      // ).show()
     },
   },
 
@@ -109,4 +119,14 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss">
+.ip_forbidden {
+  .el-switch {
+    .el-switch__label--right.is-active {
+      span {
+        color: rgb(245, 108, 108);
+      }
+    }
+  }
+}
+</style>
