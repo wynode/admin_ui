@@ -17,7 +17,7 @@ export function paramsListCols(vm) {
     },
     {
       label: '邮编',
-      prop: 'zipCode',
+      prop: 'adCode',
     },
     {
       label: '是否禁用',

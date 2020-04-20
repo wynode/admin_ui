@@ -33,7 +33,7 @@ export const IpForbiddenFields = (vm) => {
     },
     {
       title: '邮编',
-      name: 'zipCode',
+      name: 'adCode',
       widget: 'text',
     },
     {
