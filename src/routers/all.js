@@ -62,4 +62,12 @@ export default [
     },
     component: () => import('@/views/safe/params/ParamsFilter.vue'),
   },
+  {
+    path: '/server-status',
+    name: 'serverStatus',
+    meta: {
+      title: '服务器状态',
+    },
+    component: () => import('@/views/server/ServerStatus.vue'),
+  },
 ]

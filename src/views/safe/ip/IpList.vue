@@ -7,6 +7,7 @@
         size="small"
         label-position="top"
         cancelText="重置"
+        :effects="handleFormEffects"
         @submit="handleFilter"
         @cancel="handleFilterReset"
       >
@@ -80,6 +81,24 @@ export default {
   },
 
   methods: {
+    goattack(row) {
+      this.$router.push({
+        name: 'logAttack',
+        query: {
+          ip: row.ip,
+        },
+      })
+    },
+
+    goaccess(row) {
+      this.$router.push({
+        name: 'logAccess',
+        query: {
+          ip: row.ip,
+        },
+      })
+    },
+
     // async fetchTableList() {
     //   this.mixTableLoading = true
     //   const res = await this.fetchTableListMethod(
@@ -99,6 +118,11 @@ export default {
     //   }
     //   this.tableListx = this.tableListall.slice(size, size + 10)
     // },
+    handleFormEffects(subscribe) {
+      subscribe('onFieldChange', 'type', (value, form) => {
+        this.handleFilter(form)
+      })
+    },
     langtoip(lang) {
       return ip.fromLong(lang)
     },
@@ -155,7 +179,7 @@ export default {
       })
 
       if (ifDel) {
-        await delIP({ ip: row.ip })
+        await delIP({ ip: this.langtoip(row.ip) })
         this.$notify.success('删除成功')
         this.fetchTableList()
       }

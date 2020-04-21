@@ -1,5 +1,5 @@
 // import { FormatTime } from '@/components/CellTools.jsx'
-
+// import { dateFormat } from '@/utils/dateFormat'
 export function IpListCols(vm) {
   return [
     {
@@ -18,7 +18,7 @@ export function IpListCols(vm) {
       component: {
         props: { row: Object },
         render() {
-          const { type } = this.row
+          const { type, expire } = this.row
           let showText = ''
           if (type == 1) {
             showText = '白名单'
@@ -28,7 +28,12 @@ export function IpListCols(vm) {
             showText = '临时黑名单'
           }
 
-          return <div>{showText}</div>
+          return (
+            <div>
+              {showText}
+              <div>{expire ? `过期时间：${expire}` : ''}</div>
+            </div>
+          )
         },
       },
     },
@@ -36,6 +41,34 @@ export function IpListCols(vm) {
       label: '备注',
       prop: 'note',
     },
+    {
+      label: '查看',
+      width: 190,
+      component: {
+        props: { row: Object },
+        render() {
+          return (
+            <span>
+              <el-button
+                type="text"
+                class="Ml8"
+                size="small"
+                style="color:#f56c6c;"
+                onClick={() => vm.goattack(this.row)}>
+                查看攻击日志
+              </el-button>
+              <el-button
+                type="text"
+                class="Ml8"
+                size="small"
+                onClick={() => vm.goaccess(this.row)}>
+                查看请求日志
+              </el-button>
+            </span>
+          )
+        },
+      },
+    }, // 操作
     {
       label: '操作',
       width: 150,

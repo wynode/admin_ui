@@ -69,6 +69,13 @@ export const fetchIOstatis = (params = {}) => {
   return requests.get('/System/Status/ioStats', { params })
 }
 
+export const fetchCpuInfo = (params = {}) => {
+  return requests.get('/System/Status/cpuInfo', { params })
+}
+export const fetchGeneralInfo = (params = {}) => {
+  return requests.get('/System/Status/generalInfo', { params })
+}
+
 export const fetchIPForbidden = (params = {}) => {
   return requests.get('/System/IpLocationForbidden/list', { params })
 }

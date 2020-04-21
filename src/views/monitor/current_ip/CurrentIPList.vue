@@ -7,6 +7,7 @@
         size="small"
         label-position="top"
         cancelText="重置"
+        :effects="handleFormEffects"
         @submit="handleFilterFn"
         @cancel="handleFilterReset"
       >
@@ -46,6 +47,7 @@ import {
 import { urlListCols } from './tableConfig'
 import { notifyFields } from './formConfig'
 import ip from 'ip'
+// import { patchIP } from '@/apis/all'
 // import EditUrl from './EditUrl'
 
 const table = tableMixins({
@@ -84,6 +86,45 @@ export default {
 
     langtoip(lang) {
       return ip.fromLong(lang)
+    },
+
+    handleFormEffects(subscribe) {
+      subscribe('onFieldChange', 'orderType', (value, form) => {
+        if (value) {
+          this.handleFilterFn(form)
+        }
+      })
+    },
+
+    goattack(row) {
+      this.$router.push({
+        name: 'logAttack',
+        query: {
+          ip: row.ip,
+        },
+      })
+    },
+
+    goaccess(row) {
+      this.$router.push({
+        name: 'logAccess',
+        query: {
+          ip: row.ip,
+        },
+      })
+    },
+
+    goblack() {
+      // console.log(row)
+      // patchIP({
+      //   ip: this.langtoip(row.ip),
+      //   type: 2,
+      //   note: '12312',
+      // })
+    },
+
+    gowhite() {
+      // console.log(row)
     },
   },
 

@@ -51,8 +51,14 @@ export const accessFields = () => {
     },
     {
       type: 'string',
-      title: 'ip',
+      title: 'ip筛选',
       name: 'ip',
+      widget: 'text',
+    },
+    {
+      type: 'string',
+      title: 'uuid筛选',
+      name: 'uuid',
       widget: 'text',
     },
   ]
@@ -74,6 +80,12 @@ export const attackFields = () => {
       type: 'string',
       title: 'ip筛选',
       name: 'ip',
+      widget: 'text',
+    },
+    {
+      type: 'string',
+      title: 'uuid筛选',
+      name: 'uuid',
       widget: 'text',
     },
   ]

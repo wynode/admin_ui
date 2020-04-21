@@ -7,6 +7,7 @@
         size="small"
         label-position="top"
         cancelText="重置"
+        :effects="handleFormEffects"
         @submit="handleFilter"
         @cancel="handleFilterReset"
       >
@@ -74,6 +75,14 @@ export default {
   },
 
   methods: {
+    handleFormEffects(subscribe) {
+      subscribe('onFieldChange', 'provinceName', (value, form) => {
+        this.handleFilter(form)
+      })
+      subscribe('onFieldChange', 'isForbidden', (value, form) => {
+        this.handleFilter(form)
+      })
+    },
     async modifyParams(row, value) {
       let isForbidden = 0
       if (value) {

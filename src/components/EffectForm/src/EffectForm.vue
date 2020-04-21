@@ -81,9 +81,11 @@ export default {
 
     // 表单字段变化时触发
     _onFieldChange(fieldName, callback) {
-      return this.$watch(`form.${fieldName}`, (newVal) => {
-        const field = this._getCurrentField(fieldName)
-        callback(newVal, this.form, field)
+      return this.$watch(`form.${fieldName}`, (newVal, oldVal) => {
+        if (oldVal !== newVal) {
+          const field = this._getCurrentField(fieldName)
+          callback(newVal, this.form, field)
+        }
       })
     },
 

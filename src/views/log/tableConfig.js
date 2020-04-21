@@ -1,9 +1,10 @@
 import { FormatTime, TextCutOff } from '@/components/CellTools.jsx'
+import { dateFormat } from '@/utils/dateFormat'
 import ip from 'ip'
 function langtoip(lang) {
   return ip.fromLong(lang)
 }
-export function accessLogListCols() {
+export function accessLogListCols(vm) {
   return [
     // {
     //   label: '请求ID',
@@ -11,12 +12,40 @@ export function accessLogListCols() {
     //   width: 120,
     // },
     {
-      label: 'ip',
+      label: 'ip地址',
       prop: 'ip',
+      width: 200,
       component: {
         props: { row: Object },
         render() {
-          return <span>{langtoip(this.row.ip)}</span>
+          const { ipInfo } = this.row
+          let showText = ''
+          let expire = ''
+          let note = ''
+          if (ipInfo) {
+            if (ipInfo.type == 1) {
+              showText = '白名单'
+            } else if (ipInfo.type == 2) {
+              showText = '黑名单'
+            } else if (ipInfo.type == 3) {
+              showText = '临时黑名单'
+            }
+            expire = dateFormat(ipInfo.expire * 1000)
+            note = ipInfo.note
+          }
+          const black = (
+            <div style="font-size: 12px">
+              <div>{showText}</div>
+              <div>{expire ? `过期时间：${expire}` : ''}</div>
+              <div>{note}</div>
+            </div>
+          )
+          return (
+            <div class="ip_col" onClick={() => vm.goSelfIp(this.row)}>
+              {langtoip(this.row.ip)}
+              {black}
+            </div>
+          )
         },
       },
     },
@@ -58,7 +87,17 @@ export function accessLogListCols() {
     {
       label: 'uuid',
       prop: 'uuid',
-      component: TextCutOff,
+      component: {
+        props: { row: Object },
+        render() {
+          const { uuid } = this.row
+          return (
+            <div class="ip_col" onClick={() => vm.goSelfUuid(this.row)}>
+              {uuid}
+            </div>
+          )
+        },
+      },
     },
     {
       label: 'logUuid',
@@ -68,7 +107,7 @@ export function accessLogListCols() {
   ]
 }
 
-export function attackLogListCols() {
+export function attackLogListCols(vm) {
   return [
     // {
     //   label: '请求ID',
@@ -76,12 +115,40 @@ export function attackLogListCols() {
     //   width: 120,
     // },
     {
-      label: 'ip',
+      label: 'ip地址',
       prop: 'ip',
+      width: 200,
       component: {
         props: { row: Object },
         render() {
-          return <span>{langtoip(this.row.ip)}</span>
+          const { ipInfo } = this.row
+          let showText = ''
+          let expire = ''
+          let note = ''
+          if (ipInfo) {
+            if (ipInfo.type == 1) {
+              showText = '白名单'
+            } else if (ipInfo.type == 2) {
+              showText = '黑名单'
+            } else if (ipInfo.type == 3) {
+              showText = '临时黑名单'
+            }
+            expire = dateFormat(ipInfo.expire * 1000)
+            note = ipInfo.note
+          }
+          const black = (
+            <div style="font-size: 12px">
+              <div>{showText}</div>
+              <div>{expire ? `过期时间：${expire}` : ''}</div>
+              <div>{note}</div>
+            </div>
+          )
+          return (
+            <div class="ip_col" onClick={() => vm.goSelfIp(this.row)}>
+              {langtoip(this.row.ip)}
+              {black}
+            </div>
+          )
         },
       },
     },
@@ -130,7 +197,17 @@ export function attackLogListCols() {
     {
       label: 'uuid',
       prop: 'uuid',
-      component: TextCutOff,
+      component: {
+        props: { row: Object },
+        render() {
+          const { uuid } = this.row
+          return (
+            <div class="ip_col" onClick={() => vm.goSelfUuid(this.row)}>
+              {uuid}
+            </div>
+          )
+        },
+      },
     },
     {
       label: 'logUuid',

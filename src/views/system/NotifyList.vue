@@ -7,6 +7,8 @@
         size="small"
         label-position="top"
         cancelText="重置"
+        :effects="handleFormEffects"
+        :needToolBtnGroup="false"
         @submit="handleFilterFn"
         @cancel="handleFilterReset"
       >
@@ -73,11 +75,20 @@ export default {
 
   methods: {
     handleFilterFn(form) {
-      const payload = {
-        startDate: form.notify_date[0],
-        endDate: form.notify_date[1],
+      let payload = {}
+      if (form.notify_date) {
+        payload = {
+          startDate: form.notify_date[0],
+          endDate: form.notify_date[1],
+        }
       }
       this.handleFilter(payload)
+    },
+
+    handleFormEffects(subscribe) {
+      subscribe('onFieldChange', 'notify_date', (value, form) => {
+        this.handleFilterFn(form)
+      })
     },
   },
 

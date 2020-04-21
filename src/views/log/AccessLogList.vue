@@ -7,6 +7,7 @@
         size="small"
         label-position="top"
         cancelText="重置"
+        :effects="handleFormEffects"
         @submit="handleFilterFn"
         @cancel="handleFilterReset"
       >
@@ -42,6 +43,7 @@ import tableMixins from '@/mixins/table'
 import { fetchAccessLogList } from '@/apis/all'
 import { accessLogListCols } from './tableConfig'
 import { accessFields } from './formConfig'
+import ip from 'ip'
 
 const table = tableMixins({
   pagerInit: { page: 1, page_size: 10 },
@@ -71,10 +73,14 @@ export default {
   },
 
   methods: {
+    langtoip(lang) {
+      return ip.fromLong(lang)
+    },
     handleFilterFn(form) {
       let payload = (payload = {
         ip: form.ip,
         date: form.date,
+        uuid: form.uuid,
       })
       const startTime = form.time_date ? form.time_date[0] : ''
       const endTime = form.time_date ? form.time_date[1] : ''
@@ -84,10 +90,52 @@ export default {
       }
       this.handleFilter(payload)
     },
+
+    handleFormEffects(subscribe) {
+      subscribe('onFieldChange', 'date', (value, form) => {
+        if (value) {
+          this.handleFilterFn(form)
+        }
+      })
+      subscribe('onFieldChange', 'time_date', (value, form) => {
+        if (value && value.length) {
+          this.handleFilterFn(form)
+        }
+      })
+    },
+
+    goSelfIp(row) {
+      const { getForm, setForm } = this.$refs.effectForm
+      setForm('ip', this.langtoip(row.ip))
+      const data = getForm()
+      this.handleFilterFn(data)
+    },
+
+    goSelfUuid(row) {
+      const { getForm, setForm } = this.$refs.effectForm
+      setForm('uuid', row.uuid)
+      const data = getForm()
+      this.handleFilterFn(data)
+    },
   },
 
   mounted() {
-    this.fetchTableList()
+    const { ip, uuid } = this.$route.query
+    if (ip || uuid) {
+      this.$nextTick(() => {
+        const { getForm, setForm } = this.$refs.effectForm
+        if (ip) {
+          setForm('ip', this.langtoip(ip))
+        }
+        if (uuid) {
+          setForm('uuid', uuid)
+        }
+        const data = getForm()
+        this.handleFilterFn(data)
+      })
+    } else {
+      this.fetchTableList()
+    }
   },
 }
 </script>

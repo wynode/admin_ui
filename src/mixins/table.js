@@ -30,21 +30,6 @@ export default ({
     methods: {
       handleFilter(form) {
         let payload = { ...form }
-        try {
-          Object.keys(payload).forEach((item) => {
-            // 如果筛选项为inputNumberRange的类型，需要填写完整才能查询
-            if (item.includes('__range')) {
-              const indexOne = payload[item][0]
-              const indexTwo = payload[item][1]
-              if (!(indexOne && indexTwo) && (indexOne || indexTwo)) {
-                throw false
-              }
-            }
-          })
-        } catch {
-          this.$message.info('请输入完整的范围筛选')
-          return
-        }
         this.pager = { ...pagerInit }
         this.ordering = ''
         this.fetchTableList(payload)

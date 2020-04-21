@@ -6,6 +6,11 @@ export default (/* vm */) => {
       router: { name: 'monitor' },
     },
     {
+      title: '服务器状态',
+      icon: 'el-icon-cpu',
+      router: { name: 'serverStatus' },
+    },
+    {
       title: '服务监控',
       icon: 'el-icon-monitor',
       children: [
@@ -21,18 +26,18 @@ export default (/* vm */) => {
           title: '历史数据',
           router: { name: 'monitorHistory' },
         },
-        {
-          title: '磁盘分区',
-          router: { name: 'monitorDiskSplit' },
-        },
-        {
-          title: '磁盘I/O统计',
-          router: { name: 'monitorDiskStatis' },
-        },
-        {
-          title: '内存信息',
-          router: { name: 'monitorMemory' },
-        },
+        // {
+        //   title: '磁盘分区',
+        //   router: { name: 'monitorDiskSplit' },
+        // },
+        // {
+        //   title: '磁盘I/O统计',
+        //   router: { name: 'monitorDiskStatis' },
+        // },
+        // {
+        //   title: '内存信息',
+        //   router: { name: 'monitorMemory' },
+        // },
       ],
     },
     {

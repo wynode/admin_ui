@@ -87,3 +87,10 @@ body {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+.ip_col {
+  cursor: pointer;
+  &:hover {
+    color: #009688;
+  }
+}

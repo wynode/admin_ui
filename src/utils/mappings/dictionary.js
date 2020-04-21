@@ -102,4 +102,11 @@ export const diskStatis = new Map([
   ['time', 'time'],
 ])
 
+export const generalInfo = new Map([
+  ['os', '系统'],
+  ['hostname', '主机名'],
+  ['uptime', '更新时间'],
+  ['serverTime', '服务器时间'],
+])
+
 export const memory = new Map([])
