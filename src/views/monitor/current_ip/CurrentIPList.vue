@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-card>
+    <!-- <el-card>
       <EffectForm
         ref="effectForm"
         inline
@@ -17,7 +17,7 @@
           :key="field.name"
         />
       </EffectForm>
-    </el-card>
+    </el-card> -->
 
     <el-card class="Mt15">
       <Txcel
@@ -47,9 +47,10 @@ import {
 import { urlListCols } from './tableConfig'
 import { notifyFields } from './formConfig'
 import ip from 'ip'
-import { postIP } from '@/apis/all'
+import { postIP, delIP } from '@/apis/all'
 
 import EditIp from './EditIp'
+import EditWhite from './EditWhite'
 // import { patchIP } from '@/apis/all'
 // import EditUrl from './EditUrl'
 
@@ -145,8 +146,33 @@ export default {
     },
 
     async gowhite(row) {
+      this.$createDialog(
+        {
+          title: 'IP加入白名单',
+          width: '600px',
+          onSubmit: async (instance, slotRef) => {
+            if (slotRef.$refs.effectForm) {
+              const { effectForm } = slotRef.$refs
+              if (await effectForm.useValidator()) {
+                const form = slotRef.$refs.effectForm.getForm()
+
+                form.type = 1
+                form.ip = this.langtoip(row.ip)
+                await postIP(form)
+                this.fetchTableList()
+                this.$notify.success('IP加入白名单成功')
+                instance.close()
+              }
+            }
+          },
+        },
+        () => <EditWhite />
+      ).show()
+    },
+
+    async delblackorwhite(row) {
       const ifDel = await this.$confirm(
-        '请确认将该IP加入白名单, 是否继续?',
+        '请确认将该IP黑白名单记录删除, 是否继续?',
         '提示',
         {
           type: 'warning',
@@ -157,7 +183,7 @@ export default {
       })
 
       if (ifDel) {
-        await postIP({ ip: this.langtoip(row.ip), type: 1 })
+        await delIP({ ip: this.langtoip(row.ip) })
         this.$notify.success('加入白名单成功')
         this.fetchTableList()
       }

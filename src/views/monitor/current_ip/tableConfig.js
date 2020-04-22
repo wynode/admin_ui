@@ -1,4 +1,4 @@
-import { FormatTime } from '@/components/CellTools.jsx'
+import { FormatTime, OneLineText } from '@/components/CellTools.jsx'
 import { dateFormat } from '@/utils/dateFormat'
 
 export function urlListCols(vm) {
@@ -6,7 +6,76 @@ export function urlListCols(vm) {
     {
       label: 'ip地址',
       prop: 'ip',
-      width: 230,
+      component: {
+        props: { row: Object },
+        render() {
+          return (
+            <div class="ip_col" onClick={() => vm.goaccess(this.row)}>
+              {vm.langtoip(this.row.ip)}
+            </div>
+          )
+        },
+      },
+    },
+    {
+      label: 'ipLocation',
+      prop: 'ipLocation',
+      component: OneLineText,
+    },
+    {
+      label: '第一次访问时间',
+      prop: 'firstAccessTime',
+      component: FormatTime,
+    },
+    {
+      label: '最后访问时间',
+      prop: 'lastAccessTime',
+      component: FormatTime,
+    },
+    {
+      label: '访问总次数',
+      sortable: true,
+      prop: 'accessTimes',
+    },
+    {
+      label: '每秒查询率（qps）',
+      sortable: true,
+      prop: 'qps',
+    },
+    {
+      label: '访问频率',
+      sortable: true,
+      prop: 'accessInInterval',
+    },
+    {
+      label: '日志',
+      width: 190,
+      component: {
+        props: { row: Object },
+        render() {
+          return (
+            <span>
+              <el-button
+                class="Ml8"
+                size="mini"
+                type="danger"
+                onClick={() => vm.goattack(this.row)}>
+                攻击日志
+              </el-button>
+              <el-button
+                class="Ml8"
+                size="mini"
+                type="primary"
+                onClick={() => vm.goaccess(this.row)}>
+                请求日志
+              </el-button>
+            </span>
+          )
+        },
+      },
+    }, // 操作
+    {
+      label: '黑白名单状态',
       component: {
         props: { row: Object },
         render() {
@@ -26,78 +95,47 @@ export function urlListCols(vm) {
             note = ipInfo.note
           }
           const black = (
-            <div style="font-size: 12px">
-              <div>{showText}</div>
-              <div>{expire ? `过期时间：${expire}` : ''}</div>
-              <div>{note}</div>
-            </div>
+            <el-popover trigger="hover" placement="right">
+              <p style={'max-width: 400px'}>
+                {showText}
+                {expire ? ` 过期时间:${expire}` : ''}
+                {note ? ` 备注:${note}` : ''}
+              </p>
+
+              <div
+                slot="reference"
+                style="font-size: 12px"
+                class="text_one_line">
+                {showText}
+                {expire ? ` 过期时间:${expire}` : ''}
+                {note ? ` 备注:${note}` : ''}
+              </div>
+            </el-popover>
           )
-          return (
-            <div class="ip_col" onClick={() => vm.goaccess(this.row)}>
-              {vm.langtoip(this.row.ip)}
-              {black}
-            </div>
-          )
+
+          return <div>{black}</div>
         },
       },
     },
     {
-      label: '最后访问时间',
-      prop: 'lastAccessTime',
-      component: FormatTime,
-    },
-    {
-      label: '访问总次数',
-      prop: 'accessTimes',
-    },
-    {
-      label: '第一次访问时间',
-      prop: 'firstAccessTime',
-      component: FormatTime,
-    },
-    {
-      label: '每秒查询率（qps）',
-      prop: 'qps',
-    },
-    {
-      label: '访问频率',
-      prop: 'accessInInterval',
-    },
-    {
-      label: '查看',
-      width: 190,
-      component: {
-        props: { row: Object },
-        render() {
-          return (
-            <span>
-              <el-button
-                type="text"
-                class="Ml8"
-                size="small"
-                style="color:#f56c6c;"
-                onClick={() => vm.goattack(this.row)}>
-                查看攻击日志
-              </el-button>
-              <el-button
-                type="text"
-                class="Ml8"
-                size="small"
-                onClick={() => vm.goaccess(this.row)}>
-                查看请求日志
-              </el-button>
-            </span>
-          )
-        },
-      },
-    }, // 操作
-    {
-      label: '操作',
+      label: '黑白名单操作',
       width: 150,
       component: {
         props: { row: Object },
         render() {
-          return (
+          const { ipInfo } = this.row
+          const haveblack = (
+            <el-button
+              type="text"
+              class="Ml8"
+              size="small"
+              style="color:#f56c6c;"
+              onClick={() => vm.delblackorwhite(this.row)}>
+              删除
+            </el-button>
+          )
+
+          const noblack = (
             <span>
               <el-button
                 type="text"
@@ -115,6 +153,7 @@ export function urlListCols(vm) {
               </el-button>
             </span>
           )
+          return <div>{ipInfo ? haveblack : noblack}</div>
         },
       },
     }, // 操作

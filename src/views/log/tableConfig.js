@@ -1,4 +1,4 @@
-import { FormatTime, TextCutOff } from '@/components/CellTools.jsx'
+import { FormatTime, OneLineText } from '@/components/CellTools.jsx'
 import { dateFormat } from '@/utils/dateFormat'
 import ip from 'ip'
 function langtoip(lang) {
@@ -12,7 +12,7 @@ export function accessLogListCols(vm) {
     //   width: 120,
     // },
     {
-      label: 'ip地址',
+      label: 'ip',
       prop: 'ip',
       width: 200,
       component: {
@@ -50,59 +50,72 @@ export function accessLogListCols(vm) {
       },
     },
     {
-      label: '账户',
-      prop: 'account',
-      component: TextCutOff,
-    },
-    {
-      label: 'query',
-      prop: 'query',
-      component: TextCutOff,
-    },
-    {
-      label: 'post',
-      prop: 'post',
-      component: TextCutOff,
-    },
-    {
-      label: 'cookie',
-      prop: 'cookie',
-      component: TextCutOff,
-    },
-    {
-      label: 'header',
-      prop: 'header',
-      component: TextCutOff,
-    },
-    {
-      label: 'hour',
-      prop: 'hour',
-      component: TextCutOff,
-    },
-    {
-      label: 'time',
-      prop: 'time',
-      component: FormatTime,
-    },
-    {
       label: 'uuid',
       prop: 'uuid',
       component: {
         props: { row: Object },
         render() {
           const { uuid } = this.row
-          return (
-            <div class="ip_col" onClick={() => vm.goSelfUuid(this.row)}>
-              {uuid}
-            </div>
+          const textcut = (
+            <el-popover trigger="hover" placement="right">
+              <p style={'max-width: 400px'}>{uuid}</p>
+              <p
+                slot="reference"
+                class="text_one_line ip_col"
+                onClick={() => vm.goSelfUuid(this.row)}>
+                {uuid}
+              </p>
+            </el-popover>
           )
+
+          return <div>{textcut}</div>
         },
       },
     },
     {
       label: 'logUuid',
       prop: 'logUuid',
-      component: TextCutOff,
+      component: OneLineText,
+    },
+    {
+      label: 'ipLocation',
+      prop: 'ipLocation',
+      component: OneLineText,
+    },
+    {
+      label: 'account',
+      prop: 'account',
+      component: OneLineText,
+    },
+    {
+      label: 'query',
+      prop: 'query',
+      component: OneLineText,
+    },
+    {
+      label: 'post',
+      prop: 'post',
+      component: OneLineText,
+    },
+    {
+      label: 'cookie',
+      prop: 'cookie',
+      component: OneLineText,
+    },
+    {
+      label: 'header',
+      prop: 'header',
+      component: OneLineText,
+    },
+    {
+      label: 'hour',
+      prop: 'hour',
+      component: OneLineText,
+    },
+    {
+      label: 'time',
+      prop: 'time',
+      component: FormatTime,
     },
   ]
 }
@@ -115,7 +128,7 @@ export function attackLogListCols(vm) {
     //   width: 120,
     // },
     {
-      label: 'ip地址',
+      label: 'ip',
       prop: 'ip',
       width: 200,
       component: {
@@ -153,66 +166,79 @@ export function attackLogListCols(vm) {
       },
     },
     {
-      label: '账户',
-      prop: 'account',
-      component: TextCutOff,
-    },
-
-    {
-      label: '攻击类型',
-      prop: 'attackType',
-      component: TextCutOff,
-    },
-
-    {
-      label: 'query',
-      prop: 'query',
-      component: TextCutOff,
-    },
-    {
-      label: 'post',
-      prop: 'post',
-      component: TextCutOff,
-    },
-    {
-      label: 'cookie',
-      prop: 'cookie',
-      component: TextCutOff,
-    },
-    {
-      label: 'header',
-      prop: 'header',
-      component: TextCutOff,
-    },
-    {
-      label: 'hour',
-      prop: 'hour',
-      component: TextCutOff,
-    },
-    {
-      label: 'time',
-      prop: 'time',
-      component: FormatTime,
-    },
-    {
       label: 'uuid',
       prop: 'uuid',
       component: {
         props: { row: Object },
         render() {
           const { uuid } = this.row
-          return (
-            <div class="ip_col" onClick={() => vm.goSelfUuid(this.row)}>
-              {uuid}
-            </div>
+          const textcut = (
+            <el-popover trigger="hover" placement="right">
+              <p style={'max-width: 400px'}>{uuid}</p>
+              <p
+                slot="reference"
+                class="text_one_line ip_col"
+                onClick={() => vm.goSelfUuid(this.row)}>
+                {uuid}
+              </p>
+            </el-popover>
           )
+
+          return <div>{textcut}</div>
         },
       },
     },
     {
       label: 'logUuid',
       prop: 'logUuid',
-      component: TextCutOff,
+      component: OneLineText,
+    },
+    {
+      label: 'ipLocation',
+      prop: 'ipLocation',
+      component: OneLineText,
+    },
+    {
+      label: 'account',
+      prop: 'account',
+      component: OneLineText,
+    },
+
+    {
+      label: '攻击类型',
+      prop: 'attackType',
+      component: OneLineText,
+    },
+
+    {
+      label: 'query',
+      prop: 'query',
+      component: OneLineText,
+    },
+    {
+      label: 'post',
+      prop: 'post',
+      component: OneLineText,
+    },
+    {
+      label: 'cookie',
+      prop: 'cookie',
+      component: OneLineText,
+    },
+    {
+      label: 'header',
+      prop: 'header',
+      component: OneLineText,
+    },
+    {
+      label: 'hour',
+      prop: 'hour',
+      component: OneLineText,
+    },
+    {
+      label: 'time',
+      prop: 'time',
+      component: FormatTime,
     },
     // {
     //   label: '最后监控时间',

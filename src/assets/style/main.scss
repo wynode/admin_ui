@@ -94,3 +94,15 @@ body {
     color: #009688;
   }
 }
+
+.text_one_line {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.cell {
+  .el-button--mini {
+    padding: 7px 12px;
+  }
+}

@@ -44,7 +44,7 @@ export function IpListCols(vm) {
       prop: 'note',
     },
     {
-      label: '查看',
+      label: '日志',
       width: 190,
       component: {
         props: { row: Object },
@@ -52,19 +52,18 @@ export function IpListCols(vm) {
           return (
             <span>
               <el-button
-                type="text"
                 class="Ml8"
-                size="small"
-                style="color:#f56c6c;"
+                size="mini"
+                type="danger"
                 onClick={() => vm.goattack(this.row)}>
-                查看攻击日志
+                攻击日志
               </el-button>
               <el-button
-                type="text"
+                type="primary"
                 class="Ml8"
-                size="small"
+                size="mini"
                 onClick={() => vm.goaccess(this.row)}>
-                查看请求日志
+                请求日志
               </el-button>
             </span>
           )

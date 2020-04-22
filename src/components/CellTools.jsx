@@ -46,3 +46,22 @@ export const TextCutOff = ({ props }) => {
 
   return <div>{isOver ? textcut : row[prop]}</div>
 }
+
+export const OneLineText = ({ props }) => {
+  const {
+    row,
+    column: { prop },
+  } = props
+  const content = row[prop] || ''
+  const isOver = content.length > 20
+  const textcut = (
+    <el-popover trigger="hover" placement="right">
+      <p style={'max-width: 400px'}>{row[prop]}</p>
+      <p slot="reference" class="text_one_line">
+        {row[prop]}
+      </p>
+    </el-popover>
+  )
+
+  return <div>{isOver ? textcut : row[prop]}</div>
+}
