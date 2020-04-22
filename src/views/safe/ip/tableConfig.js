@@ -1,5 +1,5 @@
 // import { FormatTime } from '@/components/CellTools.jsx'
-// import { dateFormat } from '@/utils/dateFormat'
+import { dateFormat } from '@/utils/dateFormat'
 export function IpListCols(vm) {
   return [
     {
@@ -31,7 +31,9 @@ export function IpListCols(vm) {
           return (
             <div>
               {showText}
-              <div>{expire ? `过期时间：${expire}` : ''}</div>
+              <div>
+                {expire ? `过期时间：${dateFormat(expire * 1000)}` : ''}
+              </div>
             </div>
           )
         },

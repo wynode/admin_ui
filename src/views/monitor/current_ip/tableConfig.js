@@ -6,7 +6,7 @@ export function urlListCols(vm) {
     {
       label: 'ip地址',
       prop: 'ip',
-      width: 200,
+      width: 230,
       component: {
         props: { row: Object },
         render() {
