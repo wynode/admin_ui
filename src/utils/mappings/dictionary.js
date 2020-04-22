@@ -109,4 +109,10 @@ export const generalInfo = new Map([
   ['serverTime', '服务器时间'],
 ])
 
+export const ordering = new Map([
+  ['qps', 1],
+  ['accessInInterval', 2],
+  ['accessTimes', 3],
+])
+
 export const memory = new Map([])

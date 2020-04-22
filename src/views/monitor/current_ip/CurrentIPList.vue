@@ -20,7 +20,7 @@
     </el-card> -->
 
     <el-card class="Mt15">
-      <Txcel
+      <Txcelx
         v-loading="mixTableLoading"
         element-loading-text="数据加载中"
         class="Txcel"
@@ -40,6 +40,7 @@
 
 <script>
 import tableMixins from '@/mixins/table'
+import Txcelx from './Txcelx'
 import {
   fetchIPAccessList,
   // fetchUrlInfo,
@@ -65,6 +66,10 @@ export default {
 
   data() {
     return {}
+  },
+
+  components: {
+    Txcelx,
   },
 
   computed: {
@@ -191,7 +196,7 @@ export default {
   },
 
   mounted() {
-    this.fetchTableList()
+    this.fetchTableList({ orderType: 1 })
   },
 }
 </script>

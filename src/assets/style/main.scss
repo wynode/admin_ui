@@ -106,3 +106,14 @@ body {
     padding: 7px 12px;
   }
 }
+
+.el-card {
+  .el-table {
+    .sort-caret.ascending {
+      display: none;
+    }
+    .sort-caret.descending {
+      bottom: 10px;
+    }
+  }
+}

@@ -33,11 +33,6 @@ export function urlListCols(vm) {
       component: FormatTime,
     },
     {
-      label: '访问总次数',
-      sortable: true,
-      prop: 'accessTimes',
-    },
-    {
       label: '每秒查询率（qps）',
       sortable: true,
       prop: 'qps',
@@ -46,6 +41,11 @@ export function urlListCols(vm) {
       label: '访问频率',
       sortable: true,
       prop: 'accessInInterval',
+    },
+    {
+      label: '访问总次数',
+      sortable: true,
+      prop: 'accessTimes',
     },
     {
       label: '日志',

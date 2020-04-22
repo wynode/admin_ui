@@ -3,6 +3,7 @@ import Mutation from '@what-a-faka/obj-mutation'
 import { allErrors } from '@/utils/errorFormat'
 import requests from '@/apis/requests'
 import exportCsv from '@/utils/exportCSV'
+import { translate } from '@/utils/mappings'
 /**
  * TODO 需要重构为 interface
  * TODO 需要重新整理请求逻辑
@@ -42,7 +43,7 @@ export default ({
             page: this.pager.page,
             pageSize: this.pager.page_size,
             ...this.filters,
-            ordering: this.ordering,
+            orderType: this.ordering,
             ...params,
           }
 
@@ -81,11 +82,11 @@ export default ({
         if (sort) {
           const ordering = {
             ascending: '',
-            descending: '-',
+            descending: '',
           }
           this.ordering =
             sort.column && sort.order
-              ? `${ordering[sort.order]}${sort.prop}`
+              ? `${ordering[sort.order]}${translate(sort.prop, 'ordering')}`
               : ''
         }
         const form = this.$refs.effectForm
