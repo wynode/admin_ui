@@ -47,6 +47,9 @@ import {
 import { urlListCols } from './tableConfig'
 import { notifyFields } from './formConfig'
 import ip from 'ip'
+import { postIP } from '@/apis/all'
+
+import EditIp from './EditIp'
 // import { patchIP } from '@/apis/all'
 // import EditUrl from './EditUrl'
 
@@ -114,17 +117,50 @@ export default {
       })
     },
 
-    goblack() {
-      // console.log(row)
-      // patchIP({
-      //   ip: this.langtoip(row.ip),
-      //   type: 2,
-      //   note: '12312',
-      // })
+    goblack(row) {
+      this.$createDialog(
+        {
+          title: '拉黑IP',
+          width: '600px',
+          onSubmit: async (instance, slotRef) => {
+            if (slotRef.$refs.effectForm) {
+              const { effectForm } = slotRef.$refs
+              if (await effectForm.useValidator()) {
+                const form = slotRef.$refs.effectForm.getForm()
+                if (!form.expire) {
+                  form.expire = null
+                }
+                form.type = 2
+                form.ip = this.langtoip(row.ip)
+                await postIP(form)
+                this.fetchTableList()
+                this.$notify.success('新增成功')
+                instance.close()
+              }
+            }
+          },
+        },
+        () => <EditIp />
+      ).show()
     },
 
-    gowhite() {
-      // console.log(row)
+    async gowhite(row) {
+      const ifDel = await this.$confirm(
+        '请确认将该IP加入白名单, 是否继续?',
+        '提示',
+        {
+          type: 'warning',
+        }
+      ).catch(() => {
+        this.$notify.info('操作取消')
+        return false
+      })
+
+      if (ifDel) {
+        await postIP({ ip: this.langtoip(row.ip), type: 1 })
+        this.$notify.success('加入白名单成功')
+        this.fetchTableList()
+      }
     },
   },
 

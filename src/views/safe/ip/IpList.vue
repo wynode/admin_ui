@@ -137,6 +137,9 @@ export default {
               const { effectForm } = slotRef.$refs
               if (await effectForm.useValidator()) {
                 const form = slotRef.$refs.effectForm.getForm()
+                if (!form.expire) {
+                  form.expire = null
+                }
                 await postIP(form)
                 this.fetchTableList()
                 this.$notify.success('新增成功')
