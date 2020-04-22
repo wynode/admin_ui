@@ -1,3 +1,5 @@
+import { startOfDay, endOfDay } from 'date-fns'
+
 export const ChangeFields = () => {
   return [
     {
@@ -34,6 +36,7 @@ export const accessFields = () => {
       title: '日期筛选',
       name: 'date',
       widget: 'datetimepicker',
+      defaultValue: new Date(),
       xProps: {
         type: 'date',
         'value-format': 'yyMMdd',
@@ -71,6 +74,7 @@ export const attackFields = () => {
       title: '时间范围筛选',
       name: 'time_date',
       widget: 'datetimepicker',
+      defaultValue: [startOfDay(new Date()), endOfDay(new Date())],
       xProps: {
         type: 'datetimerange',
         'value-format': 'yyyy-MM-dd HH:mm:ss',

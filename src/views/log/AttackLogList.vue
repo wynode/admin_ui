@@ -42,7 +42,9 @@ import tableMixins from '@/mixins/table'
 import { fetchAttackLogList } from '@/apis/all'
 import { attackFields } from './formConfig'
 import { attackLogListCols } from './tableConfig'
+import { startOfDay, endOfDay } from 'date-fns'
 import ip from 'ip'
+import { dateFormat } from '@/utils/dateFormat'
 
 const table = tableMixins({
   pagerInit: { page: 1, page_size: 10 },
@@ -83,8 +85,8 @@ export default {
       const startTime = form.time_date ? form.time_date[0] : ''
       const endTime = form.time_date ? form.time_date[1] : ''
       if (startTime) {
-        payload.startTime = startTime
-        payload.endTime = endTime
+        payload.startTime = dateFormat(startTime)
+        payload.endTime = dateFormat(endTime)
       }
       this.handleFilter(payload)
     },
@@ -127,7 +129,9 @@ export default {
         this.handleFilterFn(data)
       })
     } else {
-      this.fetchTableList()
+      this.handleFilterFn({
+        time_date: [startOfDay(new Date()), endOfDay(new Date())],
+      })
     }
   },
 }

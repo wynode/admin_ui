@@ -44,6 +44,7 @@ import { fetchAccessLogList } from '@/apis/all'
 import { accessLogListCols } from './tableConfig'
 import { accessFields } from './formConfig'
 import ip from 'ip'
+import { dateFormat } from '@/utils/dateFormat'
 
 const table = tableMixins({
   pagerInit: { page: 1, page_size: 10 },
@@ -92,6 +93,11 @@ export default {
     },
 
     handleFormEffects(subscribe) {
+      // subscribe('onFieldInit', (fields) => {
+      //   if (fields.date) {
+      //     fields.date.defaultValue = new Date()
+      //   }
+      // })
       subscribe('onFieldChange', 'date', (value, form) => {
         if (value) {
           this.handleFilterFn(form)
@@ -134,7 +140,7 @@ export default {
         this.handleFilterFn(data)
       })
     } else {
-      this.fetchTableList()
+      this.fetchTableList({ data: dateFormat(new Date(), 'yyMMdd') })
     }
   },
 }
