@@ -1,5 +1,6 @@
 import { startOfDay, endOfDay } from 'date-fns'
 import { dateFormat } from '@/utils/dateFormat'
+
 export const ChangeFields = () => {
   return [
     {
@@ -42,26 +43,11 @@ export const accessFields = () => {
         'value-format': 'yyMMdd',
       },
     },
-    {
-      type: 'datetime',
-      title: '时间范围筛选',
-      name: 'time_date',
-      widget: 'datetimepicker',
-      xProps: {
-        type: 'datetimerange',
-        'value-format': 'yyyy-MM-dd HH:mm:ss',
-      },
-    },
+
     {
       type: 'string',
       title: 'ip筛选',
       name: 'ip',
-      widget: 'text',
-    },
-    {
-      type: 'string',
-      title: 'uuid筛选',
-      name: 'uuid',
       widget: 'text',
     },
   ]
@@ -74,10 +60,7 @@ export const attackFields = () => {
       title: '时间范围筛选',
       name: 'time_date',
       widget: 'datetimepicker',
-      defaultValue: [
-        dateFormat(startOfDay(new Date())),
-        dateFormat(endOfDay(new Date())),
-      ],
+      defaultValue: [startOfDay(new Date()), endOfDay(new Date())],
       xProps: {
         type: 'datetimerange',
         'value-format': 'yyyy-MM-dd HH:mm:ss',

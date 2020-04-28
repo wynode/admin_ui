@@ -4,6 +4,10 @@ export const fetchAccessLogList = (params = {}) => {
   return requests.get('/System/Log/accessLogList', { params })
 }
 
+export const fetchIpAccessLogList = (params = {}) => {
+  return requests.get('/System/IpAccess/ipAccessLog', { params })
+}
+
 export const fetchAttackLogList = (params = {}) => {
   return requests.get('/System/Log/attackLogList', { params })
 }

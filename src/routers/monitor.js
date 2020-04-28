@@ -27,6 +27,15 @@ export default [
     component: () => import('@/views/monitor/history/HistoryData.vue'),
   },
   {
+    path: '/monitor/ip-history',
+    name: 'monitorIpHistory',
+    meta: {
+      title: 'IP历史访问数据',
+      breadcrumb: ['服务监控', 'IP历史访问数据'],
+    },
+    component: () => import('@/views/monitor/ip_history/IpHistory.vue'),
+  },
+  {
     path: '/monitor/disk-split',
     name: 'monitorDiskSplit',
     meta: {

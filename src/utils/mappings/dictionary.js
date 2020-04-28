@@ -1,6 +1,7 @@
 export const liveStatus = new Map([
   ['qps', '当前qps'],
-  ['requestTimes', ' 当前总请求次数'],
+  ['requestTimes', ' 当前waf响应次数'],
+  ['status', '上游网关统计次数'],
   ['outcomeTransfer', '当前出网总流量'],
   ['outcomeAverageTransfer', '当前出网平均流量'],
   ['incomeTransfer', '当前入网总流量'],
@@ -10,7 +11,7 @@ export const liveStatus = new Map([
 
 export const liveStatusDay = new Map([
   ['qps', '今日qps'],
-  ['requestTimes', '总请求次数'],
+  ['requestTimes', 'waf响应次数'],
   ['outcomeTransfer', '今日出网总流量'],
   ['outcomeAverageTransfer', '今日出网平均流量'],
   ['incomeTransfer', '今日入网总流量'],
@@ -20,7 +21,7 @@ export const liveStatusDay = new Map([
 
 export const liveStatusDayHistory = new Map([
   ['qps', 'qps'],
-  ['requestTimes', '总请求次数'],
+  ['requestTimes', 'waf响应次数'],
   ['outcomeTransfer', '出网总流量'],
   ['outcomeAverageTransfer', '出网平均流量'],
   ['incomeTransfer', '入网总流量'],
@@ -29,7 +30,7 @@ export const liveStatusDayHistory = new Map([
 ])
 
 export const liveLine = new Map([
-  ['requestTimes', '当前总请求次数'],
+  ['requestTimes', '当前waf响应次数'],
   ['qps', '当前qps'],
   ['status10x', '当前10x响应次数'],
   ['status20x', '当前20x响应次数'],

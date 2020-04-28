@@ -26,7 +26,7 @@
       <el-col :span="14">
         <el-card class="box-card" style="height: 377px">
           <div slot="header" class="clearfix">
-            <span>{{ dateName }} - http响应统计</span>
+            <span>{{ dateName }} - 上游响应统计</span>
           </div>
           <HistogramData :chartData="chartData" v-loading="loading" />
         </el-card>

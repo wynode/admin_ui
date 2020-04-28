@@ -12,7 +12,7 @@
       <el-col :span="14">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
-            <span>http响应统计</span>
+            <span>上游响应统计</span>
           </div>
           <HistogramData :chartData="histogramChartData" v-loading="loading1" />
         </el-card>

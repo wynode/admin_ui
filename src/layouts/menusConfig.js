@@ -26,6 +26,10 @@ export default (/* vm */) => {
           title: '历史数据',
           router: { name: 'monitorHistory' },
         },
+        {
+          title: 'IP历史访问数据',
+          router: { name: 'monitorIpHistory' },
+        },
         // {
         //   title: '磁盘分区',
         //   router: { name: 'monitorDiskSplit' },

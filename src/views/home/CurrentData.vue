@@ -4,7 +4,12 @@
       <el-col :span="8" v-for="item in liveTimeOptions" :key="item.value">
         <div class="current_col">
           <p>{{ item.label }}</p>
-          <span>{{ formatValue(item.value, currentData[item.value]) }}</span>
+          <span v-if="item.value === 'status'">
+            {{ total }}
+          </span>
+          <span v-else>
+            {{ formatValue(item.value, currentData[item.value]) }}
+          </span>
         </div>
       </el-col>
     </el-row>
@@ -28,6 +33,18 @@ export default {
   computed: {
     liveTimeOptions() {
       return getMapOptions('liveStatus')
+    },
+    total() {
+      const status = [
+        'status10x',
+        'status20x',
+        'status30x',
+        'status40x',
+        'status50x',
+      ]
+      return status.reduce((acc, cur) => {
+        return this.currentData[cur] + acc
+      }, 0)
     },
   },
 

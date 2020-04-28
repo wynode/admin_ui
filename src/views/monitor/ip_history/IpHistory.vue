@@ -1,5 +1,5 @@
 <template>
-  <div class="access_list">
+  <div class="ip_access_list">
     <el-card>
       <EffectForm
         ref="effectForm"
@@ -40,7 +40,7 @@
 
 <script>
 import tableMixins from '@/mixins/table'
-import { fetchAccessLogList } from '@/apis/all'
+import { fetchIpAccessLogList } from '@/apis/all'
 import { accessLogListCols } from './tableConfig'
 import { accessFields } from './formConfig'
 import ip from 'ip'
@@ -61,7 +61,7 @@ export default {
 
   computed: {
     fetchTableListMethod() {
-      return fetchAccessLogList
+      return fetchIpAccessLogList
     },
 
     accessFields() {
@@ -81,14 +81,7 @@ export default {
       let payload = (payload = {
         ip: form.ip,
         date: form.date,
-        uuid: form.uuid,
       })
-      const startTime = form.time_date ? form.time_date[0] : ''
-      const endTime = form.time_date ? form.time_date[1] : ''
-      if (startTime) {
-        payload.startTime = startTime
-        payload.endTime = endTime
-      }
       this.handleFilter(payload)
     },
 
@@ -109,45 +102,16 @@ export default {
         }
       })
     },
-
-    goSelfIp(row) {
-      const { getForm, setForm } = this.$refs.effectForm
-      setForm('ip', this.langtoip(row.ip))
-      const data = getForm()
-      this.handleFilterFn(data)
-    },
-
-    goSelfUuid(row) {
-      const { getForm, setForm } = this.$refs.effectForm
-      setForm('uuid', row.uuid)
-      const data = getForm()
-      this.handleFilterFn(data)
-    },
   },
 
   mounted() {
-    const { ip, uuid } = this.$route.query
-    if (ip || uuid) {
-      this.$nextTick(() => {
-        const { getForm, setForm } = this.$refs.effectForm
-        if (ip) {
-          setForm('ip', this.langtoip(ip))
-        }
-        if (uuid) {
-          setForm('uuid', uuid)
-        }
-        const data = getForm()
-        this.handleFilterFn(data)
-      })
-    } else {
-      this.fetchTableList({ date: dateFormat(new Date(), 'yyMMdd') })
-    }
+    this.fetchTableList({ date: dateFormat(new Date(), 'yyMMdd') })
   },
 }
 </script>
 
 <style lang="scss">
-.access_list {
+.ip_access_list {
   .el-pagination {
     .el-pagination__total {
       display: none;
@@ -155,6 +119,10 @@ export default {
   }
 
   .el-pager {
+    display: none;
+  }
+
+  .el-button--default {
     display: none;
   }
 }
