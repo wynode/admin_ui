@@ -34,17 +34,17 @@ export function urlListCols(vm) {
     },
     {
       label: '每秒查询率（qps）',
-      sortable: true,
+      sortable: 'custom',
       prop: 'qps',
     },
     {
       label: '访问频率',
-      sortable: true,
+      sortable: 'custom',
       prop: 'accessInInterval',
     },
     {
       label: '访问总次数',
-      sortable: true,
+      sortable: 'custom',
       prop: 'accessTimes',
     },
     {
