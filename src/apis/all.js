@@ -52,6 +52,22 @@ export const delParamsFilter = (payload) => {
   return requests.post('/System/ParamFilter/delParamFilter', payload)
 }
 
+export const fetchUA = (params = {}) => {
+  return requests.get('/System/ClientUaForbidden/list', { params })
+}
+
+export const postUA = (payload) => {
+  return requests.post('/System/ClientUaForbidden/addUaForbidden', payload)
+}
+
+export const patchUA = (payload) => {
+  return requests.post('/System/ClientUaForbidden/updateUaForbidden', payload)
+}
+
+export const delUA = (payload) => {
+  return requests.post('/System/ClientUaForbidden/deleteUaForbidden', payload)
+}
+
 export const fetchBaseSetting = (params = {}) => {
   return requests.get('/System/BaseSetting/getBaseSetting', { params })
 }

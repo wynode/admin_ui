@@ -38,6 +38,7 @@ export default ({
 
       async fetchTableList(params = {}) {
         this.mixTableLoading = true
+
         try {
           this.filtersCache = {
             page: this.pager.page,
@@ -46,10 +47,16 @@ export default ({
             orderType: this.ordering,
             ...params,
           }
+          let payload = {}
+          if (params.isForbidden === 0) {
+            payload = {
+              ...this.filtersCache,
+            }
+          } else {
+            payload = this.filtersMutate.parse(this.filtersCache)
+          }
 
-          const res = await this.fetchTableListMethod(
-            this.filtersMutate.parse(this.filtersCache)
-          )
+          const res = await this.fetchTableListMethod(payload)
           if (this.$route.name === 'monitorDiskSplit') {
             this.tableList = res.result
           } else {

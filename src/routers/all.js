@@ -63,6 +63,15 @@ export default [
     component: () => import('@/views/safe/params/ParamsFilter.vue'),
   },
   {
+    path: '/safe/ua',
+    name: 'UAFilter',
+    meta: {
+      title: 'UA禁用列表',
+      breadcrumb: ['安全防护', 'UA禁用列表'],
+    },
+    component: () => import('@/views/safe/ua/UA.vue'),
+  },
+  {
     path: '/server-status',
     name: 'serverStatus',
     meta: {
