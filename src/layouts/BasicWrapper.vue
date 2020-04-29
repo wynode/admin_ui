@@ -5,7 +5,7 @@
         <svg class="logo"><use xlink:href="#logo_lite"></use></svg>
       </a> -->
       <p :class="{ top_title_flex: !menuCollapse }" class="top_title">
-        后台系统admin
+        Waf管理
       </p>
 
       <el-dropdown class="Mla" trigger="click">

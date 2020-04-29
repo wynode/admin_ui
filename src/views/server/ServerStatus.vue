@@ -16,38 +16,68 @@
         </div>
       </div>
     </el-card>
-    <el-card class="Mt15">
-      <div slot="header">
-        <span>cpu信息</span>
-      </div>
-      <div class="server_list">
-        <div
-          v-for="(value, key, index) in cpuInfo.result"
-          :key="index"
-          class="server_item"
-        >
-          <p>{{ key | translate('generalInfo') }}</p>
-          <span v-if="key === 'serverTime'">{{ value | date }}</span>
-          <span v-else>{{ value }}</span>
-        </div>
-      </div>
-    </el-card>
-    <el-card class="Mt15">
-      <div slot="header">
-        <span>内存信息</span>
-      </div>
-      <div class="server_list">
-        <div
-          v-for="(value, key, index) in memory.result"
-          :key="index"
-          class="server_item"
-        >
-          <p>{{ key | translate('generalInfo') }}</p>
-          <span v-if="key === 'serverTime'">{{ value | date }}</span>
-          <span v-else>{{ value }}</span>
-        </div>
-      </div>
-    </el-card>
+
+    <el-row :gutter="15" class="Mt15 last_modify">
+      <el-col :span="13">
+        <el-card>
+          <div slot="header">
+            <span>cpu信息</span>
+          </div>
+          <div class="server_list">
+            <template v-for="(value, key, index) in cpuInfo.result">
+              <div
+                :key="index"
+                v-if="
+                  [
+                    'Model name',
+                    'CPU(s)',
+                    'CPU MHz',
+                    'CPU max MHz',
+                    'CPU min MHz',
+                    'BogoMIPS',
+                  ].includes(key)
+                "
+                class="server_item"
+              >
+                <p>{{ key | translate('generalInfo') }}</p>
+                <span v-if="key === 'serverTime'">{{ value | date }}</span>
+                <span v-else>{{ value }}</span>
+              </div>
+            </template>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="11">
+        <el-card>
+          <div slot="header">
+            <span>内存信息</span>
+          </div>
+          <div class="server_list">
+            <template v-for="(value, key, index) in memory.result">
+              <div
+                :key="index"
+                v-if="
+                  [
+                    'MemTotal',
+                    'MemFree',
+                    'MemAvailable',
+                    'Buffers',
+                    'Cached',
+                    'SwapCached',
+                  ].includes(key)
+                "
+                class="server_item"
+              >
+                <p>{{ key | translate('generalInfo') }}</p>
+                <span v-if="key === 'serverTime'">{{ value | date }}</span>
+                <span v-else>{{ value }}</span>
+              </div>
+            </template>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
+
     <el-card class="Mt15">
       <div slot="header">
         <span>磁盘分区</span>
@@ -178,6 +208,12 @@ export default {
     font-size: 14px;
     color: #009688;
     margin-top: 4px;
+  }
+}
+
+.last_modify {
+  .el-card {
+    min-height: 134px;
   }
 }
 </style>

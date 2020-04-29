@@ -205,7 +205,7 @@ export function attackLogListCols(vm) {
     },
 
     {
-      label: '攻击类型',
+      label: 'attackType',
       prop: 'attackType',
       component: OneLineText,
     },

@@ -18,7 +18,7 @@ export function IpListCols(vm) {
       component: {
         props: { row: Object },
         render() {
-          const { type, expire } = this.row
+          const { type } = this.row
           let showText = ''
           if (type == 1) {
             showText = '白名单'
@@ -28,17 +28,27 @@ export function IpListCols(vm) {
             showText = '临时黑名单'
           }
 
+          return <div>{showText}</div>
+        },
+      },
+    },
+    {
+      label: '过期时间',
+      prop: 'expire',
+      component: {
+        props: { row: Object },
+        render() {
+          const { expire } = this.row
+
           return (
             <div>
-              {showText}
-              <div>
-                {expire ? `过期时间：${dateFormat(expire * 1000)}` : ''}
-              </div>
+              <div>{expire ? `${dateFormat(expire * 1000)}` : ''}</div>
             </div>
           )
         },
       },
     },
+
     {
       label: '备注',
       prop: 'note',
