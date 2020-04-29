@@ -1,5 +1,6 @@
 import { OneLineText } from '@/components/CellTools.jsx'
 // import { dateFormat } from '@/utils/dateFormat'
+import { byteToMGb } from '@/utils/common'
 import ip from 'ip'
 function langtoip(lang) {
   return ip.fromLong(lang)
@@ -23,17 +24,7 @@ export function accessLogListCols() {
       },
     },
     {
-      label: 'ipAccessId',
-      prop: 'ipAccessId',
-      component: OneLineText,
-    },
-    {
-      label: 'accessNum',
-      prop: 'accessNum',
-      component: OneLineText,
-    },
-    {
-      label: 'date',
+      label: '日期',
       prop: 'date',
       component: {
         props: { row: Object },
@@ -48,17 +39,22 @@ export function accessLogListCols() {
       },
     },
     {
-      label: 'hash',
-      prop: 'hash',
+      label: '访问次数',
+      prop: 'accessNum',
       component: OneLineText,
     },
     {
-      label: 'incomeTransferNum',
+      label: '入网流量',
       prop: 'incomeTransferNum',
-      component: OneLineText,
+      component: {
+        props: { row: Object },
+        render() {
+          return <div>{byteToMGb(this.row.incomeTransferNum)}</div>
+        },
+      },
     },
     {
-      label: 'suspectNum',
+      label: '可疑次数',
       prop: 'suspectNum',
       component: OneLineText,
     },

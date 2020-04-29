@@ -24,7 +24,7 @@
           :prop="col.prop"
           :sortable="col.sortable"
           :formatter="col.formatter"
-          :sort-orders="['descending', null]"
+          :sort-orders="['descending']"
           :resizable="false"
           :width="col.width"
           :header-align="col.headerAlign || 'center'"
@@ -46,7 +46,7 @@
           v-else
           :key="col.prop"
           :label="col.label"
-          :sort-orders="['descending', null]"
+          :sort-orders="['descending']"
           :prop="col.prop"
           :sortable="col.sortable"
           :formatter="col.formatter"
