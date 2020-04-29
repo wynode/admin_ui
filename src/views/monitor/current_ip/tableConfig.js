@@ -48,6 +48,22 @@ export function urlListCols(vm) {
       prop: 'accessTimes',
     },
     {
+      label: '访问统计',
+      component: {
+        props: { row: Object },
+        render() {
+          return (
+            <el-button
+              size="mini"
+              type="primary"
+              onClick={() => vm.goipHistory(this.row)}>
+              访问统计
+            </el-button>
+          )
+        },
+      },
+    },
+    {
       label: '日志',
       width: 190,
       component: {
@@ -58,16 +74,16 @@ export function urlListCols(vm) {
               <el-button
                 class="Ml8"
                 size="mini"
-                type="danger"
-                onClick={() => vm.goattack(this.row)}>
-                攻击日志
+                type="primary"
+                onClick={() => vm.goaccess(this.row)}>
+                请求日志
               </el-button>
               <el-button
                 class="Ml8"
                 size="mini"
-                type="primary"
-                onClick={() => vm.goaccess(this.row)}>
-                请求日志
+                type="danger"
+                onClick={() => vm.goattack(this.row)}>
+                攻击日志
               </el-button>
             </span>
           )

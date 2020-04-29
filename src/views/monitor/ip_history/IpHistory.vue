@@ -105,7 +105,19 @@ export default {
   },
 
   mounted() {
-    this.fetchTableList({ date: dateFormat(new Date(), 'yyMMdd') })
+    const { ip } = this.$route.query
+    if (ip) {
+      this.$nextTick(() => {
+        const { getForm, setForm } = this.$refs.effectForm
+        if (ip) {
+          setForm('ip', this.langtoip(ip))
+        }
+        const data = getForm()
+        this.handleFilterFn(data)
+      })
+    } else {
+      this.fetchTableList({ date: dateFormat(new Date(), 'yyMMdd') })
+    }
   },
 }
 </script>

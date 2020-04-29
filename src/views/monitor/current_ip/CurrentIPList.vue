@@ -114,6 +114,15 @@ export default {
       })
     },
 
+    goipHistory(row) {
+      this.$router.push({
+        name: 'monitorIpHistory',
+        query: {
+          ip: row.ip,
+        },
+      })
+    },
+
     goaccess(row) {
       this.$router.push({
         name: 'logAccess',

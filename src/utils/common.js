@@ -72,10 +72,15 @@ export const byteToMGb = (byte) => {
     return 0
   }
   const mb = byte / 1024 / 1024
+  const kb = byte / 1024
   if (mb > 1024) {
     const gb = Math.round((mb / 1024) * 100) / 100
     return `${gb}GB`
   } else {
-    return `${Math.round(mb * 100) / 100}MB`
+    if (kb > 1024) {
+      return `${Math.round(mb * 100) / 100}MB`
+    } else {
+      return `${Math.round(kb * 100) / 100}KB`
+    }
   }
 }
