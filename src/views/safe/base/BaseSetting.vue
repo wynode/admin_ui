@@ -1,11 +1,11 @@
 <template>
   <div class="base_setting">
     <el-card class="Mt15">
-      <Txcel
+      <Txcelb
         v-loading="mixTableLoading"
         element-loading-text="数据加载中"
         class="Txcel"
-        :data="tableList"
+        :data="tableList1"
         :columns="IpListCols"
         :pager="{
           page: pager.page,
@@ -24,6 +24,7 @@ import tableMixins from '@/mixins/table'
 import { fetchBaseSetting, patchBaseSetting } from '@/apis/all'
 import { IpListCols } from './tableConfig'
 import EditIp from './EditIp'
+import Txcelb from './Txcelb'
 
 const table = tableMixins({
   pagerInit: { page: 1, page_size: 10 },
@@ -33,6 +34,10 @@ export default {
   name: 'UserList',
 
   mixins: [table],
+
+  components: {
+    Txcelb,
+  },
 
   data() {
     return {}
@@ -45,6 +50,16 @@ export default {
 
     IpListCols() {
       return IpListCols(this)
+    },
+
+    tableList1() {
+      let tableList = []
+      const keys = Object.keys(this.tableList)
+      keys.forEach((item) => {
+        tableList.push({ item })
+        tableList = tableList.concat(this.tableList[item])
+      })
+      return tableList || []
     },
   },
 
@@ -85,6 +100,15 @@ export default {
   }
   .txcel_wrap {
     padding: 15px 0;
+  }
+  .header_row {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    .cell {
+      text-align: left;
+      margin-left: 10px;
+    }
   }
 }
 </style>
