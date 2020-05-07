@@ -75,6 +75,10 @@ export default (/* vm */) => {
           router: { name: 'ipForbidden' },
         },
         {
+          title: 'IP国家禁用列表',
+          router: { name: 'countryIpForbidden' },
+        },
+        {
           title: 'UA禁用列表',
           router: { name: 'UAFilter' },
         },

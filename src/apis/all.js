@@ -107,3 +107,19 @@ export const fetchProvince = (params = {}) => {
 export const patchIPForbidden = (payload) => {
   return requests.post('/System/IpLocationForbidden/updateForbidden', payload)
 }
+
+export const fetchCountryIPForbidden = (params = {}) => {
+  return requests.get('/System/IpCountryForbidden/list', { params })
+}
+
+export const postCountryIPForbidden = (payload) => {
+  return requests.post('/System/IpCountryForbidden/addIpCountry', payload)
+}
+
+export const patchCountryIPForbidden = (payload) => {
+  return requests.post('/System/IpCountryForbidden/updateIpCountry', payload)
+}
+
+export const delCountryIPForbidden = (payload) => {
+  return requests.post('/System/IpCountryForbidden/deleteIpCountry', payload)
+}

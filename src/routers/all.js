@@ -45,6 +45,16 @@ export default [
     component: () => import('@/views/safe/ipForbidden/IPForbidden.vue'),
   },
   {
+    path: '/safe/country-ip-forbidden',
+    name: 'countryIpForbidden',
+    meta: {
+      title: 'IP国家禁用列表',
+      breadcrumb: ['安全防护', 'IP国家禁用列表'],
+    },
+    component: () =>
+      import('@/views/safe/CountryIpForbidden/CountryIpForbidden.vue'),
+  },
+  {
     path: '/safe/base',
     name: 'baseSetting',
     meta: {
