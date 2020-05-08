@@ -52,15 +52,15 @@ export default {
     OpHistogram: () => import('@/components/echarts/OpHistogram'),
   },
 
-  mounted() {
-    // 控制echart根据屏幕伸缩
-    this.$nextTick(() => {
-      window.onresize = () => {
-        if (this.$refs.liveTimePie) {
-          this.$refs.liveTimePie.myChart.resize()
-        }
-      }
-    })
-  },
+  // mounted() {
+  //   // 控制echart根据屏幕伸缩
+  //   this.$nextTick(() => {
+  //     window.onresize = () => {
+  //       if (this.$refs.liveTimePie) {
+  //         this.$refs.liveTimePie.myChart.resize()
+  //       }
+  //     }
+  //   })
+  // },
 }
 </script>

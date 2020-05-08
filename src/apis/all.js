@@ -97,15 +97,15 @@ export const fetchGeneralInfo = (params = {}) => {
 }
 
 export const fetchIPForbidden = (params = {}) => {
-  return requests.get('/System/IpLocationForbidden/list', { params })
+  return requests.get('/System/IpCityForbidden/list', { params })
 }
 
 export const fetchProvince = (params = {}) => {
-  return requests.get('/System/IpLocationForbidden/provinceList', { params })
+  return requests.get('/System/IpCityForbidden/provinceList', { params })
 }
 
 export const patchIPForbidden = (payload) => {
-  return requests.post('/System/IpLocationForbidden/updateForbidden', payload)
+  return requests.post('/System/IpCityForbidden/updateForbidden', payload)
 }
 
 export const fetchCountryIPForbidden = (params = {}) => {
@@ -122,4 +122,8 @@ export const patchCountryIPForbidden = (payload) => {
 
 export const delCountryIPForbidden = (payload) => {
   return requests.post('/System/IpCountryForbidden/deleteIpCountry', payload)
+}
+
+export const fetchMap = (params = {}) => {
+  return requests.get('/System/IpAccess/getProvinceSumData', { params })
 }

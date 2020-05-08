@@ -14,7 +14,11 @@
           <div slot="header" class="clearfix">
             <span>上游响应统计</span>
           </div>
-          <HistogramData :chartData="histogramChartData" v-loading="loading1" />
+          <HistogramData
+            ref="father"
+            :chartData="histogramChartData"
+            v-loading="loading1"
+          />
         </el-card>
       </el-col>
     </el-row>
@@ -75,6 +79,16 @@
         <!-- <LineData :chartData="lineChartData" mapOption="liveLineFlow" /> -->
       </el-card>
     </el-row>
+
+    <el-row class="Mt15">
+      <el-card class="box-card" style="height: 678px">
+        <div slot="header" class="clearfix">
+          <span>当天 - 省份访问</span>
+        </div>
+        <Map ref="chinaMap" :chartData="mapData" v-loading="loading3" />
+        <!-- <LineData :chartData="lineChartData" mapOption="liveLineFlow" /> -->
+      </el-card>
+    </el-row>
   </div>
 </template>
 
@@ -83,14 +97,17 @@ import { dateFormat } from '@/utils/dateFormat'
 import { getDateData, getCurrentData } from '@/apis/home'
 import { getMapOptions } from '@/utils/mappings'
 import { subHours } from 'date-fns'
+import { fetchMap } from '@/apis/all'
 
 export default {
   data() {
     return {
       lineChartData: [],
       histogramChartData: [],
+      mapData: [],
       loading1: true,
       loading2: true,
+      loading3: true,
       currentData: {},
       interval: '',
     }
@@ -100,6 +117,7 @@ export default {
     // LineData: () => import('./LineData'),
     HistogramData: () => import('./HistogramData'),
     LineChart: () => import('@/components/echarts/LineChart'),
+    Map: () => import('@/components/echarts/Map'),
   },
 
   computed: {
@@ -114,6 +132,31 @@ export default {
       getDateData({ date }).then((data) => {
         this.histogramChartData = data.result || []
         this.loading1 = false
+      })
+    },
+
+    getMapDataFn() {
+      const date = dateFormat(new Date(), 'yyMMdd')
+      fetchMap({ date }).then((data) => {
+        let tempArray =
+          data.result.list.reduce((acc, cur) => {
+            let accTemp = acc
+            if (cur.provinceName) {
+              const isThree =
+                cur.provinceName.includes('内蒙古') ||
+                cur.provinceName.includes('黑龙江')
+              accTemp.push({
+                name: cur.provinceName.slice(0, isThree ? 3 : 2),
+                value: Number(cur.accessNum),
+              })
+            } else {
+              return acc
+            }
+            return accTemp
+          }, []) || []
+        tempArray.sort((a, b) => b.value - a.value)
+        this.mapData = tempArray
+        this.loading3 = false
       })
     },
 
@@ -139,6 +182,7 @@ export default {
     this.getCurrentDataFn()
     this.getDateDataFn()
     this.getTimeDataFn()
+    this.getMapDataFn()
     const that = this
     this.interval = setInterval(function() {
       that.getCurrentDataFn()
@@ -149,6 +193,14 @@ export default {
           this.$refs.liveTimeLine.myChart.resize()
           this.$refs.liveTimeLineFlow.myChart.resize()
           this.$refs.liveTimeLineAttack.myChart.resize()
+          if (this.$refs.chinaMap) {
+            this.$refs.chinaMap.myChart.resize()
+          }
+        }
+        if (this.$refs.father) {
+          if (this.$refs.father.$refs.liveTimePie) {
+            this.$refs.father.$refs.liveTimePie.myChart.resize()
+          }
         }
       }
     })
