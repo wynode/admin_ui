@@ -69,7 +69,7 @@ export default {
         tooltip: {
           show: true,
           formatter: function(params) {
-            return params.name + '：' + params.data['value']
+            return params.name + '：' + params.data ? params.data.value : ''
           },
         },
         visualMap: {
