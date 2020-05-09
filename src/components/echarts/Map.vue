@@ -38,9 +38,12 @@ export default {
       immediate: true,
       handler(newVal) {
         if (newVal.length) {
-          for (var i = 0; i < 10; i++) {
-            this.barData.push(this.chartData[i])
-            this.yData.push(i + this.chartData[i].name)
+          const forLength = newVal.length === 1 ? 1 : 10
+          this.barData = []
+          this.yData = []
+          for (var i = 0; i < forLength; i++) {
+            this.barData[i] = this.chartData[i]
+            this.yData[i] = i + this.chartData[i].name
           }
           this.$nextTick(() => {
             this.myChart = echarts.init(document.getElementById(this.chartId))
@@ -62,14 +65,14 @@ export default {
               color: '#2D3E53',
               fontSize: 18,
             },
-            right: 180,
+            right: 280,
             top: 100,
           },
         ],
         tooltip: {
           show: true,
           formatter: function(params) {
-            return params.name + '：' + params.data ? params.data.value : ''
+            return params.name + '：' + params.data['value']
           },
         },
         visualMap: {
@@ -92,7 +95,7 @@ export default {
           left: 'left',
         },
         grid: {
-          right: 10,
+          right: 100,
           top: 135,
           bottom: 100,
           width: '20%',
@@ -169,7 +172,7 @@ export default {
           map: 'china',
           left: 'left',
           zoom: 0.5,
-          right: '300',
+          right: '340',
           layoutSize: '80%',
           label: {
             emphasis: {
@@ -241,6 +244,13 @@ export default {
               },
             },
             data: this.barData,
+            label: {
+              show: true,
+              position: 'right',
+              color: '#333333',
+              fontSize: 14,
+              offset: [10, 0],
+            },
           },
         ],
       }

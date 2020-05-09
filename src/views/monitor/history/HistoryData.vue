@@ -28,7 +28,11 @@
           <div slot="header" class="clearfix">
             <span>{{ dateName }} - 上游响应统计</span>
           </div>
-          <HistogramData :chartData="chartData" v-loading="loading" />
+          <HistogramData
+            ref="father"
+            :chartData="chartData"
+            v-loading="loading"
+          />
         </el-card>
       </el-col>
     </el-row>
@@ -88,6 +92,16 @@
         </div>
       </el-card>
     </el-row>
+
+    <el-row class="Mt15">
+      <el-card class="box-card" style="height: 678px">
+        <div slot="header" class="clearfix">
+          <span>{{ dateName }}统计 - 省份访问</span>
+        </div>
+        <Map ref="chinaMap" :chartData="mapData" v-loading="loading3" />
+        <!-- <LineData :chartData="lineChartData" mapOption="liveLineFlow" /> -->
+      </el-card>
+    </el-row>
   </div>
 </template>
 
@@ -96,12 +110,15 @@ import { dateFormat } from '@/utils/dateFormat'
 import { getDateData } from '@/apis/home'
 import { getMapOptions, translate } from '@/utils/mappings'
 import { filterFields } from './formConfig'
+import { fetchMap } from '@/apis/all'
 
 export default {
   data() {
     return {
       chartData: [],
       loading: true,
+      mapData: [],
+      loading3: true,
       form: {
         date: new Date(),
       },
@@ -111,6 +128,7 @@ export default {
     CurrentData: () => import('./CurrentData'),
     HistogramData: () => import('./HistogramData'),
     LineChart: () => import('@/components/echarts/LineChart'),
+    Map: () => import('@/components/echarts/Map'),
   },
 
   computed: {
@@ -166,6 +184,35 @@ export default {
     handleDateChange() {
       const date = dateFormat(this.form.date || new Date(), 'yyMMdd')
       this.getDateDataFn(date)
+      this.getMapDataFn(date)
+    },
+
+    getMapDataFn(date) {
+      fetchMap({ date }).then((data) => {
+        let tempArray =
+          data.result.list.reduce((acc, cur) => {
+            let accTemp = acc
+            if (cur.provinceName) {
+              const isThree =
+                cur.provinceName.includes('内蒙古') ||
+                cur.provinceName.includes('黑龙江')
+              accTemp.push({
+                name: cur.provinceName.slice(0, isThree ? 3 : 2),
+                value: Number(cur.accessNum),
+              })
+            } else {
+              return acc
+            }
+            return accTemp
+          }, []) || []
+        tempArray.sort((a, b) => b.value - a.value)
+        if (tempArray.length) {
+          this.mapData = tempArray
+        } else {
+          this.mapData = [{ name: '', value: '' }]
+        }
+        this.loading3 = false
+      })
     },
 
     // getDateDataFn(date) {
@@ -219,12 +266,23 @@ export default {
   mounted() {
     const date = dateFormat(new Date(), 'yyMMdd')
     this.getDateDataFn(date)
+    this.getMapDataFn(date)
     this.$nextTick(() => {
       window.onresize = () => {
         if (this.$refs.liveTimeLine) {
           this.$refs.liveTimeLine.myChart.resize()
           this.$refs.liveTimeLineFlow.myChart.resize()
           this.$refs.liveTimeLineAttack.myChart.resize()
+        }
+        if (this.$refs.chinaMap) {
+          if (this.$refs.chinaMap.myChart) {
+            this.$refs.chinaMap.myChart.resize()
+          }
+        }
+        if (this.$refs.father) {
+          if (this.$refs.father.$refs.liveTimePie) {
+            this.$refs.father.$refs.liveTimePie.myChart.resize()
+          }
         }
       }
     })
