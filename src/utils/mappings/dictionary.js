@@ -1,5 +1,5 @@
 export const liveStatus = new Map([
-  ['qps', '当前qps'],
+  ['qps', '当前最高qps'],
   ['requestTimes', ' 当前waf响应次数'],
   ['status', '上游网关统计次数'],
   ['outcomeTransfer', '当前出网总流量'],
@@ -20,7 +20,8 @@ export const liveStatusDay = new Map([
 ])
 
 export const liveStatusDayHistory = new Map([
-  ['qps', 'qps'],
+  ['qps', '最高qps'],
+  ['status', '上游网关统计次数'],
   ['requestTimes', 'waf响应次数'],
   ['outcomeTransfer', '出网总流量'],
   ['outcomeAverageTransfer', '出网平均流量'],

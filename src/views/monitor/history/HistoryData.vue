@@ -118,6 +118,7 @@ export default {
       chartData: [],
       loading: true,
       mapData: [],
+      originData: [],
       loading3: true,
       form: {
         date: new Date(),
@@ -155,6 +156,7 @@ export default {
       const statusArray = [
         'qps',
         'requestTimes',
+        'status',
         'outcomeTransfer',
         'outcomeAverageTransfer',
         'incomeTransfer',
@@ -165,12 +167,30 @@ export default {
       statusArray.forEach((item) => {
         initObj[item] = 0
       })
-      const totalChartData = this.chartData.reduce((acc, cur) => {
+      let maxQps = 0
+      const statusList = [
+        'status10x',
+        'status20x',
+        'status30x',
+        'status40x',
+        'status50x',
+      ]
+      const totalChartData = this.originData.reduce((acc, cur) => {
         statusArray.forEach((key) => {
-          acc[key] += cur[key]
+          if (key === 'qps') {
+            maxQps = Math.max(cur[key], maxQps)
+          } else if (key === 'status') {
+            acc[key] += statusList.reduce((deepacc, deepcur) => {
+              return cur[deepcur] + deepacc
+            }, 0)
+          } else {
+            acc[key] += Number(cur[key])
+          }
         })
         return acc
       }, initObj)
+
+      totalChartData.qps = maxQps
 
       statusArray.forEach((key) => {
         chartData[`${this.dateName}${translate(key, 'liveStatusDayHistory')}`] =
@@ -231,7 +251,7 @@ export default {
           const objItemValue = objItem[key] || 0
           obj[key] = obj[key] || 0 + objItemValue
         }
-        obj[key] = parseInt(obj[key] / sliceLength)
+        // obj[key] = parseInt(obj[key] / sliceLength)
       })
       const middleArrayList = arrayList[start + Math.floor(sliceLength / 2)]
       obj.time = middleArrayList ? middleArrayList.time : arrayList[start].time
@@ -241,6 +261,7 @@ export default {
     getDateDataFn(date) {
       getDateData({ date }).then((data) => {
         let result = data.result || []
+        this.originData = data.result
         if (result.length == 0) {
           for (let i = 0; i < 1000; i++) {
             result[i] = {}

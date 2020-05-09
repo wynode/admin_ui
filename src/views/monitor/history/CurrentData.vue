@@ -29,6 +29,18 @@ export default {
     liveTimeOptions() {
       return getMapOptions('liveStatusDay')
     },
+    // total() {
+    //   const status = [
+    //     'status10x',
+    //     'status20x',
+    //     'status30x',
+    //     'status40x',
+    //     'status50x',
+    //   ]
+    //   return status.reduce((acc, cur) => {
+    //     return this.currentData[cur] + acc
+    //   }, 0)
+    // },
   },
 
   methods: {
