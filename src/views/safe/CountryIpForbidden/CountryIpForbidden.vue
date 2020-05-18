@@ -88,6 +88,11 @@ export default {
 
   methods: {
     handleFormEffects(subscribe) {
+      subscribe('onFieldInit', (fields) => {
+        if (fields.isForbidden) {
+          fields.isForbidden.fieldValue = ''
+        }
+      })
       subscribe('onFieldChange', 'isForbidden', (value, form) => {
         this.handleFilter(form)
       })

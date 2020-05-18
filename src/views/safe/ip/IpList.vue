@@ -7,6 +7,7 @@
         size="small"
         label-position="top"
         cancelText="重置"
+        :needToolBtnGroup="false"
         :effects="handleFormEffects"
         @submit="handleFilter"
         @cancel="handleFilterReset"
@@ -119,6 +120,11 @@ export default {
     //   this.tableListx = this.tableListall.slice(size, size + 10)
     // },
     handleFormEffects(subscribe) {
+      subscribe('onFieldInit', (fields) => {
+        if (fields.type) {
+          fields.type.fieldValue = ''
+        }
+      })
       subscribe('onFieldChange', 'type', (value, form) => {
         this.handleFilter(form)
       })

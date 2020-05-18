@@ -56,6 +56,7 @@ export const FormFields = () => {
       xProps: {
         filterable: true,
         options: [
+          { label: '全部', value: '' },
           { label: '禁用', value: 1 },
           { label: '正常', value: 0 },
         ],
