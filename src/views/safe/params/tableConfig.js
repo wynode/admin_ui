@@ -28,9 +28,11 @@ export function paramsListCols(vm) {
           const { type } = this.row
           let showText = ''
           if (type == 1) {
-            showText = '白名单'
+            showText = '全局规则'
           } else if (type == 2) {
-            showText = '黑名单'
+            showText = '路径匹配规则'
+          } else if (type == 3) {
+            showText = '正则匹配规则'
           }
           return <div>{showText}</div>
         },

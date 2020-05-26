@@ -22,8 +22,9 @@ export const ChangeFields = () => {
       xProps: {
         filterable: true,
         options: [
-          { label: '白名单', value: 1 },
-          { label: '黑名单', value: 2 },
+          { label: '全局规则', value: 1 },
+          { label: '路径匹配规则', value: 2 },
+          { label: '正则匹配规则', value: 3 },
         ],
       },
     },

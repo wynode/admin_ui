@@ -2,11 +2,11 @@
 
 export function upstreamListCols(vm) {
   return [
-    {
-      label: '上游Id',
-      prop: 'upId',
-      width: 120,
-    },
+    // {
+    //   label: '上游Id',
+    //   prop: 'upId',
+    //   width: 120,
+    // },
     {
       label: 'host地址',
       prop: 'host',

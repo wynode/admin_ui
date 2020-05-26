@@ -71,6 +71,10 @@ export default (/* vm */) => {
           router: { name: 'ipList' },
         },
         {
+          title: 'upstream',
+          router: { name: 'monitorUpstream' },
+        },
+        {
           title: 'IP地区禁用列表',
           router: { name: 'ipForbidden' },
         },
@@ -99,10 +103,6 @@ export default (/* vm */) => {
         {
           title: '账户设置',
           router: { name: 'userList' },
-        },
-        {
-          title: 'upstream',
-          router: { name: 'monitorUpstream' },
         },
         {
           title: '短信预警',

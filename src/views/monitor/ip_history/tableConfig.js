@@ -24,6 +24,11 @@ export function accessLogListCols() {
       },
     },
     {
+      label: 'country',
+      prop: 'country',
+      component: OneLineText,
+    },
+    {
       label: 'ipLocation',
       prop: 'ipLocation',
       component: OneLineText,

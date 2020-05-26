@@ -1,11 +1,15 @@
 <template>
   <el-container class="Hst">
     <el-header class="Df Aic bgh Header">
-      <!-- <a href="/" class="Lhcr Curp">
-        <svg class="logo"><use xlink:href="#logo_lite"></use></svg>
-      </a> -->
       <p :class="{ top_title_flex: !menuCollapse }" class="top_title">
-        Waf管理
+        <a href="/" class="Lhcr Curp">
+          <img
+            src="./logo.png"
+            alt=""
+            style="width: 30px; height: 30px;margin-left: -20px; margin-right: 8px"
+          />
+        </a>
+        扶树WAF
       </p>
 
       <el-dropdown class="Mla" trigger="click">

@@ -22,6 +22,13 @@ export function urlListCols(vm) {
     {
       label: '响应时间',
       prop: 'microTime',
+      component: {
+        props: { row: Object },
+        render() {
+          const { microTime } = this.row
+          return <div>{microTime} ms</div>
+        },
+      },
     },
     {
       label: '最后监控时间',
