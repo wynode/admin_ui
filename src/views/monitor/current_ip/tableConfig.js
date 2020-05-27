@@ -60,17 +60,17 @@ export function urlListCols(vm) {
       component: FormatTime,
     },
     {
-      label: '每秒查询率（qps）',
+      label: 'QPS',
       sortable: 'custom',
       prop: 'qps',
     },
     {
-      label: '访问频率',
+      label: '周期次数',
       sortable: 'custom',
       prop: 'accessInInterval',
     },
     {
-      label: '访问总次数',
+      label: '近期总次数',
       sortable: 'custom',
       prop: 'accessTimes',
     },

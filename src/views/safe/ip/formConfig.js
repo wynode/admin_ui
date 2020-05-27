@@ -71,5 +71,11 @@ export const notifyFields = () => {
       },
       // rules: [{ required: true, message: '请填写用户名', trigger: 'blur' }],
     },
+    {
+      type: 'string',
+      title: 'ip筛选',
+      name: 'ip',
+      widget: 'text',
+    },
   ]
 }

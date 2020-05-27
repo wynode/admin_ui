@@ -17,8 +17,8 @@
           v-bind="field"
           :key="field.name"
         />
-        <el-form-item label="验证码" prop="verifyCode" class="verify_code_item">
-          <div class="verify_code">
+        <el-form-item label="证码" prop="verifyCode" class="verify_code_item">
+          <div class="verify_code" v-on:keyup.enter="handleLoginFn">
             <el-input v-model="verifyCode"></el-input>
             <img
               :src="verifyCodeUrl"
@@ -59,6 +59,10 @@ export default {
   },
 
   methods: {
+    handleLoginFn() {
+      const form = this.$refs.effectForm.form
+      this.handleLogin(form)
+    },
     handleLogin(form) {
       postLogin({
         ...form,

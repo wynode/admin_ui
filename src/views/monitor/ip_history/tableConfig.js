@@ -34,7 +34,7 @@ export function accessLogListCols() {
           if (country == 'CN') {
             showText = '境内IP'
           } else {
-            showText = '境外IP'
+            showText = <p style="color: red">境外IP</p>
           }
 
           return <div>{showText}</div>

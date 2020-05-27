@@ -189,8 +189,10 @@ export default {
         })
         return acc
       }, initObj)
-
+      const { outcomeTransfer, incomeTransfer, requestTimes } = totalChartData
       totalChartData.qps = maxQps
+      totalChartData.outcomeAverageTransfer = outcomeTransfer / requestTimes
+      totalChartData.incomeAverageTransfer = incomeTransfer / requestTimes
 
       statusArray.forEach((key) => {
         chartData[`${this.dateName}${translate(key, 'liveStatusDayHistory')}`] =

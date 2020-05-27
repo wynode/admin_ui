@@ -82,18 +82,11 @@ export const whiteFields = () => {
 export const notifyFields = () => {
   return [
     {
-      title: '排序类型',
-      name: 'orderType',
-      widget: 'select',
-      xProps: {
-        filterable: true,
-        options: [
-          { label: 'qps', value: 1 },
-          { label: '访问频率', value: 2 },
-          { label: '访问总次数', value: 3 },
-        ],
-      },
-      // rules: [{ required: true, message: '请填写用户名', trigger: 'blur' }],
+      type: 'string',
+      title: 'ip筛选',
+      name: 'ip',
+      widget: 'text',
     },
+    // rules: [{ required: true, message: '请填写用户名', trigger: 'blur' }],
   ]
 }

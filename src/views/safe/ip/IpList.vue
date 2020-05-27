@@ -7,7 +7,6 @@
         size="small"
         label-position="top"
         cancelText="重置"
-        :needToolBtnGroup="false"
         :effects="handleFormEffects"
         @submit="handleFilter"
         @cancel="handleFilterReset"

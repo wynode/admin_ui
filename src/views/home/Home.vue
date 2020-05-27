@@ -6,7 +6,10 @@
           <div slot="header" class="clearfix">
             <span>实时状态</span>
           </div>
-          <CurrentData :currentData="currentData" />
+          <CurrentData
+            :currentData="currentData"
+            :histogramChartData="histogramChartData"
+          />
         </el-card>
       </el-col>
       <el-col :span="14">

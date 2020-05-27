@@ -28,6 +28,10 @@ export default {
       type: Object,
       default: () => {},
     },
+    histogramChartData: {
+      type: Array,
+      default: () => [],
+    },
   },
 
   computed: {
@@ -35,16 +39,31 @@ export default {
       return getMapOptions('liveStatus')
     },
     total() {
-      const status = [
+      const statusArray = [
         'status10x',
         'status20x',
         'status30x',
         'status40x',
         'status50x',
       ]
-      return status.reduce((acc, cur) => {
+      const total = statusArray.reduce((acc, cur) => {
         return this.currentData[cur] + acc
       }, 0)
+      let initObj = {}
+      statusArray.forEach((item) => {
+        initObj[item] = 0
+      })
+      const totalChartData = this.histogramChartData.reduce((acc, cur) => {
+        statusArray.forEach((key) => {
+          acc[key] += cur[key]
+        })
+        return acc
+      }, initObj)
+      const historydata = Object.values(totalChartData).reduce(
+        (acc, cur) => acc + cur,
+        0
+      )
+      return total + historydata
     },
   },
 

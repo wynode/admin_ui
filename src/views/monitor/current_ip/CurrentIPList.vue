@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <el-card>
+    <el-card>
       <EffectForm
         ref="effectForm"
         inline
@@ -17,7 +17,7 @@
           :key="field.name"
         />
       </EffectForm>
-    </el-card> -->
+    </el-card>
 
     <el-card class="Mt15">
       <Txcelx
