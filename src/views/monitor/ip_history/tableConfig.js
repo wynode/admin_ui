@@ -26,12 +26,52 @@ export function accessLogListCols() {
     {
       label: 'country',
       prop: 'country',
-      component: OneLineText,
+      component: {
+        props: { row: Object },
+        render() {
+          const { country } = this.row
+          let showText = ''
+          if (country == 'CN') {
+            showText = '境内IP'
+          } else {
+            showText = '境外IP'
+          }
+
+          return <div>{showText}</div>
+        },
+      },
     },
     {
       label: 'ipLocation',
       prop: 'ipLocation',
-      component: OneLineText,
+      component: {
+        props: { row: Object },
+        render() {
+          const { ipLocation } = this.row
+          const lo = JSON.parse(ipLocation)
+          const showText = lo.province
+            ? `${lo.province || ''}${lo.city || ''}${lo.county || ''}`
+            : '未知'
+          const referenceText = (
+            <div>
+              <p>省：{lo.province}</p>
+              <p>市：{lo.city}</p>
+              <p>区：{lo.county}</p>
+              <p>经度：{lo.lat}</p>
+              <p>维度：{lo.lng}</p>
+            </div>
+          )
+          const refer = lo.province ? <p>{referenceText}</p> : ''
+          const textcut = (
+            <el-popover trigger="hover" placement="right">
+              {refer}
+              <p slot="reference">{showText}</p>
+            </el-popover>
+          )
+
+          return <div>{textcut}</div>
+        },
+      },
     },
     {
       label: '日期',

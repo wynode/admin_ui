@@ -1,4 +1,4 @@
-import { FormatTime, OneLineText } from '@/components/CellTools.jsx'
+import { FormatTime } from '@/components/CellTools.jsx'
 import { dateFormat } from '@/utils/dateFormat'
 
 export function urlListCols(vm) {
@@ -20,7 +20,34 @@ export function urlListCols(vm) {
     {
       label: 'ipLocation',
       prop: 'ipLocation',
-      component: OneLineText,
+      component: {
+        props: { row: Object },
+        render() {
+          const { ipLocation } = this.row
+          const lo = JSON.parse(ipLocation)
+          const showText = lo.province
+            ? `${lo.province || ''}${lo.city || ''}${lo.county || ''}`
+            : '未知'
+          const referenceText = (
+            <div>
+              <p>省：{lo.province}</p>
+              <p>市：{lo.city}</p>
+              <p>区：{lo.county}</p>
+              <p>经度：{lo.lat}</p>
+              <p>维度：{lo.lng}</p>
+            </div>
+          )
+          const refer = lo.province ? <p>{referenceText}</p> : ''
+          const textcut = (
+            <el-popover trigger="hover" placement="right">
+              {refer}
+              <p slot="reference">{showText}</p>
+            </el-popover>
+          )
+
+          return <div>{textcut}</div>
+        },
+      },
     },
     {
       label: '第一次访问时间',

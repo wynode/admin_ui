@@ -260,26 +260,26 @@ export default {
 
     getDateDataFn(date) {
       getDateData({ date }).then((data) => {
-        let result = data.result || []
+        // const result = data.result || []
         this.originData = data.result
-        if (result.length == 0) {
-          for (let i = 0; i < 1000; i++) {
-            result[i] = {}
-          }
-        }
-        const totalLength = result.length || 0
-        const sliceLength = parseInt(totalLength / 150)
-        const pieLength = totalLength / sliceLength
-        let deputyDateData = []
-        for (let index = 0; index < pieLength; index++) {
-          deputyDateData[index] = this.ListObjectItemAdd(
-            result,
-            index * sliceLength,
-            sliceLength
-          )
-        }
+        // if (result.length == 0) {
+        //   for (let i = 0; i < 1000; i++) {
+        //     result[i] = {}
+        //   }
+        // }
+        // const totalLength = result.length || 0
+        // const sliceLength = parseInt(totalLength / 150)
+        // const pieLength = totalLength / sliceLength
+        // let deputyDateData = []
+        // for (let index = 0; index < pieLength; index++) {
+        //   deputyDateData[index] = this.ListObjectItemAdd(
+        //     result,
+        //     index * sliceLength,
+        //     sliceLength
+        //   )
+        // }
         this.loading = false
-        this.chartData = deputyDateData
+        this.chartData = this.originData
       })
     },
   },
