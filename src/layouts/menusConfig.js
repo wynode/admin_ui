@@ -67,6 +67,10 @@ export default (/* vm */) => {
       icon: 'el-icon-lock',
       children: [
         {
+          title: 'sql注入白名单路径',
+          router: { name: 'sql' },
+        },
+        {
           title: 'IP黑白名单',
           router: { name: 'ipList' },
         },

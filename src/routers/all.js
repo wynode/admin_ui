@@ -36,6 +36,15 @@ export default [
     component: () => import('@/views/safe/ip/IpList.vue'),
   },
   {
+    path: '/safe/sql',
+    name: 'sql',
+    meta: {
+      title: 'sql注入白名单路径',
+      breadcrumb: ['安全防护', 'sql注入白名单路径'],
+    },
+    component: () => import('@/views/safe/sqlInject/SQLInject.vue'),
+  },
+  {
     path: '/safe/ip-forbidden',
     name: 'ipForbidden',
     meta: {

@@ -17,7 +17,12 @@
           v-bind="field"
           :key="field.name"
         />
-        <el-form-item label="证码" prop="verifyCode" class="verify_code_item">
+        <el-form-item
+          label="验证码"
+          prop="verifyCode"
+          class="verify_code_item"
+          :error="errorMsg"
+        >
           <div class="verify_code" v-on:keyup.enter="handleLoginFn">
             <el-input v-model="verifyCode"></el-input>
             <img
@@ -49,6 +54,7 @@ export default {
       verifyCodeUrl: '',
       verifyCodeTime: '',
       verifyCodeHash: '',
+      errorMsg: '',
     }
   },
 
@@ -64,21 +70,30 @@ export default {
       this.handleLogin(form)
     },
     handleLogin(form) {
+      if (!this.verifyCode) {
+        this.errorMsg = '请填入验证码'
+        return
+      }
       postLogin({
         ...form,
         verifyCode: this.verifyCode,
         verifyCodeTime: this.verifyCodeTime,
         verifyCodeHash: this.verifyCodeHash,
-      }).then((data) => {
-        const { adminSession, adminId, adminName, adminAccount } = data.result
-        store.set(AUTH_TOKEN, adminSession)
-        store.set(USER_INFO, {
-          adminId,
-          adminName,
-          adminAccount,
-        })
-        this.$router.push('/')
       })
+        .then((data) => {
+          const { adminSession, adminId, adminName, adminAccount } = data.result
+          store.set(AUTH_TOKEN, adminSession)
+          store.set(USER_INFO, {
+            adminId,
+            adminName,
+            adminAccount,
+          })
+          this.$router.push('/')
+        })
+        .catch(() => {
+          this.errorMsg = ''
+        })
+      this.errorMsg = ''
       this.fetchVerifyCodeFn()
     },
 

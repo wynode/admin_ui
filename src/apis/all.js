@@ -127,3 +127,20 @@ export const delCountryIPForbidden = (payload) => {
 export const fetchMap = (params = {}) => {
   return requests.get('/System/IpAccess/getProvinceSumData', { params })
 }
+
+// sql注入列表
+export const fetchSQL = (params = {}) => {
+  return requests.get('/System/InjectWhitePath/list', { params })
+}
+
+export const postSQL = (payload) => {
+  return requests.post('/System/InjectWhitePath/addInjectWhitePath', payload)
+}
+
+export const patchSQL = (payload) => {
+  return requests.post('/System/InjectWhitePath/updateInjectWhitePath', payload)
+}
+
+export const deleteSQL = (payload) => {
+  return requests.post('/System/InjectWhitePath/delInjectWhitePath', payload)
+}
