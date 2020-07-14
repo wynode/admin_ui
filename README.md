@@ -1,4 +1,4 @@
-# coconut_ui
+# admin_ui
 
 ## 依赖安装
 ```
