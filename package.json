@@ -16,7 +16,7 @@
     "@what-a-faka/obj-mutation": "^0.0.7",
     "@what-a-faka/txcel": "^1.2.2",
     "@what-a-faka/vue-authplugin": "^0.2.5",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "chimee-player": "^1.4.8",
     "core-js": "^3.3.2",
     "date-fns": "^2.6.0",
